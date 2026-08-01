@@ -1,0 +1,413 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<!-- skill:chrome -->
+<style>
+/* Credit line — bottom-right */
+.design-ui-credit {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  font: 11px/1 system-ui, sans-serif;
+  color: rgba(128,128,128,0.5);
+  pointer-events: none;
+  z-index: 2147483647;
+  transition: opacity 0.4s ease;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+/* Hide chrome on touch devices */
+@media (hover: none) {
+  .design-ui-credit { display: none; }
+}
+
+/* Print fixes */
+@media print {
+  * {
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+  }
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .design-ui-credit { display: none !important; }
+}
+
+</style>
+<script>
+(function () {
+    // Design-ui pages are single compositions, so the whole body is editable.
+    function markEditable() {
+        document.body.classList.add('artifact-editable');
+    }
+
+    // Credit badge with idle-fade. Hover devices only.
+    function initChromeUI() {
+        if (!matchMedia('(hover: hover)').matches) return;
+
+        var credit = document.createElement('div');
+        credit.className = 'design-ui-credit';
+        credit.setAttribute('aria-hidden', 'true');
+        credit.innerHTML = '\u{1F49C} by ClickUp Brain';
+        document.body.appendChild(credit);
+
+        var timer = null;
+        var fade = function (out) { credit.style.opacity = out ? '0' : ''; };
+        fade(true);
+        var show = function () {
+            fade(false);
+            clearTimeout(timer);
+            timer = setTimeout(function () { fade(true); }, 3000);
+        };
+        document.addEventListener('mousemove', show);
+        show();
+    }
+
+    function init() {
+        markEditable();
+        initChromeUI();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+
+</script>
+<!-- /skill:chrome -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Book 4: Bea Meterai</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+:root{--bg:oklch(0.99 0.005 65);--surface:oklch(0.97 0.01 65);--surface-alt:oklch(0.94 0.018 65);--border:oklch(0.88 0.025 65);--text:oklch(0.18 0.02 65);--text-muted:oklch(0.45 0.02 65);--accent:oklch(0.58 0.16 55);--accent-light:oklch(0.93 0.05 55);--accent-dark:oklch(0.42 0.12 55);--success:oklch(0.58 0.14 145);--error:oklch(0.55 0.18 25);--sidebar-w:280px;--header-h:60px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:15px}
+.progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--accent),oklch(0.65 0.18 40));z-index:9999;transition:width .1s}
+.header{position:fixed;top:0;left:var(--sidebar-w);right:0;height:var(--header-h);background:oklch(0.99 0.005 65/.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 2rem;z-index:100;gap:1rem}
+.header-title{font-weight:700;font-size:1.05rem;color:var(--accent-dark)}
+.header-badge{background:var(--accent-light);color:var(--accent-dark);padding:.2rem .6rem;border-radius:99px;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.search-box{margin-left:auto;position:relative}
+.search-box input{padding:.45rem .9rem .45rem 2.2rem;border:1.5px solid var(--border);border-radius:9px;font-size:.83rem;font-family:inherit;width:240px;background:var(--surface);transition:all .2s}
+.search-box input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px oklch(0.58 0.16 55/.1);width:300px}
+.search-box::before{content:"🔍";position:absolute;left:.7rem;top:50%;transform:translateY(-50%);font-size:.8rem}
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;background:oklch(0.15 0.04 50);color:oklch(0.88 0.02 55);overflow-y:auto;z-index:200;padding:1.4rem 0;transition:transform .3s}
+.sidebar-brand{padding:0 1.4rem 1.3rem;border-bottom:1px solid oklch(0.28 0.04 50);margin-bottom:.8rem}
+.sidebar-brand h2{font-size:.95rem;font-weight:700;color:oklch(0.78 0.14 55)}
+.sidebar-brand p{font-size:.7rem;color:oklch(0.55 0.03 55)}
+.nav-section{padding:.4rem .9rem}
+.nav-section-title{font-size:.62rem;text-transform:uppercase;letter-spacing:1.2px;color:oklch(0.48 0.03 55);padding:.4rem .5rem;font-weight:600}
+.nav-item{display:flex;align-items:center;gap:.6rem;padding:.55rem .7rem;border-radius:7px;cursor:pointer;font-size:.8rem;transition:all .15s;color:oklch(0.72 0.02 55);text-decoration:none}
+.nav-item:hover{background:oklch(0.23 0.04 50);color:oklch(0.95 0.01 55)}
+.nav-item.active{background:oklch(0.58 0.16 55/.18);color:oklch(0.82 0.12 55);font-weight:600}
+.nav-item .num{width:20px;height:20px;border-radius:5px;background:oklch(0.28 0.04 50);display:flex;align-items:center;justify-content:center;font-size:.67rem;font-weight:700;flex-shrink:0}
+.nav-item.active .num{background:var(--accent);color:white}
+.main{margin-left:var(--sidebar-w);padding:calc(var(--header-h) + 2rem) 3rem 4rem;max-width:880px}
+.chapter{display:none;animation:fadeIn .35s ease}
+.chapter.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.chapter-num{font-size:.72rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.4rem}
+.chapter-title{font-size:1.9rem;font-weight:800;color:var(--text);line-height:1.2;margin-bottom:.7rem}
+.chapter-desc{font-size:.95rem;color:var(--text-muted);line-height:1.6;margin-bottom:2rem}
+.section{margin-bottom:2rem}
+.section h3{font-size:1.15rem;font-weight:700;margin-bottom:.7rem;padding-bottom:.4rem;border-bottom:2px solid var(--accent-light)}
+.section p,.section li{margin-bottom:.8rem;font-size:.9rem}
+ul,ol{padding-left:1.4rem;margin:.6rem 0}
+li{margin-bottom:.35rem}
+.collapsible{border:1.5px solid var(--border);border-radius:11px;margin-bottom:.9rem;overflow:hidden;background:var(--surface)}
+.collapsible-header{padding:.9rem 1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-weight:600;font-size:.88rem;transition:background .2s}
+.collapsible-header:hover{background:var(--surface-alt)}
+.collapsible-header::after{content:"▶";font-size:.65rem;transition:transform .3s;color:var(--accent)}
+.collapsible.open .collapsible-header::after{transform:rotate(90deg)}
+.collapsible-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.collapsible.open .collapsible-body{max-height:3000px}
+.collapsible-content{padding:0 1.1rem 1.1rem;font-size:.86rem;line-height:1.8}
+.info-box{padding:.9rem 1.1rem;border-radius:9px;margin:1rem 0;font-size:.86rem;line-height:1.7}
+.info-box.note{background:oklch(0.93 0.05 55/.5);border-left:4px solid var(--accent)}
+.info-box.warning{background:oklch(0.94 0.06 25/.4);border-left:4px solid var(--error)}
+.table-wrapper{overflow-x:auto;margin:1.1rem 0;border-radius:11px;border:1.5px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+thead{background:var(--accent);color:white}
+th{padding:.7rem .9rem;text-align:left;font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.4px}
+td{padding:.6rem .9rem;border-top:1px solid var(--border)}
+tbody tr:hover{background:var(--surface-alt)}
+.quiz-section{background:var(--surface);border:1.5px solid var(--border);border-radius:13px;padding:1.4rem;margin:2rem 0}
+.quiz-title{font-size:.95rem;font-weight:700;margin-bottom:1rem;color:var(--accent-dark)}
+.quiz-question{margin-bottom:1.3rem;padding-bottom:1.3rem;border-bottom:1px solid var(--border)}
+.quiz-question:last-of-type{border-bottom:none}
+.quiz-question p{font-weight:600;font-size:.88rem;margin-bottom:.5rem}
+.quiz-options label{display:flex;align-items:center;gap:.5rem;padding:.4rem .7rem;border-radius:7px;cursor:pointer;font-size:.83rem;transition:background .15s;margin-bottom:.2rem}
+.quiz-options label:hover{background:var(--surface-alt)}
+.quiz-options input[type="radio"]{accent-color:var(--accent)}
+.quiz-btn{background:var(--accent);color:white;border:none;padding:.6rem 1.3rem;border-radius:7px;font-family:inherit;font-weight:600;font-size:.83rem;cursor:pointer;transition:all .2s;margin-top:.8rem}
+.quiz-btn:hover{background:var(--accent-dark);transform:translateY(-1px)}
+.quiz-result{margin-top:.8rem;padding:.9rem;border-radius:7px;font-weight:600;font-size:.88rem;display:none}
+.quiz-result.show{display:block}
+.quiz-result.good{background:oklch(0.92 0.07 145/.5);color:oklch(0.33 0.11 145)}
+.quiz-result.bad{background:oklch(0.93 0.06 25/.4);color:oklch(0.35 0.14 25)}
+.glossary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.9rem;margin-top:.9rem}
+.glossary-card{background:var(--surface);border:1.5px solid var(--border);border-radius:9px;padding:.9rem 1rem;transition:all .2s}
+.glossary-card:hover{border-color:var(--accent);box-shadow:0 3px 12px oklch(0.58 0.16 55/.08)}
+.glossary-card dt{font-weight:700;font-size:.87rem;color:var(--accent-dark);margin-bottom:.2rem}
+.glossary-card dd{font-size:.8rem;color:var(--text-muted);line-height:1.5}
+.back-to-top{position:fixed;bottom:2rem;right:2rem;width:42px;height:42px;border-radius:50%;background:var(--accent);color:white;border:none;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px oklch(0.58 0.16 55/.25);opacity:0;transform:translateY(8px);transition:all .3s;z-index:50}
+.back-to-top.visible{opacity:1;transform:translateY(0)}
+.back-to-top:hover{background:var(--accent-dark)}
+.mobile-toggle{display:none;position:fixed;bottom:2rem;left:1rem;width:42px;height:42px;border-radius:50%;background:oklch(0.15 0.04 50);color:white;border:none;cursor:pointer;font-size:1.1rem;z-index:300;box-shadow:0 3px 12px rgba(0,0,0,.25)}
+@media(max-width:900px){:root{--sidebar-w:0px}.sidebar{transform:translateX(-280px);width:280px}.sidebar.open{transform:translateX(0)}.header{left:0;padding:0 1rem}.main{margin-left:0;padding:calc(var(--header-h)+1.3rem) 1.1rem 3rem}.mobile-toggle{display:flex;align-items:center;justify-content:center}.chapter-title{font-size:1.4rem}.search-box input{width:150px}.search-box input:focus{width:190px}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-brand"><h2>📜 E-Book Bea Meterai</h2><p>UU No. 10 Tahun 2020</p></div>
+<div class="nav-section">
+<div class="nav-section-title">Materi</div>
+<a class="nav-item active" data-chapter="0"><span class="num">1</span>Pengantar & Dasar Hukum</a>
+<a class="nav-item" data-chapter="1"><span class="num">2</span>Objek Bea Meterai</a>
+<a class="nav-item" data-chapter="2"><span class="num">3</span>Non-Objek & Fasilitas</a>
+<a class="nav-item" data-chapter="3"><span class="num">4</span>Tarif, Saat & Pihak Terutang</a>
+<a class="nav-item" data-chapter="4"><span class="num">5</span>Pembayaran Bea Meterai</a>
+<a class="nav-item" data-chapter="5"><span class="num">6</span>Meterai Elektronik</a>
+<a class="nav-item" data-chapter="6"><span class="num">7</span>Pemeteraian Kemudian</a>
+<a class="nav-item" data-chapter="7"><span class="num">8</span>Pemungutan Bea Meterai</a>
+<a class="nav-item" data-chapter="8"><span class="num">9</span>Sanksi & Ketentuan Pidana</a>
+<a class="nav-item" data-chapter="9"><span class="num">10</span>Glossarium & Kuis</a>
+</div>
+</nav>
+<header class="header"><span class="header-title">Bea Meterai</span><span class="header-badge">UU 10/2020</span><div class="search-box"><input type="text" id="searchInput" placeholder="Cari materi..."></div></header>
+<main class="main" id="mainContent">
+
+<div class="chapter active" data-chapter="0">
+<div class="chapter-num">Bab 1</div>
+<h1 class="chapter-title">Pengantar & Dasar Hukum Bea Meterai</h1>
+<p class="chapter-desc">Memahami pengertian Bea Meterai sebagai pajak atas dokumen dan sejarah pengenaan di Indonesia.</p>
+<div class="section"><h3>Apa Itu Bea Meterai?</h3><p><strong>Bea Meterai adalah pajak atas dokumen.</strong> Terutang atau tidaknya Bea Meterai ditentukan oleh keberadaan dokumen: jika ada dokumen yang memenuhi syarat sebagai objek, maka terutang Bea Meterai. Jika tidak ada dokumen, tidak ada Bea Meterai.</p><div class="info-box note"><strong>💡 Prinsip Utama:</strong> Bea Meterai dikenakan 1 (satu) kali untuk setiap dokumen. Grosse, salinan, dan kutipan akta notaris/PPAT juga dikenai Bea Meterai sama dengan aslinya.</div></div>
+<div class="section"><h3>Sejarah Pengenaan</h3>
+<div class="collapsible"><div class="collapsible-header">Tahun 1817 sampai 1921</div><div class="collapsible-body"><div class="collapsible-content"><p>Dikenal sejak masa penjajahan Belanda dengan nama <em>De Heffing Van Het Recht Kleinnegel</em>. Pengenaan didasarkan pada perbuatan/persetujuan dalam surat (akta). Terdapat dua cara: secara seragam dan secara sebanding.</p></div></div></div>
+<div class="collapsible"><div class="collapsible-header">Tahun 1921 sampai 1985 (Aturan Bea Meterai 1921)</div><div class="collapsible-body"><div class="collapsible-content"><p>Berlaku <em>Zegel Verordening 1921</em> (Aturan Bea Meterai 1921). Mengalami beberapa perubahan, terakhir ditetapkan menjadi UU No. 7/1969.</p></div></div></div>
+<div class="collapsible"><div class="collapsible-header">Tahun 1986 sampai 2020 (UU 13/1985)</div><div class="collapsible-body"><div class="collapsible-content"><p>Reformasi perpajakan 1983 menghasilkan UU No. 13/1985 tentang Bea Meterai (berlaku 1 Januari 1986). Bea Meterai dikenakan atas dokumen berupa kertas yang berisikan tulisan yang mengandung arti tentang perbuatan, keadaan, atau kenyataan.</p></div></div></div>
+<div class="collapsible open"><div class="collapsible-header">Tahun 2021 sampai sekarang (UU 10/2020)</div><div class="collapsible-body"><div class="collapsible-content"><p>UU No. 10 Tahun 2020 berlaku sejak 1 Januari 2021. Perubahan mendasar:</p><ul><li>Tarif tunggal Rp10.000 (sebelumnya Rp3.000 dan Rp6.000)</li><li>Perluasan objek mencakup <strong>dokumen elektronik</strong></li><li>Pengenalan <strong>meterai elektronik (e-Meterai)</strong></li><li>Pengaturan pemungutan Bea Meterai oleh pihak tertentu</li><li>Kedaluwarsa 5 tahun sejak saat terutang</li></ul></div></div></div>
+</div>
+</div>
+
+<div class="chapter" data-chapter="1">
+<div class="chapter-num">Bab 2</div>
+<h1 class="chapter-title">Objek Bea Meterai</h1>
+<p class="chapter-desc">Dokumen apa saja yang dikenai Bea Meterai berdasarkan UU 10/2020.</p>
+<div class="section"><h3>Definisi Dokumen</h3><p>Dokumen dalam konteks Bea Meterai adalah <strong>sesuatu yang ditulis atau tulisan</strong>, dalam bentuk tulisan tangan, cetakan, atau elektronik, yang dapat dipakai sebagai alat bukti atau keterangan.</p></div>
+<div class="section"><h3>Dokumen yang Dikenai Bea Meterai</h3><p>Bea Meterai dikenakan atas dokumen yang dibuat sebagai alat untuk menerangkan suatu kejadian yang bersifat <strong>perdata</strong>:</p>
+<div class="table-wrapper"><table><thead><tr><th>No</th><th>Jenis Dokumen</th><th>Batasan Nilai</th></tr></thead><tbody>
+<tr><td>1</td><td>Surat perjanjian, surat keterangan, surat pernyataan, atau surat lainnya yang sejenis, beserta rangkapnya</td><td>Tanpa batasan</td></tr>
+<tr><td>2</td><td>Akta notaris beserta grosse, salinan, dan kutipannya</td><td>Tanpa batasan</td></tr>
+<tr><td>3</td><td>Akta PPAT beserta salinan dan kutipannya</td><td>Tanpa batasan</td></tr>
+<tr><td>4</td><td>Surat berharga dengan nama dan dalam bentuk apa pun</td><td>Tanpa batasan</td></tr>
+<tr><td>5</td><td>Dokumen transaksi surat berharga, termasuk kontrak berjangka</td><td>Sesuai PP 3/2022</td></tr>
+<tr><td>6</td><td>Dokumen lelang (kutipan, minuta, salinan, grosse risalah lelang)</td><td>Tanpa batasan</td></tr>
+<tr><td>7</td><td>Dokumen yang menyatakan jumlah uang (kuitansi, pengakuan utang lunas)</td><td>> Rp5.000.000</td></tr>
+<tr><td>8</td><td>Dokumen lain yang ditetapkan PP</td><td>Sesuai PP</td></tr>
+</tbody></table></div>
+<div class="info-box note"><strong>💡 Tambahan:</strong> Bea Meterai juga dikenakan atas <strong>dokumen yang digunakan sebagai alat bukti di pengadilan</strong>, termasuk dokumen yang sebelumnya bukan objek Bea Meterai.</div></div>
+</div>
+
+<div class="chapter" data-chapter="2">
+<div class="chapter-num">Bab 3</div>
+<h1 class="chapter-title">Non-Objek & Fasilitas Pembebasan</h1>
+<p class="chapter-desc">Dokumen yang tidak dikenai Bea Meterai dan fasilitas pembebasan.</p>
+<div class="section"><h3>Dokumen yang Tidak Dikenai Bea Meterai (Non-Objek)</h3>
+<div class="collapsible open"><div class="collapsible-header">Daftar Lengkap Non-Objek</div><div class="collapsible-body"><div class="collapsible-content"><ol>
+<li>Dokumen terkait lalu lintas orang dan barang (surat penyimpanan barang, konosemen, surat angkutan, bukti pengiriman/penerimaan barang)</li>
+<li>Segala bentuk <strong>ijazah</strong> (termasuk STTB, tanda lulus, surat keterangan pendidikan/pelatihan/kursus)</li>
+<li>Tanda terima gaji, uang tunggu, pensiun, tunjangan, dan pembayaran lain terkait hubungan kerja</li>
+<li>Tanda bukti penerimaan uang negara dari kas negara/daerah/bank</li>
+<li>Kuitansi untuk semua jenis pajak dari kas negara/daerah/bank</li>
+<li>Tanda penerimaan uang untuk <strong>keperluan intern organisasi</strong></li>
+<li>Dokumen yang menyebutkan simpanan uang/surat berharga di bank/koperasi/kustodian</li>
+<li><strong>Surat gadai</strong></li>
+<li>Tanda pembagian keuntungan/bunga/imbal hasil dari surat berharga</li>
+<li>Dokumen yang diterbitkan Bank Indonesia dalam rangka kebijakan moneter</li>
+</ol></div></div></div></div>
+<div class="section"><h3>Fasilitas Pembebasan (PP 3/2022)</h3>
+<div class="collapsible"><div class="collapsible-header">Dokumen yang Mendapat Pembebasan</div><div class="collapsible-body"><div class="collapsible-content"><ol>
+<li><strong>Pengalihan hak tanah/bangunan akibat bencana alam</strong> yang ditetapkan sebagai bencana nasional</li>
+<li><strong>Pengalihan hak tanah/bangunan untuk keagamaan/sosial</strong> non-komersial (wakaf, hibah ke badan keagamaan/sosial)</li>
+<li><strong>Dokumen dalam rangka program pemerintah/kebijakan moneter/jasa keuangan</strong>, meliputi:
+<ul><li>Transaksi surat berharga di pasar perdana ≤ Rp5 juta</li><li>Transaksi surat berharga di bursa efek ≤ Rp10 juta</li><li>Transaksi melalui penyelenggara pasar alternatif ≤ Rp5 juta</li><li>Konfirmasi pembelian/penjualan unit penyertaan KIK ≤ Rp10 juta</li><li>Transaksi melalui layanan urun dana ≤ Rp5 juta</li></ul></li>
+<li><strong>Dokumen terkait perjanjian internasional</strong> berdasarkan asas timbal balik (organisasi internasional, perwakilan negara asing)</li>
+</ol></div></div></div></div>
+</div>
+
+<div class="chapter" data-chapter="3">
+<div class="chapter-num">Bab 4</div>
+<h1 class="chapter-title">Tarif, Saat Terutang & Pihak yang Terutang</h1>
+<p class="chapter-desc">Tarif tetap, penentuan saat terutang, dan siapa yang wajib membayar.</p>
+<div class="section"><h3>Tarif Bea Meterai</h3><p>Bea Meterai dikenakan dengan <strong>tarif tetap sebesar Rp10.000</strong> (sepuluh ribu rupiah) per dokumen. Tarif ini dapat diturunkan/dinaikkan sesuai kondisi perekonomian nasional melalui Peraturan Pemerintah setelah konsultasi dengan DPR RI.</p></div>
+<div class="section"><h3>Saat Terutang Bea Meterai</h3>
+<div class="table-wrapper"><table><thead><tr><th>Jenis Dokumen</th><th>Saat Terutang</th></tr></thead><tbody>
+<tr><td>Surat perjanjian beserta rangkapnya</td><td>Saat dibubuhi tanda tangan</td></tr>
+<tr><td>Akta notaris (beserta grosse, salinan, kutipan)</td><td>Saat dibubuhi tanda tangan</td></tr>
+<tr><td>Akta PPAT (beserta salinan, kutipan)</td><td>Saat dibubuhi tanda tangan</td></tr>
+<tr><td>Surat berharga</td><td>Saat dokumen selesai dibuat</td></tr>
+<tr><td>Dokumen transaksi surat berharga/kontrak berjangka</td><td>Saat dokumen selesai dibuat</td></tr>
+<tr><td>Surat keterangan, pernyataan, dan sejenisnya</td><td>Saat diserahkan kepada pihak yang dituju</td></tr>
+<tr><td>Dokumen lelang</td><td>Saat diserahkan kepada pihak yang dituju</td></tr>
+<tr><td>Dokumen penerimaan uang/pelunasan utang > Rp5 jt</td><td>Saat diserahkan kepada pihak yang dituju</td></tr>
+<tr><td>Dokumen sebagai alat bukti di pengadilan</td><td>Saat diajukan ke pengadilan</td></tr>
+<tr><td>Dokumen dibuat di luar negeri</td><td>Saat digunakan di Indonesia</td></tr>
+</tbody></table></div></div>
+<div class="section"><h3>Pihak yang Terutang</h3>
+<div class="table-wrapper"><table><thead><tr><th>Kondisi</th><th>Pihak yang Terutang</th></tr></thead><tbody>
+<tr><td>Dokumen dibuat sepihak</td><td>Pihak yang <strong>menerima</strong> dokumen</td></tr>
+<tr><td>Dokumen dibuat 2 pihak atau lebih</td><td>Masing-masing pihak atas dokumen yang diterimanya</td></tr>
+<tr><td>Surat berharga</td><td>Pihak yang <strong>menerbitkan</strong> surat berharga</td></tr>
+<tr><td>Alat bukti di pengadilan</td><td>Pihak yang <strong>mengajukan</strong> dokumen ke pengadilan</td></tr>
+<tr><td>Dokumen dari luar negeri digunakan di Indonesia</td><td>Pihak yang <strong>menerima manfaat</strong> atas dokumen</td></tr>
+</tbody></table></div>
+<div class="info-box note"><strong>💡 Catatan:</strong> Para pihak boleh bersepakat mengenai siapa yang membayar Bea Meterai tanpa mengubah siapa yang secara hukum "terutang".</div></div>
+<div class="section"><h3>Kedaluwarsa</h3><p>Bea Meterai yang terutang menjadi <strong>kedaluwarsa setelah 5 (lima) tahun</strong> sejak saat terutang, berlaku untuk semua jenis dokumen.</p></div>
+</div>
+
+<div class="chapter" data-chapter="4">
+<div class="chapter-num">Bab 5</div>
+<h1 class="chapter-title">Cara Pembayaran Bea Meterai</h1>
+<p class="chapter-desc">Mekanisme pembayaran: meterai tempel, meterai elektronik, meterai bentuk lain, dan SSP.</p>
+<div class="section"><h3>Meterai Tempel</h3>
+<div class="collapsible open"><div class="collapsible-header">Ketentuan Penggunaan Meterai Tempel Rp10.000</div><div class="collapsible-body"><div class="collapsible-content"><ul>
+<li>Meterai tempel <strong>Rp10.000</strong> (berdasarkan UU 10/2020) berlaku sejak 20 Januari 2021</li>
+<li>Harus sah, berlaku, dan <strong>belum pernah dipakai</strong></li>
+<li>Ditempel utuh dan tidak rusak di tempat tanda tangan akan dibubuhkan</li>
+<li>Tanda tangan dibubuhkan <strong>sebagian di atas kertas dan sebagian di atas meterai tempel</strong></li>
+<li>Disertai pencantuman tanggal, bulan, dan tahun penandatanganan</li>
+</ul><p><strong>Ciri umum:</strong> Gambar Garuda Pancasila, frasa "Meterai Tempel", dan angka nilai nominal.</p><p><strong>Dicetak oleh:</strong> Perum Percetakan Uang Republik Indonesia (Peruri)</p><p><strong>Didistribusikan oleh:</strong> PT Pos Indonesia (Persero)</p></div></div></div></div>
+<div class="section"><h3>Meterai Dalam Bentuk Lain</h3>
+<div class="collapsible"><div class="collapsible-header">3 Jenis Meterai Bentuk Lain</div><div class="collapsible-body"><div class="collapsible-content">
+<p><strong>1. Meterai Teraan:</strong> menggunakan mesin teraan meterai digital. Memerlukan deposit minimal Rp15.000.000. Unsur: warna merah, logo Kemenkeu, tulisan "METERAI TERAAN", angka tarif, tanggal, nomor mesin, kode unik.</p>
+<p><strong>2. Meterai Komputerisasi:</strong> menggunakan sistem komputerisasi. Syarat: terutang > 1.000 dokumen/bulan. Unsur: tulisan "BEA METERAI LUNAS" dan angka tarif. Memerlukan deposit sebelum pembuatan.</p>
+<p><strong>3. Meterai Percetakan:</strong> menggunakan teknologi percetakan, khusus untuk <strong>cek dan bilyet giro</strong>. Unsur: tulisan "METERAI PERCETAKAN", logo Kemenkeu, angka tarif, nama pembuat.</p>
+<p>Semua jenis memerlukan <strong>izin dari Menteri Keuangan</strong> melalui permohonan ke KPP tempat terdaftar.</p></div></div></div></div>
+<div class="section"><h3>Pembayaran dengan Surat Setoran Pajak (SSP)</h3><p>Pembayaran via SSP dimungkinkan dalam kondisi:</p><ul><li>Pemeteraian kemudian > 50 dokumen</li><li>Meterai tempel tidak tersedia/tidak dapat digunakan</li><li>Terjadi kegagalan sistem meterai elektronik</li></ul><p>Kode akun pajak: <strong>411611</strong>, kode jenis setoran: <strong>100</strong>.</p></div>
+</div>
+
+<div class="chapter" data-chapter="5">
+<div class="chapter-num">Bab 6</div>
+<h1 class="chapter-title">Meterai Elektronik (e-Meterai)</h1>
+<p class="chapter-desc">Inovasi UU 10/2020: meterai untuk dokumen elektronik melalui sistem digital.</p>
+<div class="section"><h3>Pengertian</h3><p>Meterai elektronik adalah meterai berupa <strong>label</strong> yang penggunaannya dilakukan dengan cara dibubuhkan pada dokumen melalui <strong>sistem tertentu</strong>. Khusus digunakan untuk dokumen elektronik.</p></div>
+<div class="section"><h3>Kode Unik & Keterangan</h3><ul><li><strong>Kode unik:</strong> 22 digit nomor seri yang dihasilkan oleh sistem meterai elektronik</li><li><strong>Keterangan:</strong> Gambar Garuda Pancasila, tulisan "METERAI ELEKTRONIK", angka "10000" dan tulisan "SEPULUH RIBU RUPIAH"</li></ul></div>
+<div class="section"><h3>Cara Penggunaan</h3>
+<div class="collapsible open"><div class="collapsible-header">Langkah Pembubuhan e-Meterai</div><div class="collapsible-body"><div class="collapsible-content"><ol>
+<li>Akses portal meterai elektronik (pos.e-meterai.co.id) atau sistem terintegrasi API</li>
+<li>Unggah dokumen elektronik (PDF)</li>
+<li>Beli/gunakan kuota meterai elektronik (Rp10.000 per meterai + biaya jasa)</li>
+<li>Bubuhkan meterai elektronik pada posisi yang diinginkan dalam dokumen</li>
+<li>Dokumen otomatis ter-embed dengan kode unik dan keterangan tertentu</li>
+</ol><p><strong>Dibuat & didistribusikan oleh:</strong> Perum Percetakan Uang Republik Indonesia (Peruri), bekerja sama dengan distributor.</p>
+<p><strong>Deposit distributor:</strong> Kode akun pajak 411611, kode jenis setoran 102.</p></div></div></div></div>
+</div>
+
+<div class="chapter" data-chapter="6">
+<div class="chapter-num">Bab 7</div>
+<h1 class="chapter-title">Pemeteraian Kemudian</h1>
+<p class="chapter-desc">Mekanisme pembayaran Bea Meterai atas dokumen yang belum/kurang dibayar atau untuk alat bukti pengadilan.</p>
+<div class="section"><h3>Kapan Dilakukan?</h3><ul><li>Dokumen yang Bea Meterainya <strong>tidak atau kurang dibayar</strong> sebagaimana mestinya</li><li>Dokumen yang akan digunakan sebagai <strong>alat bukti di pengadilan</strong></li></ul></div>
+<div class="section"><h3>Besaran yang Wajib Dibayar</h3>
+<div class="table-wrapper"><table><thead><tr><th>Kondisi</th><th>Bea Meterai Terutang</th><th>Sanksi Administratif</th></tr></thead><tbody>
+<tr><td>Dokumen tidak/kurang bayar (sejak 1 Jan 2021)</td><td>Tarif saat terutang (Rp10.000)</td><td><strong>100%</strong> dari BM terutang</td></tr>
+<tr><td>Dokumen tidak/kurang bayar (sebelum 1 Jan 2021)</td><td>Tarif saat terutang (Rp3.000/Rp6.000)</td><td><strong>200%</strong> dari BM terutang</td></tr>
+<tr><td>Dokumen untuk alat bukti di pengadilan</td><td>Tarif saat pemeteraian kemudian dilakukan</td><td><strong>Tidak ada sanksi</strong></td></tr>
+</tbody></table></div></div>
+<div class="section"><h3>Pejabat yang Mengesahkan</h3><ul><li><strong>Pejabat Pos:</strong> pejabat PT Pos Indonesia yang melayani pemeteraian kemudian</li><li><strong>Pejabat Pengawas:</strong> Kepala Seksi Pelayanan KPP atau Kepala KP2KP</li></ul></div>
+</div>
+
+<div class="chapter" data-chapter="7">
+<div class="chapter-num">Bab 8</div>
+<h1 class="chapter-title">Pemungutan Bea Meterai</h1>
+<p class="chapter-desc">Mekanisme pemungutan oleh pihak ketiga yang ditetapkan DJP.</p>
+<div class="section"><h3>Objek Pemungutan</h3><p>Tidak semua objek Bea Meterai menjadi objek pemungutan. Yang termasuk:</p><ol><li>Surat berharga berupa <strong>cek dan bilyet giro</strong></li><li>Dokumen transaksi surat berharga (termasuk kontrak berjangka)</li><li>Surat keterangan, pernyataan, atau surat lainnya yang sejenis</li><li>Dokumen penerimaan uang/pelunasan utang > Rp5 juta</li></ol></div>
+<div class="section"><h3>Kriteria Pemungut Bea Meterai</h3><p>Wajib Pajak yang:</p><ul><li>Memfasilitasi penerbitan cek dan bilyet giro; dan/atau</li><li>Menerbitkan/memfasilitasi penerbitan dokumen objek pemungutan <strong>lebih dari 1.000 dokumen dalam 1 bulan</strong></li></ul><p>Ditetapkan oleh Direktur Jenderal Pajak dengan surat penetapan (berlaku sejak awal bulan berikutnya).</p></div>
+<div class="section"><h3>Kewajiban Pemungut</h3>
+<div class="table-wrapper"><table><thead><tr><th>Kewajiban</th><th>Batas Waktu</th></tr></thead><tbody>
+<tr><td><strong>Memungut</strong> Bea Meterai dari pihak yang terutang</td><td>Saat dokumen diterima/selesai dibuat/diserahkan</td></tr>
+<tr><td><strong>Menyetorkan</strong> ke kas negara</td><td>Paling lambat tanggal <strong>10</strong> bulan berikutnya</td></tr>
+<tr><td><strong>Melaporkan</strong> melalui SPT Masa Bea Meterai</td><td>Paling lambat tanggal <strong>20</strong> bulan berikutnya</td></tr>
+</tbody></table></div>
+<p>SPT Masa Bea Meterai disampaikan secara elektronik melalui <strong>sptbeameterai.pajak.go.id</strong> dan wajib disampaikan meskipun tidak ada pemungutan dalam suatu masa pajak (nihil).</p></div>
+<div class="section"><h3>Cara Pemungutan</h3>
+<div class="table-wrapper"><table><thead><tr><th>Dokumen</th><th>Cara Pemungutan</th></tr></thead><tbody>
+<tr><td>Cek dan bilyet giro</td><td>Membubuhkan <strong>meterai percetakan</strong></td></tr>
+<tr><td>Dokumen lainnya (transaksi surat berharga, keterangan, kuitansi)</td><td>Membubuhkan <strong>meterai elektronik</strong></td></tr>
+<tr><td>Jika sistem e-Meterai gagal</td><td>Membubuhkan tanda "BEA METERAI LUNAS" + angka tarif, buat daftar dokumen, lampirkan di SPT</td></tr>
+</tbody></table></div></div>
+</div>
+
+<div class="chapter" data-chapter="8">
+<div class="chapter-num">Bab 9</div>
+<h1 class="chapter-title">Sanksi & Ketentuan Pidana</h1>
+<p class="chapter-desc">Sanksi administratif bagi pemungut dan ketentuan pidana pemalsuan meterai.</p>
+<div class="section"><h3>Sanksi bagi Pemungut Bea Meterai</h3>
+<div class="collapsible open"><div class="collapsible-header">SKPKB (Tidak Memungut/Menyetor)</div><div class="collapsible-body"><div class="collapsible-content"><p>Pemungut yang tidak melaksanakan pemungutan dan/atau penyetoran diterbitkan SKPKB:</p><p><strong>Jumlah SKPKB = BM tidak/kurang dipungut/disetor + sanksi 100%</strong></p><p>Sanksi 100% dikenakan atas dokumen yang tidak dipungut dan tidak disetor, atau dipungut tetapi tidak disetor. Dokumen yang tidak dipungut tetapi disetorkan ke kas negara tidak dikenai sanksi.</p></div></div></div>
+<div class="collapsible"><div class="collapsible-header">STP (Terlambat Setor/Lapor)</div><div class="collapsible-body"><div class="collapsible-content"><p>Pemungut yang terlambat menyetorkan atau tidak/terlambat melaporkan SPT Masa Bea Meterai diterbitkan <strong>Surat Tagihan Pajak</strong> sesuai ketentuan UU KUP.</p></div></div></div></div>
+<div class="section"><h3>Larangan Bagi Pejabat (Pasal 21)</h3><p>Pejabat (hakim, panitera, jurusita, notaris, PPAT, ASN, TNI/Polri, pejabat negara) <strong>dilarang</strong>:</p><ul><li>Menerima/mempertimbangkan/menyimpan dokumen objek BM yang belum lunas</li><li>Melekatkan dokumen BM yang belum lunas pada dokumen lain</li><li>Membuat salinan/tembusan/rangkap dari dokumen BM yang belum lunas</li><li>Memberikan keterangan/catatan pada dokumen BM yang belum lunas</li></ul><p>Pelanggaran dikenai sanksi disiplin sesuai peraturan kepegawaian.</p></div>
+<div class="section"><h3>Ketentuan Pidana</h3>
+<div class="table-wrapper"><table><thead><tr><th>Tindak Pidana</th><th>Penjara</th><th>Denda</th></tr></thead><tbody>
+<tr><td>Meniru/memalsu meterai atau membuat meterai secara melawan hukum (Pasal 24)</td><td>Maks <strong>7 tahun</strong></td><td>Maks <strong>Rp500 juta</strong></td></tr>
+<tr><td>Memakai/menjual/menawarkan meterai palsu (Pasal 25)</td><td>Maks <strong>7 tahun</strong></td><td>Maks <strong>Rp500 juta</strong></td></tr>
+<tr><td>Menghilangkan tanda bekas pakai pada meterai / menggunakan meterai bekas (Pasal 26)</td><td>Maks <strong>3 tahun</strong></td><td>Maks <strong>Rp200 juta</strong></td></tr>
+</tbody></table></div></div>
+</div>
+
+<div class="chapter" data-chapter="9">
+<div class="chapter-num">Bab 10</div>
+<h1 class="chapter-title">Glossarium & Kuis Akhir</h1>
+<p class="chapter-desc">Istilah penting dan uji pemahaman Anda tentang Bea Meterai.</p>
+<div class="section"><h3>Glossarium</h3>
+<div class="glossary-grid">
+<div class="glossary-card"><dt>Bea Meterai</dt><dd>Pajak atas dokumen yang dikenakan berdasarkan UU No. 10/2020</dd></div>
+<div class="glossary-card"><dt>Dokumen</dt><dd>Sesuatu yang ditulis (tulisan tangan, cetakan, atau elektronik) yang dapat dipakai sebagai alat bukti</dd></div>
+<div class="glossary-card"><dt>Meterai Tempel</dt><dd>Meterai berupa carik fisik yang ditempelkan pada dokumen kertas</dd></div>
+<div class="glossary-card"><dt>Meterai Elektronik</dt><dd>Meterai digital (label) yang dibubuhkan melalui sistem tertentu pada dokumen elektronik</dd></div>
+<div class="glossary-card"><dt>Pemeteraian Kemudian</dt><dd>Pemeteraian yang memerlukan pengesahan pejabat, untuk dokumen yang BM-nya belum/kurang dibayar</dd></div>
+<div class="glossary-card"><dt>Pemungut Bea Meterai</dt><dd>Pihak yang ditetapkan DJP untuk memungut, menyetor, dan melaporkan BM</dd></div>
+<div class="glossary-card"><dt>Pembuat Meterai</dt><dd>WP yang memiliki izin membuat meterai dalam bentuk lain (teraan, komputerisasi, percetakan)</dd></div>
+<div class="glossary-card"><dt>Grosse</dt><dd>Salinan akta yang memiliki kekuatan eksekutorial (seperti putusan pengadilan)</dd></div>
+<div class="glossary-card"><dt>Kedaluwarsa</dt><dd>Batas waktu penagihan BM: 5 tahun sejak saat terutang</dd></div>
+<div class="glossary-card"><dt>SPT Masa Bea Meterai</dt><dd>Laporan bulanan pemungutan dan penyetoran BM oleh Pemungut</dd></div>
+</div></div>
+
+<div class="section"><h3>Kuis Pemahaman</h3>
+<div class="quiz-section">
+<div class="quiz-title">📝 10 Soal Bea Meterai</div>
+<div class="quiz-question"><p>1. Bea Meterai dikenakan berapa kali untuk setiap dokumen?</p><div class="quiz-options"><label><input type="radio" name="q1" value="a"> 1 kali</label><label><input type="radio" name="q1" value="b"> 2 kali</label><label><input type="radio" name="q1" value="c"> Tergantung nilai dokumen</label><label><input type="radio" name="q1" value="d"> Tidak terbatas</label></div></div>
+<div class="quiz-question"><p>2. Berapa tarif Bea Meterai yang berlaku saat ini (UU 10/2020)?</p><div class="quiz-options"><label><input type="radio" name="q2" value="a"> Rp6.000</label><label><input type="radio" name="q2" value="b"> Rp10.000</label><label><input type="radio" name="q2" value="c"> Rp3.000 dan Rp6.000</label><label><input type="radio" name="q2" value="d"> Rp15.000</label></div></div>
+<div class="quiz-question"><p>3. Batas nilai nominal dokumen kuitansi/penerimaan uang yang dikenai Bea Meterai adalah...</p><div class="quiz-options"><label><input type="radio" name="q3" value="a"> > Rp1.000.000</label><label><input type="radio" name="q3" value="b"> > Rp2.500.000</label><label><input type="radio" name="q3" value="c"> > Rp5.000.000</label><label><input type="radio" name="q3" value="d"> Tanpa batasan</label></div></div>
+<div class="quiz-question"><p>4. Surat perjanjian terutang Bea Meterai pada saat...</p><div class="quiz-options"><label><input type="radio" name="q4" value="a"> Dokumen dibubuhi tanda tangan</label><label><input type="radio" name="q4" value="b"> Dokumen selesai dibuat</label><label><input type="radio" name="q4" value="c"> Dokumen diserahkan</label><label><input type="radio" name="q4" value="d"> Dokumen digunakan di Indonesia</label></div></div>
+<div class="quiz-question"><p>5. Pihak yang terutang atas dokumen yang dibuat di luar negeri dan digunakan di Indonesia adalah...</p><div class="quiz-options"><label><input type="radio" name="q5" value="a"> Pihak yang menerima dokumen</label><label><input type="radio" name="q5" value="b"> Pihak yang menerbitkan</label><label><input type="radio" name="q5" value="c"> Pihak yang menerima manfaat</label><label><input type="radio" name="q5" value="d"> Kedua belah pihak</label></div></div>
+<div class="quiz-question"><p>6. Dokumen berikut yang BUKAN objek Bea Meterai adalah...</p><div class="quiz-options"><label><input type="radio" name="q6" value="a"> Surat perjanjian</label><label><input type="radio" name="q6" value="b"> Ijazah</label><label><input type="radio" name="q6" value="c"> Akta notaris</label><label><input type="radio" name="q6" value="d"> Dokumen lelang</label></div></div>
+<div class="quiz-question"><p>7. Kedaluwarsa Bea Meterai adalah...</p><div class="quiz-options"><label><input type="radio" name="q7" value="a"> 3 tahun</label><label><input type="radio" name="q7" value="b"> 5 tahun</label><label><input type="radio" name="q7" value="c"> 10 tahun</label><label><input type="radio" name="q7" value="d"> Tidak ada kedaluwarsa</label></div></div>
+<div class="quiz-question"><p>8. Sanksi administratif pemeteraian kemudian untuk dokumen terutang sejak 1 Januari 2021 yang tidak dibayar adalah...</p><div class="quiz-options"><label><input type="radio" name="q8" value="a"> 50% dari BM terutang</label><label><input type="radio" name="q8" value="b"> 100% dari BM terutang</label><label><input type="radio" name="q8" value="c"> 200% dari BM terutang</label><label><input type="radio" name="q8" value="d"> 300% dari BM terutang</label></div></div>
+<div class="quiz-question"><p>9. Pihak yang mencetak meterai tempel adalah...</p><div class="quiz-options"><label><input type="radio" name="q9" value="a"> DJP</label><label><input type="radio" name="q9" value="b"> Perum Peruri</label><label><input type="radio" name="q9" value="c"> PT Pos Indonesia</label><label><input type="radio" name="q9" value="d"> Bank Indonesia</label></div></div>
+<div class="quiz-question"><p>10. Pidana penjara bagi pemalsuan meterai paling lama...</p><div class="quiz-options"><label><input type="radio" name="q10" value="a"> 3 tahun</label><label><input type="radio" name="q10" value="b"> 5 tahun</label><label><input type="radio" name="q10" value="c"> 7 tahun</label><label><input type="radio" name="q10" value="d"> 10 tahun</label></div></div>
+<button class="quiz-btn" onclick="checkQuiz()">Periksa Jawaban</button>
+<div class="quiz-result" id="quizResult"></div>
+</div></div>
+</div>
+
+</main>
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button class="mobile-toggle" id="mobileToggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+<script>
+const navItems=document.querySelectorAll('.nav-item'),chapters=document.querySelectorAll('.chapter');
+navItems.forEach(item=>{item.addEventListener('click',()=>{const idx=item.dataset.chapter;navItems.forEach(n=>n.classList.remove('active'));chapters.forEach(c=>c.classList.remove('active'));item.classList.add('active');chapters[idx].classList.add('active');window.scrollTo({top:0,behavior:'smooth'});document.getElementById('sidebar').classList.remove('open')})});
+document.querySelectorAll('.collapsible-header').forEach(h=>{h.addEventListener('click',()=>{h.parentElement.classList.toggle('open')})});
+window.addEventListener('scroll',()=>{const s=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight,p=d>0?(s/d)*100:0;document.getElementById('progressBar').style.width=p+'%';const b=document.getElementById('backToTop');s>300?b.classList.add('visible'):b.classList.remove('visible')});
+document.getElementById('searchInput').addEventListener('input',function(){const q=this.value.toLowerCase().trim();navItems.forEach(n=>{n.style.display=n.textContent.toLowerCase().includes(q)||!q?'flex':'none'})});
+function checkQuiz(){const ans={q1:'a',q2:'b',q3:'c',q4:'a',q5:'c',q6:'b',q7:'b',q8:'b',q9:'b',q10:'c'};let score=0;for(const[q,c]of Object.entries(ans)){const s=document.querySelector(`input[name="${q}"]:checked`);if(s&&s.value===c)score++}const r=document.getElementById('quizResult'),pct=Math.round(score/10*100);r.className='quiz-result show '+(pct>=70?'good':'bad');r.textContent=pct===100?`🎉 Sempurna! ${score}/10 — Anda menguasai materi Bea Meterai!`:pct>=70?`✅ Bagus! ${score}/10 (${pct}%) — Pemahaman Anda solid.`:pct>=50?`⚠️ Cukup: ${score}/10 (${pct}%) — Review lagi beberapa bab.`:`❌ Perlu belajar lagi: ${score}/10 (${pct}%)`}
+</script>
+</body>
+</html>

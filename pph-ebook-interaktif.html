@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<!-- skill:chrome -->
+<style>
+/* Credit line — bottom-right */
+.design-ui-credit {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  font: 11px/1 system-ui, sans-serif;
+  color: rgba(128,128,128,0.5);
+  pointer-events: none;
+  z-index: 2147483647;
+  transition: opacity 0.4s ease;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+/* Hide chrome on touch devices */
+@media (hover: none) {
+  .design-ui-credit { display: none; }
+}
+
+/* Print fixes */
+@media print {
+  * {
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+  }
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .design-ui-credit { display: none !important; }
+}
+
+</style>
+<script>
+(function () {
+    // Design-ui pages are single compositions, so the whole body is editable.
+    function markEditable() {
+        document.body.classList.add('artifact-editable');
+    }
+
+    // Credit badge with idle-fade. Hover devices only.
+    function initChromeUI() {
+        if (!matchMedia('(hover: hover)').matches) return;
+
+        var credit = document.createElement('div');
+        credit.className = 'design-ui-credit';
+        credit.setAttribute('aria-hidden', 'true');
+        credit.innerHTML = '\u{1F49C} by ClickUp Brain';
+        document.body.appendChild(credit);
+
+        var timer = null;
+        var fade = function (out) { credit.style.opacity = out ? '0' : ''; };
+        fade(true);
+        var show = function () {
+            fade(false);
+            clearTimeout(timer);
+            timer = setTimeout(function () { fade(true); }, 3000);
+        };
+        document.addEventListener('mousemove', show);
+        show();
+    }
+
+    function init() {
+        markEditable();
+        initChromeUI();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+
+</script>
+<!-- /skill:chrome -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Book PPh: Pajak Penghasilan</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--primary:oklch(42% 0.14 270);--primary-light:oklch(52% 0.11 270);--accent:oklch(72% 0.15 75);--accent-light:oklch(93% 0.05 75);--n50:oklch(97% .005 270);--n100:oklch(94% .005 270);--n200:oklch(88% .008 270);--n300:oklch(78% .008 270);--n400:oklch(62% .01 270);--n700:oklch(30% .012 270);--n800:oklch(22% .015 270);--n900:oklch(15% .015 270);--font:'Plus Jakarta Sans',system-ui,sans-serif;--ease:cubic-bezier(.22,1,.36,1);--side:300px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);font-size:16px;line-height:1.7;color:var(--n800);background:var(--n50)}
+.sidebar{position:fixed;top:0;left:0;width:var(--side);height:100vh;background:var(--n900);color:var(--n200);overflow-y:auto;z-index:100;transition:transform .4s var(--ease);display:flex;flex-direction:column}
+.sidebar-header{padding:24px 20px 16px;border-bottom:1px solid oklch(25% .01 270)}
+.sidebar-header h1{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.sidebar-header p{font-size:.75rem;color:var(--n400);line-height:1.4}
+.sidebar-search{padding:12px 16px;border-bottom:1px solid oklch(25% .01 270)}
+.sidebar-search input{width:100%;padding:8px 12px;border-radius:6px;border:1px solid oklch(30% .01 270);background:oklch(20% .01 270);color:var(--n100);font-size:.8rem;font-family:var(--font);outline:none;transition:border-color .2s}
+.sidebar-search input::placeholder{color:var(--n400)}
+.sidebar-search input:focus{border-color:var(--primary-light)}
+.sidebar-nav{flex:1;overflow-y:auto;padding:8px 0}
+.nav-ch-title{display:block;width:100%;text-align:left;padding:10px 20px;font-size:.78rem;font-weight:600;color:var(--n200);background:none;border:none;cursor:pointer;transition:background .15s,color .15s;font-family:var(--font)}
+.nav-ch-title:hover{background:oklch(22% .01 270);color:var(--accent)}
+.nav-ch-title.active{color:var(--accent);background:oklch(20% .02 270)}
+.nav-sub{display:none;padding:0 0 8px}
+.nav-sub.open{display:block}
+.nav-sub a{display:block;padding:5px 20px 5px 36px;font-size:.72rem;color:var(--n400);text-decoration:none;transition:color .15s;line-height:1.4}
+.nav-sub a:hover{color:var(--n100)}
+.progress-bar{position:fixed;top:0;left:var(--side);right:0;height:3px;background:var(--n200);z-index:90}
+.progress-fill{height:100%;background:var(--primary);width:0%;transition:width .3s var(--ease)}
+.main{margin-left:var(--side);min-height:100vh}
+.content{max-width:780px;margin:0 auto;padding:48px 40px 120px}
+.cover{background:var(--primary);color:white;padding:80px 40px;text-align:center;margin-left:var(--side)}
+.cover h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;line-height:1.15;margin-bottom:16px;text-wrap:balance}
+.cover .subtitle{font-size:1rem;opacity:.85;max-width:500px;margin:0 auto 24px}
+.cover .badge{display:inline-block;background:var(--accent);color:var(--n900);padding:6px 16px;border-radius:20px;font-size:.8rem;font-weight:600}
+.chapter{margin-bottom:64px;scroll-margin-top:24px}
+.chapter-header{margin-bottom:32px;padding-bottom:16px;border-bottom:2px solid var(--n200)}
+.chapter-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--primary);margin-bottom:4px}
+.chapter-title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:var(--n900);line-height:1.2;text-wrap:balance}
+.section{margin-bottom:40px;scroll-margin-top:24px}
+.section h3{font-size:1.1rem;font-weight:700;color:var(--n800);margin-bottom:12px;padding-left:12px;border-left:3px solid var(--accent)}
+.section h4{font-size:.92rem;font-weight:600;color:var(--n700);margin:20px 0 8px}
+.section p{margin-bottom:12px;max-width:68ch;color:var(--n700)}
+.section ul,.section ol{padding-left:24px;margin-bottom:12px;color:var(--n700)}
+.section li{margin-bottom:6px}
+.collapsible{margin-bottom:12px;border:1px solid var(--n200);border-radius:8px;overflow:hidden}
+.collapsible-trigger{width:100%;text-align:left;padding:14px 16px;background:var(--n100);border:none;cursor:pointer;font-family:var(--font);font-size:.86rem;font-weight:600;color:var(--n800);display:flex;align-items:center;justify-content:space-between;gap:12px;transition:background .15s}
+.collapsible-trigger:hover{background:var(--n200)}
+.collapsible-trigger::after{content:'+';font-size:1.2rem;font-weight:400;color:var(--n400);transition:transform .3s var(--ease)}
+.collapsible.open .collapsible-trigger::after{content:'−'}
+.collapsible-content{display:none;padding:16px;font-size:.86rem;line-height:1.7;background:white}
+.collapsible.open .collapsible-content{display:block}
+.table-wrap{overflow-x:auto;margin:16px 0 24px;border-radius:8px;border:1px solid var(--n200)}
+table{width:100%;border-collapse:collapse;font-size:.8rem;font-variant-numeric:tabular-nums}
+thead{background:var(--primary);color:white}
+th{padding:10px 14px;text-align:left;font-weight:600;font-size:.76rem;letter-spacing:.02em}
+td{padding:10px 14px;border-top:1px solid var(--n200)}
+tbody tr:hover{background:var(--accent-light)}
+.info-box{background:var(--accent-light);border-radius:8px;padding:16px 20px;margin:16px 0;font-size:.84rem}
+.info-box strong{color:var(--n900)}
+.quiz{background:var(--n100);border-radius:12px;padding:24px;margin:32px 0}
+.quiz-title{font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:16px}
+.quiz-question{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--n200)}
+.quiz-question:last-of-type{border-bottom:none}
+.quiz-q{font-size:.86rem;font-weight:600;margin-bottom:10px;color:var(--n800)}
+.quiz-options label{display:block;padding:8px 12px;margin:4px 0;border-radius:6px;font-size:.8rem;cursor:pointer;transition:background .15s;color:var(--n700)}
+.quiz-options label:hover{background:var(--n200)}
+.quiz-options input[type="radio"]{margin-right:8px;accent-color:var(--primary)}
+.quiz-options label.correct{background:oklch(90% .08 145);color:oklch(30% .1 145)}
+.quiz-options label.incorrect{background:oklch(90% .08 25);color:oklch(35% .15 25)}
+.quiz-btn{display:inline-block;padding:10px 24px;background:var(--primary);color:white;border:none;border-radius:6px;font-family:var(--font);font-size:.85rem;font-weight:600;cursor:pointer;transition:background .2s,transform .1s;margin-top:12px}
+.quiz-btn:hover{background:var(--primary-light)}
+.quiz-btn:active{transform:scale(.97)}
+.quiz-result{margin-top:12px;font-size:.88rem;font-weight:600;display:none}
+.mobile-toggle{display:none;position:fixed;top:12px;left:12px;z-index:110;width:40px;height:40px;background:var(--primary);border:none;border-radius:8px;cursor:pointer;color:white;font-size:1.2rem;align-items:center;justify-content:center}
+.back-top{position:fixed;bottom:24px;right:24px;width:40px;height:40px;background:var(--primary);color:white;border:none;border-radius:50%;cursor:pointer;font-size:1.1rem;display:none;align-items:center;justify-content:center;box-shadow:0 4px 12px oklch(0% 0 0/.15);transition:transform .2s var(--ease);z-index:80}
+.back-top:hover{transform:translateY(-2px)}
+.back-top.visible{display:flex}
+.glossary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;margin:16px 0}
+.glossary-item{padding:10px 12px;background:white;border-radius:6px;border:1px solid var(--n200);font-size:.78rem}
+.glossary-item strong{color:var(--primary);display:block;margin-bottom:2px}
+@media(max-width:900px){:root{--side:0px}.sidebar{transform:translateX(-100%);width:280px}.sidebar.open{transform:translateX(0)}.mobile-toggle{display:flex}.cover{margin-left:0;padding:60px 24px}.content{padding:32px 20px 100px}.progress-bar{left:0}}
+@media(max-width:600px){.cover h1{font-size:1.8rem}.chapter-title{font-size:1.3rem}.glossary-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<button class="mobile-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-header"><h1>E-Book PPh</h1><p>Pajak Penghasilan</p></div>
+<div class="sidebar-search"><input type="text" placeholder="Cari topik..." oninput="handleSearch(this.value)"></div>
+<nav class="sidebar-nav" id="sidebarNav"></nav>
+</aside>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="cover"><h1>Pajak Penghasilan (PPh)</h1><p class="subtitle">Modul pembelajaran Pajak Penghasilan dari Direktorat Jenderal Pajak, Kementerian Keuangan RI</p><span class="badge">Edisi Januari 2024</span></div>
+<main class="main"><div class="content">
+
+<div class="chapter" id="bab1"><div class="chapter-header"><div class="chapter-label">Bab I</div><h2 class="chapter-title">Karakteristik, Ketentuan Material, dan Ketentuan Formal PPh</h2></div>
+<div class="section"><h3>Karakteristik Pajak Penghasilan</h3>
+<div class="info-box"><strong>5 Karakteristik PPh:</strong><br>1. Pajak Subjektif (memperhatikan keadaan subjek pajak)<br>2. Pajak Langsung (tidak dapat dialihkan)<br>3. Pajak Pusat (diadministrasikan oleh DJP)<br>4. Sistem Self-Assessment & Withholding<br>5. Bersifat Progresif (tarif meningkat seiring penghasilan)</div>
+<p><strong>Pajak Subjektif:</strong> Pengenaan pajak dimulai dengan menetapkan subjek pajaknya terlebih dahulu, baru dicari syarat objektifnya. Keadaan subjek pajak (seperti jumlah tanggungan) sangat diperhatikan sesuai teori gaya pikul.</p>
+<p><strong>Pajak Langsung:</strong> Penanggung jawab yuridis formal, penanggung beban ekonomis, dan destinataris undang-undang berada pada pihak yang sama.</p></div>
+<div class="section"><h3>Ketentuan Material dan Formal</h3>
+<p><strong>Ketentuan Material</strong> mengatur siapa yang dikenakan pajak (subjek), apa yang dikenakan pajak (objek), dan berapa tarif pajaknya. Diatur dalam UU No. 7/1983 tentang PPh beserta perubahannya (terakhir UU HPP 2021).</p>
+<p><strong>Ketentuan Formal</strong> mengatur tata cara agar pajak terutang masuk ke kas negara. Diatur dalam UU No. 6/1983 tentang KUP beserta perubahannya.</p></div>
+<div class="quiz" id="quiz1"><div class="quiz-title">📝 Latihan Soal: BAB I</div>
+<div class="quiz-question" data-answer="b"><div class="quiz-q">1. Karakteristik PPh adalah...</div><div class="quiz-options"><label><input type="radio" name="q1-1" value="a"> Pajak objektif</label><label><input type="radio" name="q1-1" value="b"> Pajak subjektif</label><label><input type="radio" name="q1-1" value="c"> Pajak tidak langsung</label><label><input type="radio" name="q1-1" value="d"> Pajak daerah</label></div></div>
+<div class="quiz-question" data-answer="d"><div class="quiz-q">2. Ketentuan material PPh mengatur hal berikut, kecuali...</div><div class="quiz-options"><label><input type="radio" name="q1-2" value="a"> Subjek pajak</label><label><input type="radio" name="q1-2" value="b"> Objek pajak</label><label><input type="radio" name="q1-2" value="c"> Tarif pajak</label><label><input type="radio" name="q1-2" value="d"> Cara pembayaran</label></div></div>
+<button class="quiz-btn" onclick="checkQuiz(this)">Periksa Jawaban</button><div class="quiz-result"></div></div></div>
+
+<div class="chapter" id="bab2"><div class="chapter-header"><div class="chapter-label">Bab II</div><h2 class="chapter-title">Subjek Pajak Penghasilan</h2></div>
+<div class="section"><h3>Jenis Subjek Pajak</h3>
+<p>Berdasarkan Pasal 2 ayat (1) UU PPh, subjek pajak terdiri dari: Orang Pribadi, Warisan Belum Terbagi, Badan, dan Bentuk Usaha Tetap (BUT).</p>
+<div class="collapsible"><button class="collapsible-trigger" onclick="this.parentElement.classList.toggle('open')">Subjek Pajak Dalam Negeri vs Luar Negeri</button><div class="collapsible-content">
+<p><strong>SPDN Orang Pribadi:</strong> Bertempat tinggal di Indonesia, atau berada di Indonesia > 183 hari dalam 12 bulan, atau berniat bertempat tinggal di Indonesia. Dikenakan pajak atas world-wide income.</p>
+<p><strong>SPLN:</strong> Tidak memenuhi kriteria SPDN. Hanya dikenakan pajak atas penghasilan yang bersumber dari Indonesia.</p>
+</div></div>
+<div class="collapsible"><button class="collapsible-trigger" onclick="this.parentElement.classList.toggle('open')">Yang Tidak Termasuk Subjek Pajak</button><div class="collapsible-content">
+<ul><li>Kantor perwakilan negara asing</li><li>Pejabat diplomatik/konsulat (dengan syarat tertentu)</li><li>Organisasi internasional (Indonesia anggota, tidak berusaha di Indonesia)</li><li>Pejabat organisasi internasional (bukan WNI, tidak berusaha di Indonesia)</li><li>Unit tertentu badan pemerintah (memenuhi 4 kriteria)</li></ul>
+</div></div></div>
+<div class="section"><h3>Saat Mulai & Berakhir Kewajiban Pajak Subjektif</h3>
+<div class="table-wrap"><table><thead><tr><th>Subjek Pajak</th><th>Dimulai</th><th>Berakhir</th></tr></thead><tbody>
+<tr><td>Orang Pribadi</td><td>Dilahirkan/Berada/Berniat tinggal di Indonesia</td><td>Meninggal dunia / Meninggalkan Indonesia selamanya</td></tr>
+<tr><td>Badan</td><td>Didirikan/bertempat kedudukan di Indonesia</td><td>Dibubarkan/tidak lagi berkedudukan di Indonesia</td></tr>
+<tr><td>Warisan Belum Terbagi</td><td>Saat pewaris meninggal</td><td>Saat warisan selesai dibagi</td></tr>
+<tr><td>SPLN BUT</td><td>Saat menjalankan usaha melalui BUT</td><td>Saat tidak lagi menjalankan usaha melalui BUT</td></tr>
+</tbody></table></div></div>
+<div class="quiz" id="quiz2"><div class="quiz-title">📝 Latihan Soal: BAB II</div>
+<div class="quiz-question" data-answer="c"><div class="quiz-q">1. Yang bukan subjek PPh adalah...</div><div class="quiz-options"><label><input type="radio" name="q2-1" value="a"> PNS</label><label><input type="radio" name="q2-1" value="b"> Partai Politik</label><label><input type="radio" name="q2-1" value="c"> Kedutaan Besar Inggris</label><label><input type="radio" name="q2-1" value="d"> Yayasan</label></div></div>
+<div class="quiz-question" data-answer="a"><div class="quiz-q">2. Kriteria berikut bukan syarat SPDN orang pribadi...</div><div class="quiz-options"><label><input type="radio" name="q2-2" value="a"> Warga Negara Asing</label><label><input type="radio" name="q2-2" value="b"> Bertempat tinggal di Indonesia</label><label><input type="radio" name="q2-2" value="c"> Berada di Indonesia > 183 hari dalam 12 bulan</label><label><input type="radio" name="q2-2" value="d"> Berniat bertempat tinggal di Indonesia</label></div></div>
+<button class="quiz-btn" onclick="checkQuiz(this)">Periksa Jawaban</button><div class="quiz-result"></div></div></div>
+
+<div class="chapter" id="bab3"><div class="chapter-header"><div class="chapter-label">Bab III</div><h2 class="chapter-title">Objek Pajak Penghasilan</h2></div>
+<div class="section"><h3>Definisi Penghasilan (Pasal 4 ayat 1)</h3>
+<div class="info-box"><strong>Penghasilan = setiap tambahan kemampuan ekonomis</strong> yang diterima/diperoleh WP, dari Indonesia maupun luar Indonesia, yang dapat dipakai untuk konsumsi atau menambah kekayaan WP, dengan nama dan dalam bentuk apapun.</div>
+<h4>Unsur-unsur Penghasilan:</h4>
+<ol><li>Setiap tambahan kemampuan ekonomis (SHS Concept)</li><li>Yang diterima atau diperoleh (stelsel kas/akrual)</li><li>Berasal dari Indonesia maupun luar Indonesia (world-wide income)</li><li>Dapat dipakai untuk konsumsi atau menambah kekayaan (Y = C + ΔW)</li><li>Dengan nama dan dalam bentuk apapun (substance over form)</li></ol></div>
+<div class="section"><h3>Penghasilan Objek PPh Final (Pasal 4 ayat 2)</h3>
+<p>Penghasilan yang dikenai PPh bersifat final antara lain: bunga deposito/tabungan, hadiah undian, transaksi saham di bursa, pengalihan hak atas tanah/bangunan, sewa tanah/bangunan, usaha jasa konstruksi, dan penghasilan WP peredaran bruto tertentu (0,5%).</p>
+<h4>Karakteristik PPh Final:</h4>
+<ul><li>Tidak digabung dengan penghasilan tarif umum di akhir tahun</li><li>Tidak dapat dikreditkan</li><li>Biaya terkait tidak boleh dikurangkan</li><li>Tetap dikenakan walaupun rugi usaha</li></ul></div>
+<div class="section"><h3>Penghasilan Dikecualikan dari Objek Pajak (Pasal 4 ayat 3)</h3>
+<div class="collapsible"><button class="collapsible-trigger" onclick="this.parentElement.classList.toggle('open')">Daftar Penghasilan Bukan Objek PPh</button><div class="collapsible-content">
+<ol><li>Bantuan/sumbangan/hibah (dengan syarat tertentu)</li><li>Warisan</li><li>Setoran tunai sebagai pengganti saham/penyertaan modal</li><li>Natura/kenikmatan tertentu</li><li>Pembayaran asuransi (kecelakaan, sakit, meninggal, beasiswa)</li><li>Dividen (dengan syarat investasi di NKRI)</li><li>Iuran dana pensiun (disahkan OJK)</li><li>Penghasilan dari modal dana pensiun di bidang tertentu</li><li>Bagian laba anggota CV/firma/kongsi/koperasi</li><li>Penghasilan modal ventura dari pasangan usaha UMKM</li><li>Beasiswa (memenuhi syarat tertentu)</li><li>Sisa lebih lembaga nirlaba pendidikan/penelitian</li><li>Bantuan/santunan BPJS</li><li>Dana setoran BPIH (Badan Pengelola Keuangan Haji)</li><li>Sisa lebih lembaga sosial/keagamaan</li></ol>
+</div></div></div></div>
+
+<div class="chapter" id="bab4"><div class="chapter-header"><div class="chapter-label">Bab IV</div><h2 class="chapter-title">Biaya yang Boleh dan Tidak Boleh Dikurangkan</h2></div>
+<div class="section"><h3>Biaya yang Boleh Dikurangkan (Pasal 6)</h3>
+<p>Prinsip: biaya harus terkait langsung/tidak langsung dengan kegiatan 3M (mendapatkan, menagih, memelihara) penghasilan yang merupakan objek pajak tidak final.</p>
+<ul><li>Biaya pembelian bahan, gaji, bunga, sewa, royalti</li><li>Biaya perjalanan, pengolahan limbah, premi asuransi</li><li>Biaya promosi, administrasi, pajak (kecuali PPh)</li><li>Penyusutan dan amortisasi</li><li>Iuran dana pensiun (disahkan OJK)</li><li>Kerugian penjualan/pengalihan harta usaha</li><li>Piutang tak tertagih (dengan syarat)</li><li>Sumbangan tertentu (maks 5% penghasilan neto fiskal tahun sebelumnya)</li><li>Biaya natura/kenikmatan (sejak UU HPP)</li></ul></div>
+<div class="section"><h3>Biaya yang Tidak Boleh Dikurangkan (Pasal 9)</h3>
+<ul><li>Pembagian laba (dividen, SHU koperasi)</li><li>Biaya kepentingan pribadi pemegang saham</li><li>Pembentukan dana cadangan (kecuali tertentu)</li><li>Premi asuransi pribadi WP OP</li><li>Jumlah melebihi kewajaran kepada pihak hubungan istimewa</li><li>Harta hibahan/sumbangan/warisan (Pasal 4 ayat 3)</li><li>Pajak Penghasilan</li><li>Biaya kepentingan pribadi WP/tanggungannya</li><li>Gaji anggota CV/firma yang modalnya tidak terbagi atas saham</li><li>Sanksi administrasi perpajakan</li></ul></div></div>
+
+<div class="chapter" id="bab5"><div class="chapter-header"><div class="chapter-label">Bab V</div><h2 class="chapter-title">Harga Perolehan, Pengalihan Harta, dan Penilaian Persediaan</h2></div>
+<div class="section"><h3>Harga Perolehan & Pengalihan (Pasal 10)</h3>
+<div class="table-wrap"><table><thead><tr><th>Skema</th><th>Harga Perolehan/Pengalihan</th></tr></thead><tbody>
+<tr><td>Jual beli (tanpa hub. istimewa)</td><td>Jumlah sesungguhnya dikeluarkan/diterima</td></tr>
+<tr><td>Jual beli (hub. istimewa)</td><td>Harga pasar wajar</td></tr>
+<tr><td>Tukar-menukar</td><td>Harga pasar</td></tr>
+<tr><td>Likuidasi/merger/pemekaran</td><td>Harga pasar (kecuali nilai buku dengan persetujuan DJP)</td></tr>
+<tr><td>Bantuan/sumbangan/hibah (dikecualikan dari objek)</td><td>Nilai sisa buku pihak pengalih</td></tr>
+<tr><td>Bantuan/sumbangan/hibah (tidak dikecualikan)</td><td>Nilai pasar</td></tr>
+<tr><td>Warisan</td><td>Nilai sisa buku pihak pengalih</td></tr>
+<tr><td>Penyertaan modal</td><td>Nilai pasar</td></tr>
+</tbody></table></div></div>
+<div class="section"><h3>Penilaian Persediaan (Pasal 10 ayat 6)</h3>
+<p>Metode yang diperbolehkan secara fiskal: <strong>Average (Rata-rata)</strong> atau <strong>FIFO (First-In First-Out)</strong>. Metode LIFO tidak diperbolehkan.</p></div></div>
+
+<div class="chapter" id="bab6"><div class="chapter-header"><div class="chapter-label">Bab VI</div><h2 class="chapter-title">Penyusutan dan Amortisasi Fiskal</h2></div>
+<div class="section"><h3>Penyusutan Fiskal (Pasal 11)</h3>
+<div class="table-wrap"><table><thead><tr><th>Kelompok</th><th>Masa Manfaat</th><th>Garis Lurus</th><th>Saldo Menurun</th></tr></thead><tbody>
+<tr><td>Kelompok 1</td><td>4 Tahun</td><td>25%</td><td>50%</td></tr>
+<tr><td>Kelompok 2</td><td>8 Tahun</td><td>12,5%</td><td>25%</td></tr>
+<tr><td>Kelompok 3</td><td>16 Tahun</td><td>6,25%</td><td>12,5%</td></tr>
+<tr><td>Kelompok 4</td><td>20 Tahun</td><td>5%</td><td>10%</td></tr>
+<tr><td>Bangunan Permanen</td><td>20 Tahun</td><td>5%</td><td>-</td></tr>
+<tr><td>Bangunan Tidak Permanen</td><td>10 Tahun</td><td>10%</td><td>-</td></tr>
+</tbody></table></div>
+<p><strong>Metode:</strong> Garis lurus (wajib untuk bangunan) atau Saldo menurun (hanya untuk bukan bangunan). <strong>Saat mulai:</strong> Bulan dilakukannya pengeluaran (kecuali harta dalam pengerjaan: bulan selesai). <strong>Nilai sisa:</strong> Tidak dikenal (nol).</p></div>
+<div class="section"><h3>Amortisasi Fiskal (Pasal 11A)</h3>
+<p>Untuk harta tak berwujud dan pengeluaran lainnya (termasuk goodwill, perpanjangan HGB/HGU/Hak Pakai). Masa manfaat dan tarif sama dengan tabel penyusutan bukan bangunan. Untuk bidang migas: metode satuan produksi. Untuk kehutanan/pertambangan selain migas: satuan produksi max 20%/tahun.</p></div></div>
+
+<div class="chapter" id="bab7"><div class="chapter-header"><div class="chapter-label">Bab VII</div><h2 class="chapter-title">Kompensasi Kerugian, Pemajakan Keluarga, dan PTKP</h2></div>
+<div class="section"><h3>Kompensasi Kerugian</h3>
+<p><strong>Horizontal:</strong> Kerugian satu usaha dikompensasikan dengan penghasilan lainnya dalam tahun yang sama (kecuali kerugian usaha PPh final/bukan objek, dan kerugian luar negeri).</p>
+<p><strong>Vertikal:</strong> Sisa kerugian dapat dikompensasikan ke tahun berikutnya berturut-turut sampai <strong>5 tahun</strong> (Pasal 6 ayat 2).</p></div>
+<div class="section"><h3>PTKP (Pasal 7)</h3>
+<div class="table-wrap"><table><thead><tr><th>Komponen</th><th>Besaran</th></tr></thead><tbody>
+<tr><td>Diri WP Orang Pribadi</td><td>Rp54.000.000</td></tr>
+<tr><td>Tambahan WP Kawin</td><td>Rp4.500.000</td></tr>
+<tr><td>Tambahan Istri Penghasilan Digabung</td><td>Rp54.000.000</td></tr>
+<tr><td>Tambahan per Tanggungan (maks 3)</td><td>Rp4.500.000</td></tr>
+</tbody></table></div>
+<p>Penerapan PTKP berdasarkan keadaan awal tahun pajak (1 Januari). Tanggungan: keluarga sedarah/semenda garis lurus + anak angkat, yang tidak memiliki penghasilan sendiri dan seluruh biaya hidupnya ditanggung WP.</p></div>
+<div class="section"><h3>Peredaran Bruto Tidak Kena Pajak (Pasal 7 ayat 2a)</h3>
+<p>WP Orang Pribadi dengan peredaran bruto tertentu (PP 55/2022) tidak dikenai PPh atas bagian peredaran bruto sampai dengan <strong>Rp500.000.000</strong> dalam satu tahun pajak.</p></div></div>
+
+<div class="chapter" id="bab8"><div class="chapter-header"><div class="chapter-label">Bab VIII</div><h2 class="chapter-title">Penghitungan PPh Terutang</h2></div>
+<div class="section"><h3>Tarif Umum Pasal 17</h3>
+<h4>WP Orang Pribadi (Progresif)</h4>
+<div class="table-wrap"><table><thead><tr><th>Lapisan PKP</th><th>Tarif</th></tr></thead><tbody>
+<tr><td>s.d. Rp60 Juta</td><td>5%</td></tr>
+<tr><td>> Rp60 Juta s.d. Rp250 Juta</td><td>15%</td></tr>
+<tr><td>> Rp250 Juta s.d. Rp500 Juta</td><td>25%</td></tr>
+<tr><td>> Rp500 Juta s.d. Rp5 Miliar</td><td>30%</td></tr>
+<tr><td>> Rp5 Miliar</td><td>35%</td></tr>
+</tbody></table></div>
+<h4>WP Badan</h4>
+<p>Tarif tunggal <strong>22%</strong> (sejak tahun pajak 2022). Fasilitas Pasal 31E: pengurangan 50% untuk bagian PKP dari peredaran bruto s.d. Rp4,8M (syarat: peredaran bruto ≤ Rp50M). Perseroan terbuka 40% saham publik: tarif 19%.</p></div>
+<div class="section"><h3>PPh Final Peredaran Bruto Tertentu (PP 55/2022)</h3>
+<p>Tarif <strong>0,5%</strong> dari peredaran bruto per bulan. Berlaku untuk WP dengan omzet ≤ Rp4,8M/tahun. Jangka waktu: WP OP 7 tahun, CV/Firma/Koperasi/BUMDes 4 tahun, PT 3 tahun.</p></div>
+<div class="quiz" id="quiz8"><div class="quiz-title">📝 Latihan Soal: BAB VIII</div>
+<div class="quiz-question" data-answer="c"><div class="quiz-q">1. Kegiatan usaha jasa konstruksi yang dikenakan PPh final meliputi...</div><div class="quiz-options"><label><input type="radio" name="q8-1" value="a"> Pekerjaan, perencanaan, pelaksanaan konstruksi</label><label><input type="radio" name="q8-1" value="b"> Konsultansi, pengawasan, pelaksanaan konstruksi</label><label><input type="radio" name="q8-1" value="c"> Konsultansi, pekerjaan, pekerjaan konstruksi terintegrasi</label><label><input type="radio" name="q8-1" value="d"> Perencanaan, pekerjaan, pekerjaan terintegrasi</label></div></div>
+<div class="quiz-question" data-answer="c"><div class="quiz-q">2. WP yang boleh menggunakan NPPN pada tahun 2022 adalah...</div><div class="quiz-options"><label><input type="radio" name="q8-2" value="a"> Tn Adi, dokter, omzet > Rp4,8M/thn</label><label><input type="radio" name="q8-2" value="b"> PT ABC, omzet Rp4,9M</label><label><input type="radio" name="q8-2" value="c"> Tn Tigor, usaha dagang, pilih ketentuan umum, omzet Rp1,5M</label><label><input type="radio" name="q8-2" value="d"> CV Udah Biasa, katering, pilih ketentuan umum, omzet Rp2M</label></div></div>
+<button class="quiz-btn" onclick="checkQuiz(this)">Periksa Jawaban</button><div class="quiz-result"></div></div></div>
+
+<div class="chapter" id="bab9"><div class="chapter-header"><div class="chapter-label">Bab IX</div><h2 class="chapter-title">Pelunasan Pajak dalam Tahun Berjalan dan Penghitungan Pajak Akhir Tahun</h2></div>
+<div class="section"><h3>Mekanisme Pelunasan PPh dalam Tahun Berjalan</h3>
+<div class="info-box"><strong>Pemotongan/Pemungutan Pihak Lain:</strong> PPh 21, PPh 22, PPh 23, PPh 24<br><strong>Pembayaran Sendiri:</strong> PPh 25 (angsuran bulanan)</div>
+<div class="collapsible"><button class="collapsible-trigger" onclick="this.parentElement.classList.toggle('open')">PPh Pasal 21 (Pekerjaan/Jasa/Kegiatan OP)</button><div class="collapsible-content"><p>Pajak atas penghasilan sehubungan pekerjaan, jasa, kegiatan yang diterima orang pribadi SPDN. Sejak 2024 menggunakan tarif efektif bulanan (Januari s.d. November) dan tarif Pasal 17 untuk masa pajak terakhir (Desember).</p></div></div>
+<div class="collapsible"><button class="collapsible-trigger" onclick="this.parentElement.classList.toggle('open')">PPh Pasal 22 (Pemungutan atas Impor/Penjualan Tertentu)</button><div class="collapsible-content"><p>Dipungut oleh Bank Devisa/DJBC (impor), Bendahara Pemerintah (pembelian barang), BUMN tertentu, industri tertentu (semen, kertas, baja, otomotif, farmasi), produsen BBM/pelumas, dll. Tarif bervariasi 0,25% s.d. 10% tergantung jenis transaksi.</p></div></div>
+<div class="collapsible"><button class="collapsible-trigger" onclick="this.parentElement.classList.toggle('open')">PPh Pasal 23 (Pemotongan atas Modal/Jasa)</button><div class="collapsible-content"><p><strong>15%:</strong> Dividen, bunga, royalti, hadiah/penghargaan. <strong>2%:</strong> Sewa harta (selain tanah/bangunan), jasa teknik, manajemen, konstruksi, konsultan, dan jasa lain (PMK 141/2015). Tidak dipotong atas: penghasilan kepada bank, sewa guna usaha hak opsi, dividen bukan objek.</p></div></div>
+<div class="collapsible"><button class="collapsible-trigger" onclick="this.parentElement.classList.toggle('open')">PPh Pasal 24 (Kredit Pajak Luar Negeri)</button><div class="collapsible-content"><p>Pajak yang dibayar/terutang di luar negeri dapat dikreditkan. Batas kredit: yang terkecil dari (a) PPh yang dibayar di LN, (b) (Penghasilan Neto LN / PKP) × PPh Terutang. Dihitung per jenis penghasilan per negara.</p></div></div>
+<div class="collapsible"><button class="collapsible-trigger" onclick="this.parentElement.classList.toggle('open')">PPh Pasal 25 (Angsuran Bulanan)</button><div class="collapsible-content"><p>Angsuran = (PPh Terutang SPT Tahunan tahun lalu - Kredit Pajak PPh 21/22/23/24) / 12. Dibayar sendiri setiap bulan.</p></div></div>
+<div class="collapsible"><button class="collapsible-trigger" onclick="this.parentElement.classList.toggle('open')">PPh Pasal 29 (Kurang Bayar Akhir Tahun)</button><div class="collapsible-content"><p>Kekurangan PPh yang harus dilunasi sebelum SPT Tahunan disampaikan. Terjadi jika PPh terutang > kredit pajak (PPh 21+22+23+24+25).</p></div></div></div>
+<div class="quiz" id="quiz9"><div class="quiz-title">📝 Latihan Soal: BAB IX</div>
+<div class="quiz-question" data-answer="d"><div class="quiz-q">1. Pelunasan PPh tahun berjalan melalui pemotongan pihak lain, kecuali...</div><div class="quiz-options"><label><input type="radio" name="q9-1" value="a"> PPh Pasal 21</label><label><input type="radio" name="q9-1" value="b"> PPh Pasal 22</label><label><input type="radio" name="q9-1" value="c"> PPh Pasal 23</label><label><input type="radio" name="q9-1" value="d"> PPh Pasal 25</label></div></div>
+<div class="quiz-question" data-answer="b"><div class="quiz-q">2. PT Sehati menjual laptop ke KPP Pratama. Dipungut pajak pasal...</div><div class="quiz-options"><label><input type="radio" name="q9-2" value="a"> PPh Pasal 23</label><label><input type="radio" name="q9-2" value="b"> PPh Pasal 22</label><label><input type="radio" name="q9-2" value="c"> PPh Pasal 21</label><label><input type="radio" name="q9-2" value="d"> PPh Pasal 24</label></div></div>
+<button class="quiz-btn" onclick="checkQuiz(this)">Periksa Jawaban</button><div class="quiz-result"></div></div></div>
+
+<div class="chapter" id="istilah"><div class="chapter-header"><div class="chapter-label">Lampiran</div><h2 class="chapter-title">Daftar Istilah</h2></div>
+<div class="glossary-grid">
+<div class="glossary-item"><strong>PPh</strong>Pajak Penghasilan</div>
+<div class="glossary-item"><strong>PTKP</strong>Penghasilan Tidak Kena Pajak</div>
+<div class="glossary-item"><strong>PKP</strong>Penghasilan Kena Pajak</div>
+<div class="glossary-item"><strong>NPPN</strong>Norma Penghitungan Penghasilan Neto</div>
+<div class="glossary-item"><strong>SPDN</strong>Subjek Pajak Dalam Negeri</div>
+<div class="glossary-item"><strong>SPLN</strong>Subjek Pajak Luar Negeri</div>
+<div class="glossary-item"><strong>BUT</strong>Bentuk Usaha Tetap</div>
+<div class="glossary-item"><strong>P3B</strong>Persetujuan Penghindaran Pajak Berganda</div>
+<div class="glossary-item"><strong>SPT</strong>Surat Pemberitahuan</div>
+<div class="glossary-item"><strong>WP</strong>Wajib Pajak</div>
+<div class="glossary-item"><strong>DPP</strong>Dasar Pengenaan Pajak</div>
+<div class="glossary-item"><strong>NPK</strong>Norma Penghitungan Khusus</div>
+</div></div>
+
+</div></main>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+const chapters=[{id:'bab1',title:'BAB I: Karakteristik PPh',subs:[{href:'#bab1',text:'Karakteristik & Ketentuan'}]},{id:'bab2',title:'BAB II: Subjek Pajak',subs:[{href:'#bab2',text:'Jenis Subjek Pajak'},{href:'#quiz2',text:'Latihan Soal'}]},{id:'bab3',title:'BAB III: Objek Pajak',subs:[{href:'#bab3',text:'Definisi Penghasilan'},{href:'#bab3',text:'PPh Final & Bukan Objek'}]},{id:'bab4',title:'BAB IV: Biaya Dikurangkan',subs:[{href:'#bab4',text:'Boleh & Tidak Boleh'}]},{id:'bab5',title:'BAB V: Harga Perolehan & Persediaan',subs:[{href:'#bab5',text:'Pengalihan Harta & Metode Persediaan'}]},{id:'bab6',title:'BAB VI: Penyusutan & Amortisasi',subs:[{href:'#bab6',text:'Metode & Masa Manfaat'}]},{id:'bab7',title:'BAB VII: Kompensasi, Keluarga, PTKP',subs:[{href:'#bab7',text:'Kompensasi Kerugian & PTKP'}]},{id:'bab8',title:'BAB VIII: Penghitungan PPh Terutang',subs:[{href:'#bab8',text:'Tarif Umum & Khusus'},{href:'#quiz8',text:'Latihan Soal'}]},{id:'bab9',title:'BAB IX: Pelunasan Pajak',subs:[{href:'#bab9',text:'PPh 21/22/23/24/25/29'},{href:'#quiz9',text:'Latihan Soal'}]},{id:'istilah',title:'Daftar Istilah',subs:[{href:'#istilah',text:'Glosarium'}]}];
+const nav=document.getElementById('sidebarNav');
+chapters.forEach((ch,i)=>{const div=document.createElement('div');div.innerHTML=`<button class="nav-ch-title" onclick="toggleNav(this)" data-target="nav-${i}">${ch.title}</button><div class="nav-sub" id="nav-${i}">${ch.subs.map(s=>`<a href="${s.href}">${s.text}</a>`).join('')}</div>`;nav.appendChild(div)});
+function toggleNav(btn){const t=btn.dataset.target;const s=document.getElementById(t);document.querySelectorAll('.nav-sub').forEach(x=>{if(x.id!==t)x.classList.remove('open')});document.querySelectorAll('.nav-ch-title').forEach(x=>{if(x!==btn)x.classList.remove('active')});s.classList.toggle('open');btn.classList.toggle('active')}
+document.querySelectorAll('.nav-sub a').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});if(window.innerWidth<=900)document.getElementById('sidebar').classList.remove('open')})});
+window.addEventListener('scroll',()=>{const p=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;document.getElementById('progressFill').style.width=p+'%';const b=document.getElementById('backTop');if(window.scrollY>400)b.classList.add('visible');else b.classList.remove('visible')});
+function checkQuiz(btn){const quiz=btn.parentElement;const qs=quiz.querySelectorAll('.quiz-question');let c=0;qs.forEach(q=>{const ans=q.dataset.answer;const sel=q.querySelector('input:checked');const labels=q.querySelectorAll('label');labels.forEach(l=>l.classList.remove('correct','incorrect'));if(sel){if(sel.value===ans){c++;sel.parentElement.classList.add('correct')}else{sel.parentElement.classList.add('incorrect');labels.forEach(l=>{if(l.querySelector('input').value===ans)l.classList.add('correct')})}}else{labels.forEach(l=>{if(l.querySelector('input').value===ans)l.classList.add('correct')})}});const r=quiz.querySelector('.quiz-result');r.style.display='block';r.textContent=`Skor: ${c}/${qs.length} benar`;r.style.color=c===qs.length?'oklch(45% .15 145)':'oklch(45% .15 25)'}
+function handleSearch(q){const secs=document.querySelectorAll('.chapter');if(!q.trim()){secs.forEach(s=>s.style.display='');return}secs.forEach(s=>{s.style.display=s.textContent.toLowerCase().includes(q.toLowerCase())?'':'none'})}
+</script>
+</body>
+</html>

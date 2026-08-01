@@ -1,0 +1,1270 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<!-- skill:chrome -->
+<style>
+/* Credit line — bottom-right */
+.design-ui-credit {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  font: 11px/1 system-ui, sans-serif;
+  color: rgba(128,128,128,0.5);
+  pointer-events: none;
+  z-index: 2147483647;
+  transition: opacity 0.4s ease;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+/* Hide chrome on touch devices */
+@media (hover: none) {
+  .design-ui-credit { display: none; }
+}
+
+/* Print fixes */
+@media print {
+  * {
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+  }
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .design-ui-credit { display: none !important; }
+}
+
+</style>
+<script>
+(function () {
+    // Design-ui pages are single compositions, so the whole body is editable.
+    function markEditable() {
+        document.body.classList.add('artifact-editable');
+    }
+
+    // Credit badge with idle-fade. Hover devices only.
+    function initChromeUI() {
+        if (!matchMedia('(hover: hover)').matches) return;
+
+        var credit = document.createElement('div');
+        credit.className = 'design-ui-credit';
+        credit.setAttribute('aria-hidden', 'true');
+        credit.innerHTML = '\u{1F49C} by ClickUp Brain';
+        document.body.appendChild(credit);
+
+        var timer = null;
+        var fade = function (out) { credit.style.opacity = out ? '0' : ''; };
+        fade(true);
+        var show = function () {
+            fade(false);
+            clearTimeout(timer);
+            timer = setTimeout(function () { fade(true); }, 3000);
+        };
+        document.addEventListener('mousemove', show);
+        show();
+    }
+
+    function init() {
+        markEditable();
+        initChromeUI();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+
+</script>
+<!-- /skill:chrome -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Book KUP: Ketentuan Umum dan Tata Cara Perpajakan</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: oklch(45% 0.15 250);
+  --primary-light: oklch(55% 0.12 250);
+  --primary-dark: oklch(35% 0.15 250);
+  --accent: oklch(75% 0.16 85);
+  --accent-light: oklch(92% 0.06 85);
+  --accent-dark: oklch(60% 0.16 85);
+  --neutral-50: oklch(97% 0.005 250);
+  --neutral-100: oklch(94% 0.005 250);
+  --neutral-200: oklch(88% 0.008 250);
+  --neutral-300: oklch(78% 0.008 250);
+  --neutral-400: oklch(62% 0.01 250);
+  --neutral-500: oklch(50% 0.01 250);
+  --neutral-600: oklch(40% 0.012 250);
+  --neutral-700: oklch(30% 0.012 250);
+  --neutral-800: oklch(22% 0.015 250);
+  --neutral-900: oklch(15% 0.015 250);
+  --success: oklch(55% 0.15 145);
+  --error: oklch(55% 0.2 25);
+  --font: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --sidebar-w: 300px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--neutral-800);
+  background: var(--neutral-50);
+  font-optical-sizing: auto;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--neutral-900);
+  color: var(--neutral-200);
+  overflow-y: auto;
+  z-index: 100;
+  transition: transform 0.4s var(--ease-out);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  padding: 24px 20px 16px;
+  border-bottom: 1px solid oklch(25% 0.01 250);
+}
+
+.sidebar-header h1 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.sidebar-header p {
+  font-size: 0.75rem;
+  color: var(--neutral-400);
+  line-height: 1.4;
+}
+
+.sidebar-search {
+  padding: 12px 16px;
+  border-bottom: 1px solid oklch(25% 0.01 250);
+}
+
+.sidebar-search input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid oklch(30% 0.01 250);
+  background: oklch(20% 0.01 250);
+  color: var(--neutral-100);
+  font-size: 0.8rem;
+  font-family: var(--font);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.sidebar-search input::placeholder { color: var(--neutral-500); }
+.sidebar-search input:focus { border-color: var(--primary-light); }
+
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.nav-chapter {
+  padding: 0;
+}
+
+.nav-chapter-title {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--neutral-200);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  font-family: var(--font);
+}
+
+.nav-chapter-title:hover { background: oklch(22% 0.01 250); color: var(--accent); }
+.nav-chapter-title.active { color: var(--accent); background: oklch(20% 0.02 250); }
+
+.nav-sub {
+  display: none;
+  padding: 0 0 8px;
+}
+
+.nav-sub.open { display: block; }
+
+.nav-sub a {
+  display: block;
+  padding: 5px 20px 5px 36px;
+  font-size: 0.72rem;
+  color: var(--neutral-400);
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+  line-height: 1.4;
+}
+
+.nav-sub a:hover { color: var(--neutral-100); background: oklch(20% 0.01 250); }
+.nav-sub a.active { color: var(--accent); }
+
+/* PROGRESS BAR */
+.progress-bar {
+  position: fixed;
+  top: 0; left: var(--sidebar-w);
+  right: 0;
+  height: 3px;
+  background: var(--neutral-200);
+  z-index: 90;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--primary);
+  width: 0%;
+  transition: width 0.3s var(--ease-out);
+}
+
+/* MAIN CONTENT */
+.main {
+  margin-left: var(--sidebar-w);
+  min-height: 100vh;
+}
+
+.content {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 48px 40px 120px;
+}
+
+/* HERO / COVER */
+.cover {
+  background: var(--primary);
+  color: white;
+  padding: 80px 40px;
+  text-align: center;
+  margin-left: var(--sidebar-w);
+}
+
+.cover h1 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  text-wrap: balance;
+}
+
+.cover .subtitle {
+  font-size: 1rem;
+  opacity: 0.85;
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+
+.cover .badge {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--neutral-900);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* CHAPTER SECTIONS */
+.chapter {
+  margin-bottom: 64px;
+  scroll-margin-top: 24px;
+}
+
+.chapter-header {
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--neutral-200);
+}
+
+.chapter-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.chapter-title {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: var(--neutral-900);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+/* SECTIONS */
+.section {
+  margin-bottom: 40px;
+  scroll-margin-top: 24px;
+}
+
+.section h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--neutral-800);
+  margin-bottom: 12px;
+  padding-left: 12px;
+  border-left: 3px solid var(--accent);
+}
+
+.section h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--neutral-700);
+  margin: 20px 0 8px;
+}
+
+.section p {
+  margin-bottom: 12px;
+  max-width: 68ch;
+  color: var(--neutral-700);
+}
+
+.section ul, .section ol {
+  padding-left: 24px;
+  margin-bottom: 12px;
+  color: var(--neutral-700);
+}
+
+.section li { margin-bottom: 6px; }
+
+/* COLLAPSIBLE */
+.collapsible {
+  margin-bottom: 12px;
+  border: 1px solid var(--neutral-200);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.collapsible:hover { box-shadow: 0 2px 8px oklch(0% 0 0 / 0.04); }
+
+.collapsible-trigger {
+  width: 100%;
+  text-align: left;
+  padding: 14px 16px;
+  background: var(--neutral-100);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--neutral-800);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  transition: background 0.15s;
+}
+
+.collapsible-trigger:hover { background: var(--neutral-200); }
+
+.collapsible-trigger::after {
+  content: '+';
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--neutral-400);
+  transition: transform 0.3s var(--ease-out);
+}
+
+.collapsible.open .collapsible-trigger::after {
+  content: '−';
+}
+
+.collapsible-content {
+  display: none;
+  padding: 16px;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  background: white;
+}
+
+.collapsible.open .collapsible-content { display: block; }
+
+/* TABLES */
+.table-wrap {
+  overflow-x: auto;
+  margin: 16px 0 24px;
+  border-radius: 8px;
+  border: 1px solid var(--neutral-200);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+
+thead { background: var(--primary); color: white; }
+th { padding: 10px 14px; text-align: left; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.02em; }
+td { padding: 10px 14px; border-top: 1px solid var(--neutral-200); }
+tbody tr:hover { background: var(--accent-light); }
+
+/* INFO BOX */
+.info-box {
+  background: var(--accent-light);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 16px 0;
+  font-size: 0.85rem;
+}
+
+.info-box strong { color: var(--neutral-900); }
+
+/* QUIZ */
+.quiz {
+  background: var(--neutral-100);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 32px 0;
+}
+
+.quiz-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+
+.quiz-question {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--neutral-200);
+}
+
+.quiz-question:last-of-type { border-bottom: none; }
+
+.quiz-q {
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--neutral-800);
+}
+
+.quiz-options label {
+  display: block;
+  padding: 8px 12px;
+  margin: 4px 0;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  color: var(--neutral-700);
+}
+
+.quiz-options label:hover { background: var(--neutral-200); }
+
+.quiz-options input[type="radio"] {
+  margin-right: 8px;
+  accent-color: var(--primary);
+}
+
+.quiz-options label.correct { background: oklch(90% 0.08 145); color: oklch(30% 0.1 145); }
+.quiz-options label.incorrect { background: oklch(90% 0.08 25); color: oklch(35% 0.15 25); }
+
+.quiz-btn {
+  display: inline-block;
+  padding: 10px 24px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: var(--font);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 12px;
+}
+
+.quiz-btn:hover { background: var(--primary-light); }
+.quiz-btn:active { transform: scale(0.97); }
+
+.quiz-result {
+  margin-top: 12px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: none;
+}
+
+/* MOBILE NAV */
+.mobile-toggle {
+  display: none;
+  position: fixed;
+  top: 12px; left: 12px;
+  z-index: 110;
+  width: 40px; height: 40px;
+  background: var(--primary);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  font-size: 1.2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* BACK TO TOP */
+.back-top {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  width: 40px; height: 40px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px oklch(0% 0 0 / 0.15);
+  transition: transform 0.2s var(--ease-out);
+  z-index: 80;
+}
+
+.back-top:hover { transform: translateY(-2px); }
+.back-top.visible { display: flex; }
+
+/* GLOSSARY */
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.glossary-item {
+  padding: 8px 12px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid var(--neutral-200);
+  font-size: 0.78rem;
+}
+
+.glossary-item strong { color: var(--primary); display: block; margin-bottom: 2px; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  :root { --sidebar-w: 0px; }
+  .sidebar { transform: translateX(-100%); width: 280px; }
+  .sidebar.open { transform: translateX(0); }
+  .mobile-toggle { display: flex; }
+  .cover { margin-left: 0; padding: 60px 24px; }
+  .content { padding: 32px 20px 100px; }
+  .progress-bar { left: 0; }
+}
+
+@media (max-width: 600px) {
+  .cover h1 { font-size: 1.8rem; }
+  .chapter-title { font-size: 1.4rem; }
+  .glossary-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h1>E-Book KUP</h1>
+    <p>Ketentuan Umum dan Tata Cara Perpajakan</p>
+  </div>
+  <div class="sidebar-search">
+    <input type="text" id="searchInput" placeholder="Cari topik..." oninput="handleSearch(this.value)">
+  </div>
+  <nav class="sidebar-nav" id="sidebarNav">
+    <div class="nav-chapter">
+      <button class="nav-chapter-title" onclick="toggleNav(this)" data-target="nav-1">BAB I: Pendahuluan</button>
+      <div class="nav-sub" id="nav-1"><a href="#bab1">Definisi & Fungsi Pajak</a><a href="#bab1-sistem">Sistem Self Assessment</a></div>
+    </div>
+    <div class="nav-chapter">
+      <button class="nav-chapter-title" onclick="toggleNav(this)" data-target="nav-2">BAB II: Pendaftaran & NPWP</button>
+      <div class="nav-sub" id="nav-2"><a href="#bab2">Kewajiban Mendaftarkan Diri</a><a href="#bab2-npwp">Fungsi NPWP</a><a href="#bab2-waktu">Jangka Waktu Pendaftaran</a><a href="#bab2-hapus">Penghapusan NPWP</a><a href="#quiz2">Latihan Soal</a></div>
+    </div>
+    <div class="nav-chapter">
+      <button class="nav-chapter-title" onclick="toggleNav(this)" data-target="nav-3">BAB III: Pembukuan & Pencatatan</button>
+      <div class="nav-sub" id="nav-3"><a href="#bab3">Kewajiban Pembukuan</a><a href="#bab3-ketentuan">Ketentuan Pembukuan</a><a href="#quiz3">Latihan Soal</a></div>
+    </div>
+    <div class="nav-chapter">
+      <button class="nav-chapter-title" onclick="toggleNav(this)" data-target="nav-4">BAB IV: Pembayaran Pajak</button>
+      <div class="nav-sub" id="nav-4"><a href="#bab4">Sarana Pembayaran</a><a href="#bab4-batas">Batas Waktu Pembayaran</a><a href="#bab4-sanksi">Sanksi Keterlambatan</a><a href="#quiz4">Latihan Soal</a></div>
+    </div>
+    <div class="nav-chapter">
+      <button class="nav-chapter-title" onclick="toggleNav(this)" data-target="nav-5">BAB V: Pelaporan Pajak</button>
+      <div class="nav-sub" id="nav-5"><a href="#bab5">SPT dan Fungsinya</a><a href="#bab5-batas">Batas Waktu SPT</a><a href="#bab5-sanksi">Sanksi Telat Lapor</a><a href="#quiz5">Latihan Soal</a></div>
+    </div>
+    <div class="nav-chapter">
+      <button class="nav-chapter-title" onclick="toggleNav(this)" data-target="nav-6">BAB VI: Pemeriksaan Pajak</button>
+      <div class="nav-sub" id="nav-6"><a href="#bab6">Tujuan Pemeriksaan</a><a href="#bab6-jangka">Jangka Waktu</a></div>
+    </div>
+    <div class="nav-chapter">
+      <button class="nav-chapter-title" onclick="toggleNav(this)" data-target="nav-7">BAB VII: Penetapan & Ketetapan</button>
+      <div class="nav-sub" id="nav-7"><a href="#bab7">Surat Ketetapan Pajak</a><a href="#bab7-sanksi">Sanksi Administratif</a></div>
+    </div>
+    <div class="nav-chapter">
+      <button class="nav-chapter-title" onclick="toggleNav(this)" data-target="nav-8">BAB VIII: Penagihan Pajak</button>
+      <div class="nav-sub" id="nav-8"><a href="#bab8">Tindakan Penagihan</a><a href="#bab8-sita">Penyitaan</a></div>
+    </div>
+    <div class="nav-chapter">
+      <button class="nav-chapter-title" onclick="toggleNav(this)" data-target="nav-9">BAB IX: Pembetulan</button>
+      <div class="nav-sub" id="nav-9"><a href="#bab9">Ruang Lingkup</a></div>
+    </div>
+    <div class="nav-chapter">
+      <button class="nav-chapter-title" onclick="toggleNav(this)" data-target="nav-10">BAB X: Sengketa Pajak</button>
+      <div class="nav-sub" id="nav-10"><a href="#bab10">Keberatan & Banding</a></div>
+    </div>
+    <div class="nav-chapter">
+      <button class="nav-chapter-title" onclick="toggleNav(this)" data-target="nav-11">BAB XI: Imbalan Bunga</button>
+      <div class="nav-sub" id="nav-11"><a href="#bab11">Ketentuan Imbalan Bunga</a></div>
+    </div>
+    <div class="nav-chapter">
+      <button class="nav-chapter-title" onclick="toggleNav(this)" data-target="nav-12">BAB XII: Ketentuan Khusus</button>
+      <div class="nav-sub" id="nav-12"><a href="#bab12">Wakil Wajib Pajak</a></div>
+    </div>
+    <div class="nav-chapter">
+      <button class="nav-chapter-title" onclick="toggleNav(this)" data-target="nav-istilah">Daftar Istilah</button>
+      <div class="nav-sub" id="nav-istilah"><a href="#istilah">Glosarium</a></div>
+    </div>
+  </nav>
+</aside>
+
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="cover">
+  <h1>Ketentuan Umum dan Tata Cara Perpajakan (KUP)</h1>
+  <p class="subtitle">Modul pembelajaran perpajakan dari Direktorat Jenderal Pajak, Kementerian Keuangan RI</p>
+  <span class="badge">Edisi Januari 2024</span>
+</div>
+
+<main class="main">
+<div class="content">
+
+<!-- BAB I -->
+<div class="chapter" id="bab1">
+  <div class="chapter-header">
+    <div class="chapter-label">Bab I</div>
+    <h2 class="chapter-title">Pendahuluan</h2>
+  </div>
+  <div class="section">
+    <h3>Definisi Pajak</h3>
+    <p>Pajak adalah kontribusi wajib kepada negara yang terutang oleh orang pribadi atau badan yang bersifat memaksa berdasarkan Undang-Undang, dengan tidak mendapatkan imbalan secara langsung dan digunakan untuk keperluan negara bagi sebesar-besarnya kemakmuran rakyat (Pasal 1 angka 1 UU KUP).</p>
+    <div class="info-box">
+      <strong>Karakteristik Pajak:</strong><br>
+      1. Pungutan secara paksa oleh negara<br>
+      2. Yang bersangkutan tidak mendapatkan imbalan secara langsung<br>
+      3. Digunakan untuk membiayai pengeluaran negara
+    </div>
+    <h4>Fungsi Pajak</h4>
+    <p><strong>Fungsi Anggaran (Budgetair):</strong> Alat untuk memasukkan uang sebanyak-banyaknya ke dalam kas negara untuk membiayai pengeluaran negara.</p>
+    <p><strong>Fungsi Mengatur (Reguleren):</strong> Alat untuk mencapai tujuan-tujuan tertentu di luar bidang keuangan, menciptakan iklim yang sehat bagi perkembangan dunia usaha.</p>
+  </div>
+  <div class="section" id="bab1-sistem">
+    <h3>Sistem Self Assessment</h3>
+    <p>Reformasi perpajakan tahun 1983 mengubah sistem dari official assessment menjadi self assessment, di mana Wajib Pajak menghitung, membayar, dan melaporkan sendiri pajak terutangnya.</p>
+    <div class="collapsible">
+      <button class="collapsible-trigger" onclick="toggleCollapsible(this)">Sistematika UU KUP</button>
+      <div class="collapsible-content">
+        <div class="table-wrap"><table>
+          <thead><tr><th>BAB</th><th>Tentang</th><th>Jumlah Pasal</th></tr></thead>
+          <tbody>
+            <tr><td>I</td><td>Ketentuan Umum</td><td>1</td></tr>
+            <tr><td>II</td><td>NPWP, PKP, SPT, Pembayaran Pajak</td><td>11</td></tr>
+            <tr><td>III</td><td>Penetapan dan Ketetapan Pajak</td><td>12</td></tr>
+            <tr><td>IV</td><td>Penagihan Pajak</td><td>7</td></tr>
+            <tr><td>V</td><td>Keberatan, Banding, Imbalan Bunga</td><td>7</td></tr>
+            <tr><td>VI</td><td>Pembukuan dan Pemeriksaan</td><td>5</td></tr>
+            <tr><td>VII</td><td>Ketentuan Khusus</td><td>13</td></tr>
+            <tr><td>VIII</td><td>Ketentuan Pidana</td><td>10</td></tr>
+            <tr><td>IX</td><td>Penyidikan</td><td>4</td></tr>
+            <tr><td>X</td><td>Ketentuan Peralihan</td><td>4</td></tr>
+            <tr><td>XI</td><td>Ketentuan Penutup</td><td>3</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BAB II -->
+<div class="chapter" id="bab2">
+  <div class="chapter-header">
+    <div class="chapter-label">Bab II</div>
+    <h2 class="chapter-title">Kewajiban Mendaftarkan Diri dan Melaporkan Usaha</h2>
+  </div>
+  <div class="section" id="bab2-npwp">
+    <h3>NPWP dan Fungsinya</h3>
+    <p>NPWP adalah nomor yang diberikan kepada Wajib Pajak sebagai sarana dalam administrasi perpajakan yang dipergunakan sebagai tanda pengenal diri atau identitas Wajib Pajak.</p>
+    <p>Sejak 14 Juli 2022, NIK digunakan sebagai NPWP bagi orang pribadi yang merupakan penduduk. WP badan dan instansi pemerintah menggunakan NPWP format 16 digit.</p>
+    <div class="info-box">
+      <strong>NPWP digunakan untuk:</strong> Pembayaran PPh, Pemotongan/pemungutan PPh, Pemungutan PPN, Pembayaran PBB, dan Penyetoran bea meterai.
+    </div>
+  </div>
+  <div class="section" id="bab2-waktu">
+    <h3>Jangka Waktu Pendaftaran</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Wajib Pajak</th><th>Jangka Waktu</th></tr></thead>
+      <tbody>
+        <tr><td>WP OP tidak berusaha (penghasilan > PTKP)</td><td>Paling lama akhir bulan berikutnya</td></tr>
+        <tr><td>WP OP yang berusaha/pekerjaan bebas</td><td>Paling lama 1 bulan setelah usaha dimulai</td></tr>
+        <tr><td>WP Badan</td><td>Paling lama 1 bulan setelah saat pendirian</td></tr>
+        <tr><td>Instansi Pemerintah</td><td>Sebelum melakukan pemotongan/pemungutan</td></tr>
+        <tr><td>Warisan Belum Terbagi</td><td>Paling lama akhir bulan berikutnya setelah meninggal</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="section" id="bab2-hapus">
+    <h3>Penghapusan NPWP</h3>
+    <div class="collapsible">
+      <button class="collapsible-trigger" onclick="toggleCollapsible(this)">Syarat Penghapusan NPWP</button>
+      <div class="collapsible-content">
+        <p>Penghapusan NPWP dilakukan sepanjang WP memenuhi ketentuan:</p>
+        <ul>
+          <li>Tidak mempunyai utang pajak</li>
+          <li>Tidak sedang dilakukan pemeriksaan/penyidikan/penuntutan</li>
+          <li>Tidak sedang dalam proses MAP atau APA</li>
+          <li>Seluruh NPWP cabang telah dihapus</li>
+          <li>Tidak sedang dalam proses upaya hukum</li>
+        </ul>
+        <p><strong>Jangka waktu keputusan:</strong> 6 bulan (WP OP) atau 12 bulan (WP Badan).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ BAB 2 -->
+  <div class="quiz" id="quiz2">
+    <div class="quiz-title">📝 Latihan Soal: BAB II</div>
+    <div class="quiz-question" data-answer="c">
+      <div class="quiz-q">1. Tuan Adrian mendirikan Yayasan pada 2 Januari 2023. Kapan paling lambat mendaftarkan NPWP?</div>
+      <div class="quiz-options">
+        <label><input type="radio" name="q2-1" value="a"> Paling lama 28 Februari 2023</label>
+        <label><input type="radio" name="q2-1" value="b"> Paling lama 14 Maret 2023</label>
+        <label><input type="radio" name="q2-1" value="c"> Paling lama 2 Februari 2023</label>
+        <label><input type="radio" name="q2-1" value="d"> Tidak wajib mendaftarkan diri</label>
+      </div>
+    </div>
+    <div class="quiz-question" data-answer="b">
+      <div class="quiz-q">2. Jangka waktu keputusan penghapusan NPWP WP orang pribadi adalah...</div>
+      <div class="quiz-options">
+        <label><input type="radio" name="q2-2" value="a"> 3 bulan</label>
+        <label><input type="radio" name="q2-2" value="b"> 6 bulan</label>
+        <label><input type="radio" name="q2-2" value="c"> 12 bulan</label>
+        <label><input type="radio" name="q2-2" value="d"> 1 bulan</label>
+      </div>
+    </div>
+    <button class="quiz-btn" onclick="checkQuiz(this)">Periksa Jawaban</button>
+    <div class="quiz-result"></div>
+  </div>
+</div>
+
+<!-- BAB III -->
+<div class="chapter" id="bab3">
+  <div class="chapter-header">
+    <div class="chapter-label">Bab III</div>
+    <h2 class="chapter-title">Pembukuan dan Pencatatan</h2>
+  </div>
+  <div class="section">
+    <h3>Kewajiban Pembukuan</h3>
+    <p>Pembukuan diwajibkan terhadap WP orang pribadi yang melakukan kegiatan usaha/pekerjaan bebas (kecuali yang boleh menggunakan NPPN) dan WP Badan.</p>
+    <p>WP yang dikecualikan dari pembukuan tetapi wajib melakukan pencatatan: WP OP dengan peredaran bruto < Rp4.800.000.000 dan WP OP yang tidak berusaha.</p>
+  </div>
+  <div class="section" id="bab3-ketentuan">
+    <h3>Ketentuan Pembukuan</h3>
+    <div class="info-box">
+      <strong>Pembukuan harus:</strong><br>
+      • Diselenggarakan dengan iktikad baik dan mencerminkan keadaan sebenarnya<br>
+      • Diselenggarakan di Indonesia, huruf Latin, angka Arab, mata uang Rupiah, bahasa Indonesia<br>
+      • Prinsip taat asas dengan stelsel akrual atau stelsel kas<br>
+      • Dokumen disimpan selama <strong>10 tahun</strong> di Indonesia
+    </div>
+  </div>
+  <div class="quiz" id="quiz3">
+    <div class="quiz-title">📝 Latihan Soal: BAB III</div>
+    <div class="quiz-question" data-answer="d">
+      <div class="quiz-q">1. WP yang diwajibkan melakukan pembukuan adalah...</div>
+      <div class="quiz-options">
+        <label><input type="radio" name="q3-1" value="a"> WP OP pegawai swasta</label>
+        <label><input type="radio" name="q3-1" value="b"> Bendahara Pemerintah</label>
+        <label><input type="radio" name="q3-1" value="c"> WP OP di bawah 4,8M</label>
+        <label><input type="radio" name="q3-1" value="d"> Wajib Pajak Badan</label>
+      </div>
+    </div>
+    <div class="quiz-question" data-answer="c">
+      <div class="quiz-q">2. Berapa kurun waktu penyimpanan dokumen dasar pembukuan?</div>
+      <div class="quiz-options">
+        <label><input type="radio" name="q3-2" value="a"> 3 tahun</label>
+        <label><input type="radio" name="q3-2" value="b"> 5 tahun</label>
+        <label><input type="radio" name="q3-2" value="c"> 10 tahun</label>
+        <label><input type="radio" name="q3-2" value="d"> 15 tahun</label>
+      </div>
+    </div>
+    <button class="quiz-btn" onclick="checkQuiz(this)">Periksa Jawaban</button>
+    <div class="quiz-result"></div>
+  </div>
+</div>
+
+<!-- BAB IV -->
+<div class="chapter" id="bab4">
+  <div class="chapter-header">
+    <div class="chapter-label">Bab IV</div>
+    <h2 class="chapter-title">Pembayaran Pajak</h2>
+  </div>
+  <div class="section">
+    <h3>Sarana Pembayaran Pajak</h3>
+    <p>WP membayar pajak terutang menggunakan SSP ke kas negara melalui tempat pembayaran yang ditentukan. SSP dianggap sah apabila telah divalidasi dengan NTPN.</p>
+  </div>
+  <div class="section" id="bab4-batas">
+    <h3>Batas Waktu Pembayaran Pajak Masa</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Jenis Setoran</th><th>Batas Waktu</th></tr></thead>
+      <tbody>
+        <tr><td>PPh Pasal 21 dipotong pemotong</td><td>Tgl 10 bulan berikutnya</td></tr>
+        <tr><td>PPh Pasal 23/26 dipotong pemotong</td><td>Tgl 10 bulan berikutnya</td></tr>
+        <tr><td>PPh Pasal 25</td><td>Tgl 15 bulan berikutnya</td></tr>
+        <tr><td>PPh Pasal 4(2) dipotong</td><td>Tgl 10 bulan berikutnya</td></tr>
+        <tr><td>PPh Pasal 4(2) dibayar sendiri</td><td>Tgl 15 bulan berikutnya</td></tr>
+        <tr><td>PPN/PPnBM terutang</td><td>Akhir bulan berikutnya, sebelum SPT PPN</td></tr>
+        <tr><td>PPh Pasal 22 bendahara</td><td>7 hari setelah pelaksanaan pembayaran</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="section" id="bab4-sanksi">
+    <h3>Sanksi Keterlambatan Pembayaran</h3>
+    <div class="info-box">
+      <strong>Rumus Sanksi:</strong><br>
+      Sanksi = Pajak Kurang Bayar × Tarif Bunga per Bulan* × Jumlah Bulan<br><br>
+      *Tarif bunga per bulan = (Suku Bunga Acuan + 5%) / 12<br>
+      Dikenakan paling lama 24 bulan, bagian dari bulan dihitung penuh 1 bulan.
+    </div>
+  </div>
+  <div class="quiz" id="quiz4">
+    <div class="quiz-title">📝 Latihan Soal: BAB IV</div>
+    <div class="quiz-question" data-answer="a">
+      <div class="quiz-q">1. Jatuh tempo PPh Pasal 22 oleh Bendahara Pengeluaran adalah...</div>
+      <div class="quiz-options">
+        <label><input type="radio" name="q4-1" value="a"> Paling lama 7 hari setelah pelaksanaan pembayaran</label>
+        <label><input type="radio" name="q4-1" value="b"> Tanggal 10 bulan berikutnya</label>
+        <label><input type="radio" name="q4-1" value="c"> Tanggal 15 bulan berikutnya</label>
+        <label><input type="radio" name="q4-1" value="d"> Sebelum menyampaikan SPT</label>
+      </div>
+    </div>
+    <div class="quiz-question" data-answer="a">
+      <div class="quiz-q">2. SSP dianggap sah apabila telah divalidasi dengan...</div>
+      <div class="quiz-options">
+        <label><input type="radio" name="q4-2" value="a"> NTPN</label>
+        <label><input type="radio" name="q4-2" value="b"> Nomor SP2D</label>
+        <label><input type="radio" name="q4-2" value="c"> Stempel DJP</label>
+        <label><input type="radio" name="q4-2" value="d"> MPN</label>
+      </div>
+    </div>
+    <button class="quiz-btn" onclick="checkQuiz(this)">Periksa Jawaban</button>
+    <div class="quiz-result"></div>
+  </div>
+</div>
+
+<!-- BAB V -->
+<div class="chapter" id="bab5">
+  <div class="chapter-header">
+    <div class="chapter-label">Bab V</div>
+    <h2 class="chapter-title">Pelaporan Pajak</h2>
+  </div>
+  <div class="section">
+    <h3>SPT dan Fungsinya</h3>
+    <p>SPT (Surat Pemberitahuan) digunakan WP untuk melaporkan penghitungan dan/atau pembayaran pajak, objek pajak dan/atau bukan objek pajak, serta harta dan kewajiban.</p>
+    <p>SPT wajib diisi dengan <strong>benar, lengkap, dan jelas</strong> dalam bahasa Indonesia.</p>
+  </div>
+  <div class="section" id="bab5-batas">
+    <h3>Batas Waktu Penyampaian SPT</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Jenis SPT</th><th>Batas Waktu</th></tr></thead>
+      <tbody>
+        <tr><td>SPT Masa (umumnya)</td><td>20 hari setelah akhir Masa Pajak</td></tr>
+        <tr><td>SPT Masa PPN</td><td>Akhir bulan berikutnya</td></tr>
+        <tr><td>SPT Tahunan PPh OP</td><td>3 bulan setelah akhir Tahun Pajak</td></tr>
+        <tr><td>SPT Tahunan PPh Badan</td><td>4 bulan setelah akhir Tahun Pajak</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="section" id="bab5-sanksi">
+    <h3>Sanksi Telat/Tidak Lapor SPT</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Jenis SPT</th><th>Denda</th></tr></thead>
+      <tbody>
+        <tr><td>SPT Masa PPN</td><td>Rp500.000</td></tr>
+        <tr><td>SPT Masa Lainnya</td><td>Rp100.000</td></tr>
+        <tr><td>SPT Tahunan PPh Badan</td><td>Rp1.000.000</td></tr>
+        <tr><td>SPT Tahunan PPh OP</td><td>Rp100.000</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="quiz" id="quiz5">
+    <div class="quiz-title">📝 Latihan Soal: BAB V</div>
+    <div class="quiz-question" data-answer="c">
+      <div class="quiz-q">1. Batas waktu pelaporan SPT Masa PPN Masa November 2022 adalah...</div>
+      <div class="quiz-options">
+        <label><input type="radio" name="q5-1" value="a"> 15 Desember 2022</label>
+        <label><input type="radio" name="q5-1" value="b"> 20 Desember 2022</label>
+        <label><input type="radio" name="q5-1" value="c"> 31 Desember 2022</label>
+        <label><input type="radio" name="q5-1" value="d"> 31 Januari 2023</label>
+      </div>
+    </div>
+    <div class="quiz-question" data-answer="d">
+      <div class="quiz-q">2. Denda telat lapor SPT Tahunan PPh Badan adalah...</div>
+      <div class="quiz-options">
+        <label><input type="radio" name="q5-2" value="a"> Rp100.000</label>
+        <label><input type="radio" name="q5-2" value="b"> Rp250.000</label>
+        <label><input type="radio" name="q5-2" value="c"> Rp500.000</label>
+        <label><input type="radio" name="q5-2" value="d"> Rp1.000.000</label>
+      </div>
+    </div>
+    <button class="quiz-btn" onclick="checkQuiz(this)">Periksa Jawaban</button>
+    <div class="quiz-result"></div>
+  </div>
+</div>
+
+<!-- BAB VI -->
+<div class="chapter" id="bab6">
+  <div class="chapter-header">
+    <div class="chapter-label">Bab VI</div>
+    <h2 class="chapter-title">Pemeriksaan Pajak</h2>
+  </div>
+  <div class="section">
+    <h3>Tujuan Pemeriksaan</h3>
+    <p>Pemeriksaan adalah serangkaian kegiatan menghimpun dan mengolah data, keterangan, dan/atau bukti secara objektif dan profesional untuk:</p>
+    <ol>
+      <li>Menguji kepatuhan pemenuhan kewajiban perpajakan</li>
+      <li>Tujuan lain dalam rangka melaksanakan ketentuan peraturan perundang-undangan perpajakan</li>
+    </ol>
+  </div>
+  <div class="section" id="bab6-jangka">
+    <h3>Jangka Waktu Pemeriksaan</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Jenis</th><th>Pengujian</th><th>Pelaporan</th></tr></thead>
+      <tbody>
+        <tr><td>Pemeriksaan Lapangan (kepatuhan)</td><td>6 bulan + perpanjangan 2 bulan</td><td>2 bulan</td></tr>
+        <tr><td>Pemeriksaan Kantor (kepatuhan)</td><td>4 bulan + perpanjangan 2 bulan</td><td>2 bulan</td></tr>
+        <tr><td>Pemeriksaan Kantor (data konkret)</td><td>1 bulan (tidak dapat diperpanjang)</td><td>10 hari</td></tr>
+        <tr><td>Tujuan Lain: Lapangan</td><td>4 bulan</td><td>-</td></tr>
+        <tr><td>Tujuan Lain: Kantor</td><td>14 hari</td><td>-</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- BAB VII -->
+<div class="chapter" id="bab7">
+  <div class="chapter-header">
+    <div class="chapter-label">Bab VII</div>
+    <h2 class="chapter-title">Penetapan dan Ketetapan</h2>
+  </div>
+  <div class="section">
+    <h3>Surat Ketetapan Pajak</h3>
+    <div class="collapsible">
+      <button class="collapsible-trigger" onclick="toggleCollapsible(this)">SKPKB (Surat Ketetapan Pajak Kurang Bayar)</button>
+      <div class="collapsible-content">
+        <p>Diterbitkan dalam jangka waktu 5 tahun setelah saat terutangnya pajak. Diterbitkan apabila: pajak tidak/kurang dibayar, SPT tidak disampaikan setelah ditegur, PPN tidak seharusnya dikompensasikan, kewajiban pembukuan tidak dipenuhi, NPWP diterbitkan secara jabatan, atau PKP tidak berproduksi.</p>
+      </div>
+    </div>
+    <div class="collapsible">
+      <button class="collapsible-trigger" onclick="toggleCollapsible(this)">SKPKBT (Surat Ketetapan Pajak Kurang Bayar Tambahan)</button>
+      <div class="collapsible-content">
+        <p>Diterbitkan apabila ditemukan data baru yang mengakibatkan penambahan jumlah pajak terutang. Sanksi: kenaikan 100% dari jumlah kekurangan pajak.</p>
+      </div>
+    </div>
+    <div class="collapsible">
+      <button class="collapsible-trigger" onclick="toggleCollapsible(this)">SKPN & SKPLB</button>
+      <div class="collapsible-content">
+        <p><strong>SKPN:</strong> Jumlah pokok pajak sama dengan jumlah kredit pajak, atau pajak tidak terutang dan tidak ada kredit pajak.</p>
+        <p><strong>SKPLB:</strong> Jumlah kredit pajak lebih besar daripada pajak yang terutang. Diterbitkan paling lama 12 bulan sejak permohonan diterima lengkap.</p>
+      </div>
+    </div>
+  </div>
+  <div class="section" id="bab7-sanksi">
+    <h3>Sanksi Administratif</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Jenis</th><th>Uplift Factor</th><th>Keterangan</th></tr></thead>
+      <tbody>
+        <tr><td>Pasal 19 (keterlambatan bayar ketetapan)</td><td>0%</td><td>Suku bunga acuan / 12</td></tr>
+        <tr><td>Pasal 8, 9, 14 (telat bayar/pembetulan)</td><td>5%</td><td>(Suku bunga acuan + 5%) / 12</td></tr>
+        <tr><td>Pasal 8(5) (pengungkapan ketidakbenaran)</td><td>10%</td><td>(Suku bunga acuan + 10%) / 12</td></tr>
+        <tr><td>Pasal 13(2) (hasil pemeriksaan)</td><td>15%</td><td>(Suku bunga acuan + 15%) / 12</td></tr>
+        <tr><td>Pasal 13(3b) (PPh tidak dibayar hasil periksa)</td><td>20%</td><td>(Suku bunga acuan + 20%) / 12</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- BAB VIII -->
+<div class="chapter" id="bab8">
+  <div class="chapter-header">
+    <div class="chapter-label">Bab VIII</div>
+    <h2 class="chapter-title">Penagihan Pajak</h2>
+  </div>
+  <div class="section">
+    <h3>Tahapan Tindakan Penagihan</h3>
+    <ol>
+      <li><strong>Surat Teguran</strong> : 7 hari setelah jatuh tempo pembayaran</li>
+      <li><strong>Surat Paksa</strong> : 21 hari setelah surat teguran disampaikan</li>
+      <li><strong>Penyitaan (SPMP)</strong> : 2 × 24 jam setelah surat paksa diberitahukan</li>
+      <li><strong>Pengumuman Lelang</strong> : 14 hari setelah penyitaan</li>
+      <li><strong>Pelaksanaan Lelang</strong> : 14 hari setelah pengumuman lelang</li>
+      <li><strong>Pencegahan</strong> : Setelah upaya penjualan barang sitaan</li>
+      <li><strong>Penyanderaan</strong> : 30 hari sebelum berakhirnya masa pencegahan</li>
+    </ol>
+  </div>
+  <div class="section" id="bab8-sita">
+    <h3>Penyitaan</h3>
+    <p>Penyitaan dilaksanakan dengan mendahulukan barang bergerak. Pencegahan dan penyanderaan mensyaratkan utang pajak minimal <strong>Rp100.000.000</strong> dan diragukan iktikad baiknya.</p>
+    <p><strong>Daluwarsa penagihan:</strong> 5 tahun sejak penerbitan STP/SKPKB/SKPKBT/SK/Putusan (untuk tahun pajak 2008 dan setelahnya).</p>
+  </div>
+</div>
+
+<!-- BAB IX -->
+<div class="chapter" id="bab9">
+  <div class="chapter-header">
+    <div class="chapter-label">Bab IX</div>
+    <h2 class="chapter-title">Pembetulan</h2>
+  </div>
+  <div class="section">
+    <h3>Ruang Lingkup Pembetulan (Pasal 16 UU KUP)</h3>
+    <p>Pembetulan terbatas pada:</p>
+    <ol>
+      <li><strong>Kesalahan tulis:</strong> nama, alamat, NPWP, nomor SKP, jenis pajak, masa/tahun pajak, tanggal jatuh tempo</li>
+      <li><strong>Kesalahan hitung:</strong> penjumlahan/pengurangan/perkalian/pembagian atau akibat penerbitan SKP/STP/SK terkait</li>
+      <li><strong>Kekeliruan penerapan ketentuan:</strong> tarif, NPPN, sanksi administrasi, PTKP, PPh tahun berjalan, pengkreditan pajak</li>
+    </ol>
+    <div class="info-box">
+      <strong>Jangka waktu:</strong> Keputusan paling lama 6 bulan sejak permohonan diterima. Jika lewat tanpa keputusan, permohonan dianggap dikabulkan.
+    </div>
+  </div>
+</div>
+
+<!-- BAB X -->
+<div class="chapter" id="bab10">
+  <div class="chapter-header">
+    <div class="chapter-label">Bab X</div>
+    <h2 class="chapter-title">Sengketa Pajak</h2>
+  </div>
+  <div class="section">
+    <h3>Keberatan</h3>
+    <p>Diajukan dalam 3 bulan sejak tanggal dikirim SKP. Keputusan diberikan paling lama 12 bulan. Sanksi jika ditolak/dikabulkan sebagian: <strong>denda 30%</strong>.</p>
+    <h3>Banding</h3>
+    <p>Diajukan dalam 3 bulan sejak SK Keberatan diterima. Putusan Banding berkekuatan hukum tetap. Sanksi jika ditolak/dikabulkan sebagian: <strong>denda 60%</strong>.</p>
+    <h3>Peninjauan Kembali</h3>
+    <p>Upaya hukum luar biasa kepada Mahkamah Agung melalui Pengadilan Pajak. Hanya dapat diajukan 1 kali. Sanksi jika menyebabkan pajak bertambah: <strong>denda 60%</strong>.</p>
+  </div>
+</div>
+
+<!-- BAB XI -->
+<div class="chapter" id="bab11">
+  <div class="chapter-header">
+    <div class="chapter-label">Bab XI</div>
+    <h2 class="chapter-title">Imbalan Bunga</h2>
+  </div>
+  <div class="section">
+    <h3>Ketentuan Imbalan Bunga</h3>
+    <p>Imbalan bunga diberikan kepada WP dalam hal terdapat:</p>
+    <ul>
+      <li>Keterlambatan pengembalian kelebihan pembayaran pajak (Pasal 11 ayat 3)</li>
+      <li>Keterlambatan penerbitan SKPLB (Pasal 17B ayat 3 dan 4)</li>
+      <li>Kelebihan pembayaran karena keberatan/banding/PK dikabulkan (Pasal 27B ayat 1)</li>
+      <li>Kelebihan pembayaran karena SK Pembetulan/pengurangan/pembatalan (Pasal 27B ayat 3)</li>
+    </ul>
+    <div class="info-box">
+      <strong>Rumus:</strong> Tarif bunga per bulan = Suku Bunga Acuan / 12<br>
+      Diberikan paling lama <strong>24 bulan</strong>.
+    </div>
+  </div>
+</div>
+
+<!-- BAB XII -->
+<div class="chapter" id="bab12">
+  <div class="chapter-header">
+    <div class="chapter-label">Bab XII</div>
+    <h2 class="chapter-title">Ketentuan Khusus</h2>
+  </div>
+  <div class="section">
+    <h3>Wakil Wajib Pajak (Pasal 32 UU KUP)</h3>
+    <p>WP diwakili oleh: pengurus (badan), kurator (pailit), pemberes (pembubaran), likuidator (likuidasi), ahli waris/pelaksana wasiat (warisan belum terbagi), wali/pengampu (belum dewasa/pengampuan).</p>
+    <p>Wakil bertanggung jawab secara pribadi dan/atau renteng atas pembayaran pajak terutang.</p>
+    <h3>Penunjukan Pihak Lain (Pasal 32A UU KUP)</h3>
+    <p>Menteri Keuangan dapat menunjuk pihak lain (termasuk penyelenggara sistem elektronik) untuk pemotongan, pemungutan, penyetoran, dan pelaporan pajak. Sanksi bagi penyelenggara sistem elektronik yang tidak patuh: pemutusan akses.</p>
+  </div>
+</div>
+
+<!-- DAFTAR ISTILAH -->
+<div class="chapter" id="istilah">
+  <div class="chapter-header">
+    <div class="chapter-label">Lampiran</div>
+    <h2 class="chapter-title">Daftar Istilah</h2>
+  </div>
+  <div class="glossary-grid">
+    <div class="glossary-item"><strong>NPWP</strong>Nomor Pokok Wajib Pajak</div>
+    <div class="glossary-item"><strong>PKP</strong>Pengusaha Kena Pajak</div>
+    <div class="glossary-item"><strong>SPT</strong>Surat Pemberitahuan</div>
+    <div class="glossary-item"><strong>STP</strong>Surat Tagihan Pajak</div>
+    <div class="glossary-item"><strong>SKPKB</strong>SK Pajak Kurang Bayar</div>
+    <div class="glossary-item"><strong>SKPKBT</strong>SK Pajak Kurang Bayar Tambahan</div>
+    <div class="glossary-item"><strong>SKPLB</strong>SK Pajak Lebih Bayar</div>
+    <div class="glossary-item"><strong>SKPN</strong>SK Pajak Nihil</div>
+    <div class="glossary-item"><strong>SKPPKP</strong>SK Pengembalian Pendahuluan Kelebihan Pajak</div>
+    <div class="glossary-item"><strong>SSP</strong>Surat Setoran Pajak</div>
+    <div class="glossary-item"><strong>NTPN</strong>Nomor Transaksi Penerimaan Pajak</div>
+    <div class="glossary-item"><strong>BPN</strong>Bukti Penerimaan Negara</div>
+    <div class="glossary-item"><strong>PPh</strong>Pajak Penghasilan</div>
+    <div class="glossary-item"><strong>PPN</strong>Pajak Pertambahan Nilai</div>
+    <div class="glossary-item"><strong>PPnBM</strong>Pajak Penjualan atas Barang Mewah</div>
+    <div class="glossary-item"><strong>PBB</strong>Pajak Bumi dan Bangunan</div>
+    <div class="glossary-item"><strong>NIK</strong>Nomor Induk Kependudukan</div>
+    <div class="glossary-item"><strong>PTKP</strong>Penghasilan Tidak Kena Pajak</div>
+    <div class="glossary-item"><strong>DPP</strong>Dasar Pengenaan Pajak</div>
+    <div class="glossary-item"><strong>NPPN</strong>Norma Penghitungan Penghasilan Neto</div>
+    <div class="glossary-item"><strong>KPP</strong>Kantor Pelayanan Pajak</div>
+    <div class="glossary-item"><strong>DJP</strong>Direktorat Jenderal Pajak</div>
+    <div class="glossary-item"><strong>PMK</strong>Peraturan Menteri Keuangan</div>
+    <div class="glossary-item"><strong>SPMP</strong>Surat Perintah Melaksanakan Penyitaan</div>
+  </div>
+</div>
+
+</div>
+</main>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// Sidebar navigation toggle
+function toggleNav(btn) {
+  const targetId = btn.dataset.target;
+  const sub = document.getElementById(targetId);
+  const allSubs = document.querySelectorAll('.nav-sub');
+  const allBtns = document.querySelectorAll('.nav-chapter-title');
+  
+  allSubs.forEach(s => { if(s.id !== targetId) s.classList.remove('open'); });
+  allBtns.forEach(b => { if(b !== btn) b.classList.remove('active'); });
+  
+  sub.classList.toggle('open');
+  btn.classList.toggle('active');
+}
+
+// Collapsible sections
+function toggleCollapsible(trigger) {
+  trigger.parentElement.classList.toggle('open');
+}
+
+// Mobile sidebar
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+// Close sidebar on link click (mobile)
+document.querySelectorAll('.nav-sub a').forEach(a => {
+  a.addEventListener('click', () => {
+    if(window.innerWidth <= 900) {
+      document.getElementById('sidebar').classList.remove('open');
+    }
+  });
+});
+
+// Progress bar
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
+  document.getElementById('progressFill').style.width = progress + '%';
+  
+  // Back to top button
+  const btn = document.getElementById('backTop');
+  if(scrollTop > 400) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+
+// Quiz checking
+function checkQuiz(btn) {
+  const quiz = btn.parentElement;
+  const questions = quiz.querySelectorAll('.quiz-question');
+  let correct = 0;
+  
+  questions.forEach(q => {
+    const answer = q.dataset.answer;
+    const selected = q.querySelector('input:checked');
+    const labels = q.querySelectorAll('label');
+    
+    labels.forEach(l => l.classList.remove('correct', 'incorrect'));
+    
+    if(selected) {
+      if(selected.value === answer) {
+        correct++;
+        selected.parentElement.classList.add('correct');
+      } else {
+        selected.parentElement.classList.add('incorrect');
+        labels.forEach(l => {
+          if(l.querySelector('input').value === answer) l.classList.add('correct');
+        });
+      }
+    } else {
+      labels.forEach(l => {
+        if(l.querySelector('input').value === answer) l.classList.add('correct');
+      });
+    }
+  });
+  
+  const result = quiz.querySelector('.quiz-result');
+  result.style.display = 'block';
+  result.textContent = `Skor: ${correct}/${questions.length} benar`;
+  result.style.color = correct === questions.length ? 'oklch(45% 0.15 145)' : 'oklch(45% 0.15 25)';
+}
+
+// Search functionality
+function handleSearch(query) {
+  const sections = document.querySelectorAll('.chapter');
+  const q = query.toLowerCase().trim();
+  
+  if(!q) {
+    sections.forEach(s => s.style.display = '');
+    return;
+  }
+  
+  sections.forEach(s => {
+    const text = s.textContent.toLowerCase();
+    s.style.display = text.includes(q) ? '' : 'none';
+  });
+}
+
+// Smooth scroll for nav links
+document.querySelectorAll('.nav-sub a').forEach(a => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>

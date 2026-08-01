@@ -1,0 +1,1846 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<!-- skill:chrome -->
+<style>
+/* Credit line — bottom-right */
+.design-ui-credit {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  font: 11px/1 system-ui, sans-serif;
+  color: rgba(128,128,128,0.5);
+  pointer-events: none;
+  z-index: 2147483647;
+  transition: opacity 0.4s ease;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+/* Hide chrome on touch devices */
+@media (hover: none) {
+  .design-ui-credit { display: none; }
+}
+
+/* Print fixes */
+@media print {
+  * {
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+  }
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .design-ui-credit { display: none !important; }
+}
+
+</style>
+<script>
+(function () {
+    // Design-ui pages are single compositions, so the whole body is editable.
+    function markEditable() {
+        document.body.classList.add('artifact-editable');
+    }
+
+    // Credit badge with idle-fade. Hover devices only.
+    function initChromeUI() {
+        if (!matchMedia('(hover: hover)').matches) return;
+
+        var credit = document.createElement('div');
+        credit.className = 'design-ui-credit';
+        credit.setAttribute('aria-hidden', 'true');
+        credit.innerHTML = '\u{1F49C} by ClickUp Brain';
+        document.body.appendChild(credit);
+
+        var timer = null;
+        var fade = function (out) { credit.style.opacity = out ? '0' : ''; };
+        fade(true);
+        var show = function () {
+            fade(false);
+            clearTimeout(timer);
+            timer = setTimeout(function () { fade(true); }, 3000);
+        };
+        document.addEventListener('mousemove', show);
+        show();
+    }
+
+    function init() {
+        markEditable();
+        initChromeUI();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+
+</script>
+<!-- /skill:chrome -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Book 3: Pajak Pertambahan Nilai (PPN)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg: oklch(0.99 0.002 155);
+  --surface: oklch(0.97 0.008 155);
+  --surface-alt: oklch(0.94 0.015 155);
+  --border: oklch(0.90 0.02 155);
+  --text: oklch(0.20 0.02 155);
+  --text-muted: oklch(0.45 0.02 155);
+  --accent: oklch(0.55 0.18 155);
+  --accent-light: oklch(0.92 0.06 155);
+  --accent-dark: oklch(0.40 0.14 155);
+  --success: oklch(0.60 0.18 145);
+  --error: oklch(0.55 0.20 25);
+  --warning: oklch(0.70 0.15 80);
+  --sidebar-w: 300px;
+  --header-h: 64px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* Progress Bar */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--success));
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+/* Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-w);
+  right: 0;
+  height: var(--header-h);
+  background: oklch(0.99 0.002 155 / 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  z-index: 100;
+  gap: 1rem;
+}
+
+.header-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--accent-dark);
+}
+
+.header-badge {
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  padding: 0.2rem 0.7rem;
+  border-radius: 99px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.search-box {
+  margin-left: auto;
+  position: relative;
+}
+
+.search-box input {
+  padding: 0.5rem 1rem 0.5rem 2.4rem;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  width: 260px;
+  background: var(--surface);
+  transition: all 0.2s;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px oklch(0.55 0.18 155 / 0.1);
+  width: 320px;
+}
+
+.search-box::before {
+  content: "🔍";
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: oklch(0.16 0.04 155);
+  color: oklch(0.90 0.02 155);
+  overflow-y: auto;
+  z-index: 200;
+  padding: 1.5rem 0;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-brand {
+  padding: 0 1.5rem 1.5rem;
+  border-bottom: 1px solid oklch(0.30 0.04 155);
+  margin-bottom: 1rem;
+}
+
+.sidebar-brand h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: oklch(0.75 0.15 155);
+  margin-bottom: 0.2rem;
+}
+
+.sidebar-brand p {
+  font-size: 0.72rem;
+  color: oklch(0.60 0.03 155);
+}
+
+.nav-section {
+  padding: 0.5rem 1rem;
+}
+
+.nav-section-title {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: oklch(0.50 0.03 155);
+  padding: 0.5rem 0.5rem;
+  font-weight: 600;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  transition: all 0.15s;
+  color: oklch(0.75 0.02 155);
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  background: oklch(0.25 0.04 155);
+  color: oklch(0.95 0.02 155);
+}
+
+.nav-item.active {
+  background: oklch(0.55 0.18 155 / 0.2);
+  color: oklch(0.80 0.14 155);
+  font-weight: 600;
+}
+
+.nav-item .num {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: oklch(0.30 0.04 155);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.nav-item.active .num {
+  background: var(--accent);
+  color: white;
+}
+
+/* Main Content */
+.main {
+  margin-left: var(--sidebar-w);
+  padding: calc(var(--header-h) + 2rem) 3rem 4rem;
+  max-width: 900px;
+}
+
+.chapter {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.chapter.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.chapter-header {
+  margin-bottom: 2rem;
+}
+
+.chapter-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.5rem;
+}
+
+.chapter-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 0.8rem;
+}
+
+.chapter-desc {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Content Sections */
+.section {
+  margin-bottom: 2rem;
+}
+
+.section h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent-light);
+}
+
+.section p {
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+/* Collapsible */
+.collapsible {
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.collapsible-header {
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition: background 0.2s;
+}
+
+.collapsible-header:hover {
+  background: var(--surface-alt);
+}
+
+.collapsible-header::after {
+  content: "▶";
+  font-size: 0.7rem;
+  transition: transform 0.3s;
+  color: var(--accent);
+}
+
+.collapsible.open .collapsible-header::after {
+  transform: rotate(90deg);
+}
+
+.collapsible-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.collapsible.open .collapsible-body {
+  max-height: 2000px;
+}
+
+.collapsible-content {
+  padding: 0 1.2rem 1.2rem;
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+
+/* Info Boxes */
+.info-box {
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  margin: 1rem 0;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+.info-box.note {
+  background: oklch(0.92 0.06 155 / 0.5);
+  border-left: 4px solid var(--accent);
+}
+
+.info-box.warning {
+  background: oklch(0.95 0.06 80 / 0.5);
+  border-left: 4px solid var(--warning);
+}
+
+.info-box.important {
+  background: oklch(0.93 0.06 25 / 0.4);
+  border-left: 4px solid var(--error);
+}
+
+/* Tables */
+.table-wrapper {
+  overflow-x: auto;
+  margin: 1.2rem 0;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+thead {
+  background: var(--accent);
+  color: white;
+}
+
+th {
+  padding: 0.8rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+td {
+  padding: 0.7rem 1rem;
+  border-top: 1px solid var(--border);
+}
+
+tbody tr:hover {
+  background: var(--surface-alt);
+}
+
+/* Quiz */
+.quiz-section {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.quiz-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  color: var(--accent-dark);
+}
+
+.quiz-question {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.quiz-question:last-of-type {
+  border-bottom: none;
+}
+
+.quiz-question p {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.7rem;
+}
+
+.quiz-options label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.15s;
+  margin-bottom: 0.3rem;
+}
+
+.quiz-options label:hover {
+  background: var(--surface-alt);
+}
+
+.quiz-options input[type="radio"] {
+  accent-color: var(--accent);
+}
+
+.quiz-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 1rem;
+}
+
+.quiz-btn:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+}
+
+.quiz-result {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: none;
+}
+
+.quiz-result.show {
+  display: block;
+}
+
+.quiz-result.good {
+  background: oklch(0.92 0.08 145 / 0.5);
+  color: oklch(0.35 0.12 145);
+}
+
+.quiz-result.bad {
+  background: oklch(0.93 0.06 25 / 0.4);
+  color: oklch(0.35 0.15 25);
+}
+
+/* Glossary */
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.glossary-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  transition: all 0.2s;
+}
+
+.glossary-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 15px oklch(0.55 0.18 155 / 0.1);
+}
+
+.glossary-card dt {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--accent-dark);
+  margin-bottom: 0.3rem;
+}
+
+.glossary-card dd {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* List Styles */
+ul, ol {
+  padding-left: 1.5rem;
+  margin: 0.8rem 0;
+}
+
+li {
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+}
+
+/* Back to Top */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px oklch(0.55 0.18 155 / 0.3);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s;
+  z-index: 50;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--accent-dark);
+  transform: translateY(-2px);
+}
+
+/* Mobile Toggle */
+.mobile-toggle {
+  display: none;
+  position: fixed;
+  bottom: 2rem;
+  left: 1rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: oklch(0.16 0.04 155);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  z-index: 300;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  :root { --sidebar-w: 0px; }
+  
+  .sidebar {
+    transform: translateX(-300px);
+    width: 300px;
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .header {
+    left: 0;
+    padding: 0 1rem;
+  }
+  
+  .main {
+    margin-left: 0;
+    padding: calc(var(--header-h) + 1.5rem) 1.2rem 3rem;
+  }
+  
+  .mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .chapter-title {
+    font-size: 1.5rem;
+  }
+  
+  .search-box input {
+    width: 160px;
+  }
+  
+  .search-box input:focus {
+    width: 200px;
+  }
+}
+
+/* Highlight */
+.highlight {
+  background: oklch(0.85 0.12 155 / 0.3);
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+}
+
+code {
+  background: var(--surface-alt);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.83rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <h2>📗 E-Book PPN</h2>
+    <p>Pajak Pertambahan Nilai</p>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Materi</div>
+    <a class="nav-item active" data-chapter="0"><span class="num">1</span>Dasar Hukum PPN</a>
+    <a class="nav-item" data-chapter="1"><span class="num">2</span>Objek PPN (BKP & JKP)</a>
+    <a class="nav-item" data-chapter="2"><span class="num">3</span>Subjek PPN (PKP)</a>
+    <a class="nav-item" data-chapter="3"><span class="num">4</span>Mekanisme PPN</a>
+    <a class="nav-item" data-chapter="4"><span class="num">5</span>Dasar Pengenaan Pajak</a>
+    <a class="nav-item" data-chapter="5"><span class="num">6</span>Tarif & Perhitungan</a>
+    <a class="nav-item" data-chapter="6"><span class="num">7</span>Faktur Pajak</a>
+    <a class="nav-item" data-chapter="7"><span class="num">8</span>Pajak Masukan</a>
+    <a class="nav-item" data-chapter="8"><span class="num">9</span>PPN Dibebaskan & Tidak Dipungut</a>
+    <a class="nav-item" data-chapter="9"><span class="num">10</span>Saat & Tempat Terutang</a>
+    <a class="nav-item" data-chapter="10"><span class="num">11</span>Pelaporan SPT Masa PPN</a>
+    <a class="nav-item" data-chapter="11"><span class="num">12</span>Glossarium & Kuis</a>
+  </div>
+</nav>
+
+<header class="header">
+  <span class="header-title">Pajak Pertambahan Nilai</span>
+  <span class="header-badge">UU HPP 2021</span>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Cari materi...">
+  </div>
+</header>
+
+<main class="main" id="mainContent">
+
+  <!-- Chapter 1: Dasar Hukum PPN -->
+  <div class="chapter active" data-chapter="0">
+    <div class="chapter-header">
+      <div class="chapter-num">Bab 1</div>
+      <h1 class="chapter-title">Dasar Hukum PPN</h1>
+      <p class="chapter-desc">Landasan peraturan yang mengatur pengenaan Pajak Pertambahan Nilai di Indonesia.</p>
+    </div>
+
+    <div class="section">
+      <h3>Sejarah Singkat PPN di Indonesia</h3>
+      <p>PPN di Indonesia pertama kali diperkenalkan melalui <strong>UU No. 8 Tahun 1983</strong> tentang Pajak Pertambahan Nilai Barang dan Jasa dan Pajak Penjualan atas Barang Mewah, menggantikan Pajak Penjualan (PPn) 1951 yang berbasis kaskade (cascading tax). Sistem PPN dipilih karena lebih netral dan menghindari pengenaan pajak berganda.</p>
+      
+      <div class="info-box note">
+        <strong>💡 Perubahan Penting:</strong> UU PPN telah mengalami beberapa kali perubahan: UU No. 11/1994, UU No. 18/2000, UU No. 42/2009, dan terakhir UU No. 7/2021 (UU Harmonisasi Peraturan Perpajakan / HPP).
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Dasar Hukum Utama</h3>
+      <div class="collapsible">
+        <div class="collapsible-header">UU No. 8 Tahun 1983 (UU PPN)</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <p>Undang-undang pokok yang mengatur PPN dan PPnBM. Telah diubah beberapa kali dan terakhir melalui UU HPP 2021. Mengatur tentang objek pajak, subjek pajak, tarif, mekanisme pengkreditan, dan ketentuan pelaporan.</p>
+          </div>
+        </div>
+      </div>
+      <div class="collapsible">
+        <div class="collapsible-header">UU No. 7 Tahun 2021 (UU HPP)</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <p>Perubahan terbaru yang signifikan meliputi:</p>
+            <ul>
+              <li>Kenaikan tarif PPN dari 10% menjadi 11% (berlaku 1 April 2022) dan rencana 12% paling lambat 1 Januari 2025</li>
+              <li>Penghapusan beberapa fasilitas pembebasan PPN</li>
+              <li>Perluasan objek PPN pada barang/jasa tertentu yang sebelumnya dikecualikan</li>
+              <li>Pengaturan PPN Final untuk sektor tertentu</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="collapsible">
+        <div class="collapsible-header">PP & PMK Pelaksana</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <p>Beberapa peraturan pelaksana penting:</p>
+            <ul>
+              <li><strong>PP 44/2022</strong> — Penerapan PPN atas barang dan jasa serta PPnBM</li>
+              <li><strong>PMK 18/2021</strong> — Pelaksanaan UU Cipta Kerja di bidang PPN</li>
+              <li><strong>PMK 65/2022</strong> — PPN atas penyerahan JKP tertentu</li>
+              <li><strong>PER-03/PJ/2022</strong> — Faktur Pajak</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Karakteristik PPN Indonesia</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Karakteristik</th>
+              <th>Penjelasan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Pajak Tidak Langsung</td><td>Beban pajak dapat dialihkan (forward shifting) ke konsumen akhir</td></tr>
+            <tr><td>Pajak Objektif</td><td>Timbulnya kewajiban pajak ditentukan oleh objek (penyerahan BKP/JKP), bukan subjek</td></tr>
+            <tr><td>Multi-Stage Tax</td><td>Dikenakan pada setiap rantai produksi dan distribusi</td></tr>
+            <tr><td>Non-Kumulatif</td><td>Menggunakan mekanisme Pajak Masukan-Keluaran sehingga tidak menimbulkan efek kaskade</td></tr>
+            <tr><td>Destination Principle</td><td>Dikenakan di tempat tujuan barang/jasa dikonsumsi</td></tr>
+            <tr><td>Consumption Type VAT</td><td>Seluruh Pajak Masukan atas perolehan barang modal dapat dikreditkan</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 2: Objek PPN -->
+  <div class="chapter" data-chapter="1">
+    <div class="chapter-header">
+      <div class="chapter-num">Bab 2</div>
+      <h1 class="chapter-title">Objek PPN: BKP & JKP</h1>
+      <p class="chapter-desc">Memahami Barang Kena Pajak dan Jasa Kena Pajak sebagai objek pengenaan PPN.</p>
+    </div>
+
+    <div class="section">
+      <h3>Penyerahan yang Dikenai PPN (Pasal 4 ayat 1)</h3>
+      <p>PPN dikenakan atas:</p>
+      <ol>
+        <li>Penyerahan BKP di dalam Daerah Pabean oleh Pengusaha</li>
+        <li>Impor BKP</li>
+        <li>Penyerahan JKP di dalam Daerah Pabean oleh Pengusaha</li>
+        <li>Pemanfaatan BKP Tidak Berwujud dari luar Daerah Pabean di dalam Daerah Pabean</li>
+        <li>Pemanfaatan JKP dari luar Daerah Pabean di dalam Daerah Pabean</li>
+        <li>Ekspor BKP Berwujud oleh PKP</li>
+        <li>Ekspor BKP Tidak Berwujud oleh PKP</li>
+        <li>Ekspor JKP oleh PKP</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h3>Barang Kena Pajak (BKP)</h3>
+      <p>BKP adalah barang berwujud maupun tidak berwujud yang dikenai pajak berdasarkan UU PPN. Pada prinsipnya, <strong>semua barang adalah BKP kecuali yang dikecualikan oleh undang-undang</strong>.</p>
+
+      <div class="collapsible">
+        <div class="collapsible-header">Barang yang TIDAK Dikenai PPN (Pasal 4A ayat 2 UU HPP)</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <p>Setelah UU HPP, barang yang tidak dikenai PPN menjadi lebih sedikit:</p>
+            <ul>
+              <li><strong>Makanan dan minuman</strong> yang disajikan di hotel, restoran, rumah makan, warung, dan sejenisnya (karena dikenai pajak daerah/PBJT)</li>
+              <li><strong>Uang, emas batangan untuk kepentingan cadangan devisa negara</strong>, dan surat berharga</li>
+            </ul>
+            <div class="info-box warning">
+              <strong>⚠️ Perubahan UU HPP:</strong> Barang kebutuhan pokok, jasa kesehatan, jasa pendidikan, dll yang sebelumnya tidak dikenai PPN, kini menjadi dikenai PPN tetapi diberikan fasilitas dibebaskan.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Jasa Kena Pajak (JKP)</h3>
+      <p>JKP adalah setiap kegiatan pelayanan yang menyebabkan suatu fasilitas, kemudahan, atau hak tersedia untuk dipakai. Sama seperti BKP, <strong>semua jasa adalah JKP kecuali yang dikecualikan</strong>.</p>
+
+      <div class="collapsible">
+        <div class="collapsible-header">Jasa yang TIDAK Dikenai PPN (Pasal 4A ayat 3 UU HPP)</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <p>Jasa yang tidak dikenai PPN setelah UU HPP:</p>
+            <ul>
+              <li><strong>Jasa keagamaan</strong></li>
+              <li><strong>Jasa kesenian dan hiburan</strong> (dikenai pajak daerah/PBJT)</li>
+              <li><strong>Jasa perhotelan</strong> (dikenai pajak daerah/PBJT)</li>
+              <li><strong>Jasa penyediaan tempat parkir</strong> (dikenai pajak daerah)</li>
+              <li><strong>Jasa boga/catering</strong> (dikenai pajak daerah/PBJT)</li>
+              <li><strong>Jasa pemerintahan umum</strong> yang tidak dapat disediakan pihak lain</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Penyerahan BKP yang Termasuk Objek PPN</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Termasuk Penyerahan BKP</th>
+              <th>Tidak Termasuk Penyerahan BKP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Penyerahan hak atas BKP karena suatu perjanjian</td><td>Penyerahan BKP kepada makelar</td></tr>
+            <tr><td>Pengalihan BKP karena perjanjian sewa beli/leasing</td><td>Penyerahan BKP untuk jaminan utang-piutang</td></tr>
+            <tr><td>Penyerahan BKP dari pusat ke cabang atau sebaliknya</td><td>Penyerahan BKP dalam rangka penggabungan/peleburan usaha (merger)</td></tr>
+            <tr><td>Pemakaian sendiri dan pemberian cuma-cuma</td><td>BKP yang hilang/musnah karena force majeure (keadaan kahar)</td></tr>
+            <tr><td>BKP berupa persediaan yang masih tersisa saat pembubaran perusahaan</td><td>Penyerahan BKP dari pusat ke cabang atau sebaliknya jika PKP menyampaikan pemberitahuan pemusatan</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 3: Subjek PPN -->
+  <div class="chapter" data-chapter="2">
+    <div class="chapter-header">
+      <div class="chapter-num">Bab 3</div>
+      <h1 class="chapter-title">Subjek PPN: Pengusaha Kena Pajak</h1>
+      <p class="chapter-desc">Siapa yang wajib memungut, menyetor, dan melaporkan PPN.</p>
+    </div>
+
+    <div class="section">
+      <h3>Pengusaha Kena Pajak (PKP)</h3>
+      <p>PKP adalah pengusaha yang melakukan penyerahan BKP dan/atau JKP yang dikenai pajak, <strong>kecuali pengusaha kecil</strong> yang batasannya ditetapkan oleh Menteri Keuangan. Batas pengusaha kecil saat ini: peredaran bruto tidak melebihi <strong>Rp4,8 miliar per tahun</strong>.</p>
+      
+      <div class="info-box note">
+        <strong>💡 Penting:</strong> Pengusaha dengan omzet di bawah Rp4,8 miliar/tahun boleh memilih untuk dikukuhkan sebagai PKP (bersifat optional). Namun jika sudah dikukuhkan, wajib melaksanakan seluruh kewajiban PPN.
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Kewajiban PKP</h3>
+      <div class="collapsible open">
+        <div class="collapsible-header">Kewajiban Pokok PKP</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <ol>
+              <li><strong>Memungut PPN</strong> yang terutang atas penyerahan BKP/JKP</li>
+              <li><strong>Menyetorkan PPN</strong> yang masih harus dibayar (Pajak Keluaran dikurangi Pajak Masukan yang dapat dikreditkan)</li>
+              <li><strong>Melaporkan</strong> perhitungan PPN melalui SPT Masa PPN setiap bulan</li>
+              <li><strong>Menerbitkan Faktur Pajak</strong> untuk setiap penyerahan BKP/JKP</li>
+              <li><strong>Menyelenggarakan pembukuan</strong> yang memadai</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Pengukuhan & Pencabutan PKP</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Aspek</th>
+              <th>Pengukuhan PKP</th>
+              <th>Pencabutan PKP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Dasar</td><td>Peredaran bruto > Rp4,8 M/tahun atau memilih dikukuhkan</td><td>Peredaran bruto < Rp4,8 M/tahun, pindah alamat, atau pembubaran</td></tr>
+            <tr><td>Waktu</td><td>Paling lambat akhir bulan berikutnya setelah melampaui batasan</td><td>Permohonan WP atau secara jabatan oleh DJP</td></tr>
+            <tr><td>Sanksi telat</td><td>Denda Rp500.000 + PPN yang terutang tetap harus dibayar</td><td>—</td></tr>
+            <tr><td>Mulai berlaku</td><td>Sejak awal bulan berikutnya setelah dikukuhkan</td><td>Sejak tanggal pencabutan</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Pemungut PPN Selain PKP</h3>
+      <p>Selain PKP penjual, pemerintah juga menunjuk pihak lain sebagai pemungut PPN:</p>
+      <ul>
+        <li><strong>Bendahara Pemerintah</strong> — memungut PPN atas pembelian BKP/JKP dengan dana APBN/APBD</li>
+        <li><strong>BUMN/BUMD tertentu</strong> — ditunjuk sebagai pemungut PPN</li>
+        <li><strong>Pelaku usaha PMSE (Perdagangan Melalui Sistem Elektronik)</strong> — platform digital luar negeri yang ditunjuk DJP</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Chapter 4: Mekanisme PPN -->
+  <div class="chapter" data-chapter="3">
+    <div class="chapter-header">
+      <div class="chapter-num">Bab 4</div>
+      <h1 class="chapter-title">Mekanisme PPN</h1>
+      <p class="chapter-desc">Cara kerja sistem Pajak Keluaran dan Pajak Masukan (indirect subtraction method).</p>
+    </div>
+
+    <div class="section">
+      <h3>Prinsip Dasar: Credit Method</h3>
+      <p>PPN Indonesia menggunakan metode <strong>pengkreditan tidak langsung (indirect subtraction method)</strong>. PPN yang harus disetor ke negara dihitung dari selisih antara Pajak Keluaran dan Pajak Masukan.</p>
+      
+      <div class="info-box note">
+        <strong>Rumus:</strong><br>
+        PPN Kurang Bayar = Pajak Keluaran − Pajak Masukan<br>
+        Jika Pajak Masukan > Pajak Keluaran → Lebih Bayar (dapat dikompensasi atau direstitusi)
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Pajak Keluaran (PK)</h3>
+      <p>PPN yang <strong>dipungut oleh PKP</strong> pada saat menyerahkan BKP/JKP kepada pembeli. Dihitung: <code>Tarif PPN × DPP</code>.</p>
+      
+      <div class="collapsible">
+        <div class="collapsible-header">Contoh Penghitungan PK</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <p>PT ABC (PKP) menjual barang elektronik seharga Rp100.000.000:</p>
+            <ul>
+              <li>DPP = Rp100.000.000</li>
+              <li>PPN (Pajak Keluaran) = 11% × Rp100.000.000 = <strong>Rp11.000.000</strong></li>
+              <li>Total yang dibayar pembeli = Rp111.000.000</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Pajak Masukan (PM)</h3>
+      <p>PPN yang <strong>dibayar oleh PKP</strong> pada saat memperoleh BKP/JKP dari PKP lain. Pajak Masukan ini pada prinsipnya dapat dikreditkan untuk mengurangi Pajak Keluaran.</p>
+    </div>
+
+    <div class="section">
+      <h3>Ilustrasi Mekanisme PPN</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Tahap</th>
+              <th>Pelaku</th>
+              <th>Harga Jual</th>
+              <th>PK (11%)</th>
+              <th>PM</th>
+              <th>Setor ke Negara</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Produsen → Distributor</td><td>Rp50 jt</td><td>Rp5,5 jt</td><td>Rp0</td><td>Rp5,5 jt</td></tr>
+            <tr><td>2</td><td>Distributor → Retailer</td><td>Rp80 jt</td><td>Rp8,8 jt</td><td>Rp5,5 jt</td><td>Rp3,3 jt</td></tr>
+            <tr><td>3</td><td>Retailer → Konsumen</td><td>Rp100 jt</td><td>Rp11 jt</td><td>Rp8,8 jt</td><td>Rp2,2 jt</td></tr>
+            <tr><td colspan="5"><strong>Total PPN Masuk ke Negara</strong></td><td><strong>Rp11 jt</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="info-box note">
+        <strong>💡 Insight:</strong> Total PPN yang masuk ke kas negara (Rp11 jt) sama persis dengan 11% × harga jual akhir ke konsumen (Rp100 jt). Inilah sifat non-kumulatif PPN.
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 5: Dasar Pengenaan Pajak -->
+  <div class="chapter" data-chapter="4">
+    <div class="chapter-header">
+      <div class="chapter-num">Bab 5</div>
+      <h1 class="chapter-title">Dasar Pengenaan Pajak (DPP)</h1>
+      <p class="chapter-desc">Nilai yang digunakan sebagai dasar untuk menghitung PPN terutang.</p>
+    </div>
+
+    <div class="section">
+      <h3>Jenis-Jenis DPP</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Jenis DPP</th>
+              <th>Penggunaan</th>
+              <th>Cara Menentukan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Harga Jual</strong></td><td>Penyerahan BKP</td><td>Nilai berupa uang termasuk semua biaya yang diminta penjual, tidak termasuk PPN dan potongan harga</td></tr>
+            <tr><td><strong>Penggantian</strong></td><td>Penyerahan JKP</td><td>Nilai berupa uang termasuk semua biaya yang diminta pemberi jasa, tidak termasuk PPN dan potongan harga</td></tr>
+            <tr><td><strong>Nilai Impor</strong></td><td>Impor BKP</td><td>CIF + Bea Masuk + Pungutan Lain yang sah</td></tr>
+            <tr><td><strong>Nilai Ekspor</strong></td><td>Ekspor BKP/JKP</td><td>Nilai yang tercantum dalam dokumen ekspor (PEB)</td></tr>
+            <tr><td><strong>Nilai Lain</strong></td><td>Hal-hal khusus</td><td>Ditetapkan oleh Menteri Keuangan</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>DPP Nilai Lain</h3>
+      <div class="collapsible">
+        <div class="collapsible-header">Jenis-Jenis Nilai Lain (PMK 131/2024 & lainnya)</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <ul>
+              <li><strong>Pemakaian sendiri/pemberian cuma-cuma BKP:</strong> Harga jual/penggantian dikurangi laba kotor</li>
+              <li><strong>Penyerahan film cerita:</strong> perkiraan hasil rata-rata per judul film</li>
+              <li><strong>Penyerahan produk hasil tembakau:</strong> harga jual eceran (HJE)</li>
+              <li><strong>Jasa biro perjalanan/wisata:</strong> 10% dari jumlah tagihan</li>
+              <li><strong>Jasa pengiriman paket:</strong> 10% dari jumlah tagihan</li>
+              <li><strong>Jasa freight forwarding:</strong> 10% dari jumlah tagihan</li>
+              <li><strong>Penyerahan BKP melalui pedagang perantara:</strong> harga yang disepakati antara pedagang perantara dengan pembeli</li>
+              <li><strong>Penyerahan BKP melalui juru lelang:</strong> harga lelang</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>DPP Khusus: Besaran Tertentu (PPN Final)</h3>
+      <p>UU HPP memperkenalkan konsep <strong>PPN dengan besaran tertentu</strong>, yaitu PPN yang dihitung dengan cara mengalikan tarif tertentu dengan DPP berupa peredaran usaha, sehingga menyerupai pajak final.</p>
+      
+      <div class="info-box warning">
+        <strong>⚠️ Contoh PPN Besaran Tertentu:</strong>
+        <ul>
+          <li>Pedagang emas perhiasan: PPN = 1,1% × harga jual (DPP 10% dari harga jual)</li>
+          <li>Kendaraan bermotor bekas: PPN = 1,1% × harga jual</li>
+          <li>Jasa agen asuransi: PPN = 2,2% × komisi/imbalan</li>
+          <li>Pupuk bersubsidi: PPN = tertentu dari DPP</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 6: Tarif & Perhitungan -->
+  <div class="chapter" data-chapter="5">
+    <div class="chapter-header">
+      <div class="chapter-num">Bab 6</div>
+      <h1 class="chapter-title">Tarif & Perhitungan PPN</h1>
+      <p class="chapter-desc">Tarif PPN yang berlaku dan cara menghitung PPN terutang.</p>
+    </div>
+
+    <div class="section">
+      <h3>Tarif PPN</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Jenis Tarif</th>
+              <th>Besaran</th>
+              <th>Berlaku</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Tarif Umum</td><td><strong>11%</strong></td><td>Sejak 1 April 2022 (UU HPP)</td></tr>
+            <tr><td>Tarif Ekspor</td><td><strong>0%</strong></td><td>Ekspor BKP Berwujud, BKP Tidak Berwujud, dan JKP</td></tr>
+            <tr><td>Tarif Masa Depan</td><td><strong>12%</strong></td><td>Paling lambat 1 Januari 2025 (per UU HPP) - ditunda ke barang mewah saja</td></tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="info-box important">
+        <strong>🔴 Update:</strong> Per kebijakan pemerintah, kenaikan tarif PPN menjadi 12% hanya diberlakukan untuk barang mewah (Januari 2025). Untuk barang/jasa umum lainnya tetap 11%.
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Cara Menghitung PPN</h3>
+      <div class="collapsible open">
+        <div class="collapsible-header">Rumus Dasar</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <p><strong>PPN = Tarif × DPP</strong></p>
+            <p>Contoh 1: Penjualan BKP Rp200.000.000</p>
+            <ul>
+              <li>PPN = 11% × Rp200.000.000 = <strong>Rp22.000.000</strong></li>
+            </ul>
+            <p>Contoh 2: Impor barang CIF $10,000 (kurs Rp15.500), BM 10%</p>
+            <ul>
+              <li>Nilai Impor = (10.000 × 15.500) + (10% × 155.000.000) = Rp155.000.000 + Rp15.500.000 = <strong>Rp170.500.000</strong></li>
+              <li>PPN Impor = 11% × Rp170.500.000 = <strong>Rp18.755.000</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Penghitungan PPN Kurang/Lebih Bayar</h3>
+      <div class="collapsible">
+        <div class="collapsible-header">Studi Kasus Lengkap</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <p><strong>PT XYZ (PKP) pada Masa Pajak Juli 2026:</strong></p>
+            <p><em>Pajak Keluaran:</em></p>
+            <ul>
+              <li>Penjualan BKP: 11% × Rp500.000.000 = Rp55.000.000</li>
+              <li>Penyerahan JKP: 11% × Rp200.000.000 = Rp22.000.000</li>
+              <li><strong>Total PK = Rp77.000.000</strong></li>
+            </ul>
+            <p><em>Pajak Masukan:</em></p>
+            <ul>
+              <li>Pembelian bahan baku: Rp33.000.000</li>
+              <li>Sewa gudang: Rp5.500.000</li>
+              <li>Pembelian mesin: Rp22.000.000</li>
+              <li><strong>Total PM = Rp60.500.000</strong></li>
+            </ul>
+            <p><strong>PPN Kurang Bayar = Rp77.000.000 − Rp60.500.000 = Rp16.500.000</strong></p>
+            <p>PT XYZ wajib menyetor Rp16.500.000 paling lambat akhir bulan berikutnya.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 7: Faktur Pajak -->
+  <div class="chapter" data-chapter="6">
+    <div class="chapter-header">
+      <div class="chapter-num">Bab 7</div>
+      <h1 class="chapter-title">Faktur Pajak</h1>
+      <p class="chapter-desc">Bukti pungutan PPN yang wajib dibuat PKP untuk setiap penyerahan BKP/JKP.</p>
+    </div>
+
+    <div class="section">
+      <h3>Pengertian & Fungsi</h3>
+      <p>Faktur Pajak adalah bukti pungutan pajak yang dibuat oleh PKP yang melakukan penyerahan BKP atau JKP. Faktur Pajak berfungsi sebagai:</p>
+      <ul>
+        <li>Bukti pungutan PPN oleh PKP penjual</li>
+        <li>Sarana pengkreditan Pajak Masukan bagi PKP pembeli</li>
+        <li>Bukti pembayaran PPN oleh pembeli</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3>Jenis Faktur Pajak</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Kode</th>
+              <th>Jenis</th>
+              <th>Penggunaan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>01</td><td>Kepada Selain Pemungut PPN</td><td>Penyerahan BKP/JKP kepada pihak umum (non-pemungut)</td></tr>
+            <tr><td>02</td><td>Kepada Pemungut Bendahara Pemerintah</td><td>Penyerahan ke instansi pemerintah</td></tr>
+            <tr><td>03</td><td>Kepada Pemungut Selain Bendahara</td><td>Penyerahan ke BUMN/badan tertentu yang ditunjuk</td></tr>
+            <tr><td>04</td><td>DPP Nilai Lain</td><td>Penyerahan yang DPP-nya menggunakan Nilai Lain</td></tr>
+            <tr><td>05</td><td>Besaran Tertentu (Pasal 9A UU PPN)</td><td>PPN dengan besaran tertentu (PPN "Final")</td></tr>
+            <tr><td>06</td><td>Penyerahan Lainnya (eks BKP/JKP tertentu)</td><td>Penyerahan kepada turis asing (VAT refund) dll</td></tr>
+            <tr><td>07</td><td>PPN Tidak Dipungut/DTP</td><td>Penyerahan di kawasan bebas, dll</td></tr>
+            <tr><td>08</td><td>PPN Dibebaskan</td><td>Penyerahan yang mendapat fasilitas pembebasan</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>e-Faktur</h3>
+      <div class="collapsible">
+        <div class="collapsible-header">Ketentuan e-Faktur</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <p>Sejak 1 Juli 2016, seluruh PKP wajib membuat Faktur Pajak berbentuk elektronik (e-Faktur). Ketentuan:</p>
+            <ul>
+              <li>Dibuat melalui aplikasi e-Faktur yang disediakan DJP (versi terbaru: e-Faktur Desktop 4.0 atau web-based Coretax)</li>
+              <li>Menggunakan NSFP (Nomor Seri Faktur Pajak) yang diberikan DJP</li>
+              <li>Ditandatangani secara elektronik (sertifikat digital)</li>
+              <li>Wajib di-upload dan memperoleh persetujuan dari DJP</li>
+              <li>Batas upload: tanggal 15 bulan berikutnya setelah tanggal Faktur Pajak</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapsible">
+        <div class="collapsible-header">Saat Pembuatan Faktur Pajak</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <p>Faktur Pajak harus dibuat pada saat (mana yang lebih dulu):</p>
+            <ol>
+              <li>Penyerahan BKP/JKP</li>
+              <li>Pembayaran diterima (dalam hal pembayaran mendahului penyerahan)</li>
+              <li>Pembayaran termin (untuk penyerahan sebagian tahap pekerjaan)</li>
+              <li>Saat lain yang diatur PMK (ekspor, pemakaian sendiri, dll)</li>
+            </ol>
+            <div class="info-box warning">
+              <strong>⚠️ Sanksi Terlambat:</strong> Keterlambatan membuat Faktur Pajak dikenai sanksi 1% dari DPP (denda Pasal 14 ayat 4 UU KUP).
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Faktur Pajak Pengganti & Batal</h3>
+      <div class="collapsible">
+        <div class="collapsible-header">Kapan Digunakan</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <ul>
+              <li><strong>Faktur Pajak Pengganti:</strong> dibuat jika terdapat kesalahan pengisian (harga, identitas, dll) pada Faktur Pajak yang sudah diterbitkan. Kode status: 1 (pengganti).</li>
+              <li><strong>Faktur Pajak Batal:</strong> dibuat jika transaksi dibatalkan seluruhnya. PKP penjual dan pembeli harus sama-sama melakukan penyesuaian di SPT Masa PPN masing-masing.</li>
+              <li><strong>Nota Retur/Nota Pembatalan:</strong> dibuat oleh pembeli BKP/penerima JKP jika BKP dikembalikan atau JKP dibatalkan sebagian.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 8: Pajak Masukan -->
+  <div class="chapter" data-chapter="7">
+    <div class="chapter-header">
+      <div class="chapter-num">Bab 8</div>
+      <h1 class="chapter-title">Pengkreditan Pajak Masukan</h1>
+      <p class="chapter-desc">Syarat, batasan, dan ketentuan pengkreditan Pajak Masukan bagi PKP.</p>
+    </div>
+
+    <div class="section">
+      <h3>Syarat Pengkreditan PM</h3>
+      <p>Pajak Masukan dapat dikreditkan jika memenuhi syarat:</p>
+      <ol>
+        <li>Tercantum dalam Faktur Pajak yang sah dan lengkap</li>
+        <li>Berhubungan langsung dengan kegiatan usaha (penyerahan yang terutang PPN)</li>
+        <li>Belum dibebankan sebagai biaya atau dikapitalisasi ke harga perolehan BKP/JKP</li>
+        <li>Belum dilakukan pemeriksaan atas Masa Pajak terkait</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h3>PM yang Tidak Dapat Dikreditkan (Pasal 9 ayat 8)</h3>
+      <div class="collapsible">
+        <div class="collapsible-header">Daftar PM Tidak Dapat Dikreditkan</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <ol>
+              <li>Perolehan BKP/JKP <strong>sebelum pengusaha dikukuhkan</strong> sebagai PKP</li>
+              <li>Perolehan BKP/JKP yang <strong>tidak mempunyai hubungan langsung</strong> dengan kegiatan usaha</li>
+              <li>Perolehan dan pemeliharaan <strong>kendaraan bermotor sedan dan station wagon</strong>, kecuali merupakan barang dagangan atau untuk disewakan</li>
+              <li>Pemanfaatan BKP Tidak Berwujud atau JKP dari luar Daerah Pabean <strong>sebelum pengusaha dikukuhkan</strong> sebagai PKP</li>
+              <li>Perolehan BKP/JKP yang <strong>Faktur Pajaknya tidak memenuhi ketentuan</strong> (cacat)</li>
+              <li>Pemanfaatan BKP Tidak Berwujud atau JKP dari luar Daerah Pabean yang Faktur Pajaknya <strong>tidak memenuhi ketentuan</strong></li>
+              <li>Perolehan BKP/JKP yang <strong>Pajak Masukannya ditagih melalui SKP</strong></li>
+              <li>Perolehan BKP/JKP yang <strong>Pajak Masukannya tidak dilaporkan</strong> dalam SPT Masa PPN dan ditemukan saat pemeriksaan</li>
+              <li>Perolehan BKP selain barang modal yang <strong>masa manfaatnya kurang dari 1 tahun</strong> — (ketentuan ini dihapus UU HPP)</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Pengkreditan PM bagi PKP yang Melakukan Penyerahan Terutang & Tidak Terutang PPN</h3>
+      <div class="collapsible">
+        <div class="collapsible-header">Pedoman Penghitungan Pengkreditan (Pasal 9 ayat 6)</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <p>Jika PKP melakukan penyerahan yang terutang PPN dan yang tidak terutang PPN, maka PM yang dapat dikreditkan dihitung secara proporsional:</p>
+            <p><strong>PM yang dapat dikreditkan = (Penyerahan Terutang PPN / Total Penyerahan) × Total PM</strong></p>
+            <p><em>Contoh:</em> Total penyerahan Rp1 M (Rp800 jt terutang PPN + Rp200 jt tidak terutang). Total PM = Rp55 jt.</p>
+            <p>PM yang dapat dikreditkan = 800/1.000 × Rp55 jt = <strong>Rp44 jt</strong></p>
+            <div class="info-box note">
+              <strong>💡 Catatan:</strong> Penghitungan kembali PM dilakukan pada akhir tahun buku berdasarkan realisasi penyerahan sesungguhnya.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Batas Waktu Pengkreditan PM</h3>
+      <p>Pajak Masukan dapat dikreditkan paling lama <strong>3 bulan</strong> setelah berakhirnya Masa Pajak yang bersangkutan, sepanjang belum dibebankan sebagai biaya dan belum dilakukan pemeriksaan.</p>
+    </div>
+  </div>
+
+  <!-- Chapter 9: PPN Dibebaskan & Tidak Dipungut -->
+  <div class="chapter" data-chapter="8">
+    <div class="chapter-header">
+      <div class="chapter-num">Bab 9</div>
+      <h1 class="chapter-title">PPN Dibebaskan & Tidak Dipungut</h1>
+      <p class="chapter-desc">Fasilitas PPN: perbedaan pembebasan dan tidak dipungut serta dampaknya.</p>
+    </div>
+
+    <div class="section">
+      <h3>Perbedaan Mendasar</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Aspek</th>
+              <th>PPN Dibebaskan</th>
+              <th>PPN Tidak Dipungut</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Dasar Hukum</td><td>Pasal 16B ayat (1a) UU PPN</td><td>Pasal 16B ayat (1) UU PPN / PP khusus</td></tr>
+            <tr><td>PM dapat dikreditkan?</td><td><strong>Tidak</strong></td><td><strong>Ya</strong> (dapat dikreditkan)</td></tr>
+            <tr><td>Faktur Pajak</td><td>Tetap dibuat (kode 08)</td><td>Tetap dibuat (kode 07)</td></tr>
+            <tr><td>Dampak bagi PKP penjual</td><td>PM menjadi biaya</td><td>PM tetap dapat dikreditkan → bisa lebih bayar</td></tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="info-box important">
+        <strong>🔴 Kunci:</strong> PPN Tidak Dipungut lebih menguntungkan bagi PKP karena Pajak Masukan tetap bisa dikreditkan, sedangkan PPN Dibebaskan membuat PM tidak bisa dikreditkan (hangus).
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>BKP/JKP yang Dibebaskan dari PPN (PP 49/2022)</h3>
+      <div class="collapsible">
+        <div class="collapsible-header">Barang Strategis yang Dibebaskan</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <ul>
+              <li>Barang kebutuhan pokok (beras, gabah, jagung, sagu, kedelai, garam, daging, telur, susu, buah-buahan, sayur-sayuran, gula konsumsi)</li>
+              <li>Buku pelajaran umum, kitab suci, dan buku pelajaran agama</li>
+              <li>Vaksin polio</li>
+              <li>Rumah sederhana, rusunami, pondok boro, asrama</li>
+              <li>Listrik (daya tertentu untuk rumah tangga)</li>
+              <li>Air bersih (termasuk biaya penyambungan dan meter)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="collapsible">
+        <div class="collapsible-header">Jasa yang Dibebaskan</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <ul>
+              <li>Jasa pelayanan kesehatan medis</li>
+              <li>Jasa pelayanan sosial</li>
+              <li>Jasa pengiriman surat dengan perangko</li>
+              <li>Jasa keuangan (perbankan, asuransi, pembiayaan)</li>
+              <li>Jasa pendidikan</li>
+              <li>Jasa angkutan umum di darat dan di air serta jasa angkutan udara dalam negeri (bagian dari angkutan luar negeri)</li>
+              <li>Jasa tenaga kerja</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>PPN Tidak Dipungut</h3>
+      <div class="collapsible">
+        <div class="collapsible-header">Kawasan & Kondisi Khusus</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <p>PPN tidak dipungut diberikan antara lain untuk:</p>
+            <ul>
+              <li><strong>Kawasan Perdagangan Bebas dan Pelabuhan Bebas (FTZ):</strong> Batam, Bintan, Karimun</li>
+              <li><strong>Kawasan Ekonomi Khusus (KEK)</strong></li>
+              <li><strong>Tempat Penimbunan Berikat (TPB):</strong> Kawasan Berikat, Gudang Berikat, dll</li>
+              <li><strong>Proyek Pemerintah yang dibiayai hibah/pinjaman luar negeri</strong></li>
+              <li><strong>Perwakilan negara asing dan badan internasional</strong> (asas timbal balik)</li>
+              <li><strong>Alat angkutan tertentu</strong> serta jasa terkait (kapal laut, pesawat udara, kereta api)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 10: Saat & Tempat Terutang -->
+  <div class="chapter" data-chapter="9">
+    <div class="chapter-header">
+      <div class="chapter-num">Bab 10</div>
+      <h1 class="chapter-title">Saat & Tempat Terutang PPN</h1>
+      <p class="chapter-desc">Menentukan kapan dan di mana PPN terutang serta kewajiban penyetoran.</p>
+    </div>
+
+    <div class="section">
+      <h3>Saat Terutangnya PPN</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Jenis Penyerahan</th>
+              <th>Saat Terutang</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Penyerahan BKP berwujud (bergerak)</td><td>Saat BKP diserahkan langsung, dikirim, atau diantar</td></tr>
+            <tr><td>Penyerahan BKP berwujud (tidak bergerak)</td><td>Saat penyerahan hak atau penguasaan atas BKP</td></tr>
+            <tr><td>Penyerahan BKP tidak berwujud</td><td>Saat harga dinyatakan sebagai piutang, kontrak ditandatangani, atau saat mulai digunakan</td></tr>
+            <tr><td>Penyerahan JKP</td><td>Saat mulai tersedianya fasilitas/kemudahan untuk dipakai (penyelesaian jasa)</td></tr>
+            <tr><td>Impor BKP</td><td>Saat BKP masuk ke Daerah Pabean (tanggal PIB)</td></tr>
+            <tr><td>Ekspor BKP</td><td>Saat BKP dikeluarkan dari Daerah Pabean (tanggal PEB)</td></tr>
+            <tr><td>Pembayaran mendahului penyerahan</td><td>Saat pembayaran diterima</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Tempat Terutangnya PPN</h3>
+      <div class="collapsible">
+        <div class="collapsible-header">Ketentuan Tempat Terutang</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <ul>
+              <li><strong>Penyerahan BKP/JKP:</strong> tempat tinggal, tempat kedudukan, atau tempat kegiatan usaha PKP</li>
+              <li><strong>Impor:</strong> tempat BKP dimasukkan ke Daerah Pabean (pelabuhan/bandara)</li>
+              <li><strong>Pemanfaatan BKP TB/JKP dari luar negeri:</strong> tempat orang pribadi/badan terdaftar atau berkedudukan</li>
+              <li><strong>PKP dengan lebih dari satu tempat usaha:</strong> dapat memilih pemusatan tempat PPN terutang</li>
+            </ul>
+            <div class="info-box note">
+              <strong>💡 Pemusatan PPN:</strong> PKP yang memiliki cabang dapat mengajukan pemusatan PPN sehingga seluruh kewajiban PPN dilaporkan terpusat di satu KPP. Hal ini menyederhanakan administrasi dan menghindari pembuatan Faktur Pajak antar cabang.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Penyetoran PPN</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Jenis</th>
+              <th>Batas Setor</th>
+              <th>Kode MAP/KJS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>PPN Dalam Negeri (PKP)</td><td>Akhir bulan berikutnya sebelum SPT disampaikan</td><td>411211/100</td></tr>
+            <tr><td>PPN Impor (SSP)</td><td>Bersamaan dengan pembayaran Bea Masuk</td><td>411211/100</td></tr>
+            <tr><td>PPN Pemungut Bendahara</td><td>Tanggal 7 bulan berikutnya</td><td>411211/900</td></tr>
+            <tr><td>PPN PMSE</td><td>Akhir bulan berikutnya</td><td>411219/104</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 11: Pelaporan SPT Masa PPN -->
+  <div class="chapter" data-chapter="10">
+    <div class="chapter-header">
+      <div class="chapter-num">Bab 11</div>
+      <h1 class="chapter-title">Pelaporan SPT Masa PPN</h1>
+      <p class="chapter-desc">Tata cara, formulir, dan ketentuan pelaporan SPT Masa PPN setiap bulan.</p>
+    </div>
+
+    <div class="section">
+      <h3>Formulir SPT Masa PPN</h3>
+      <p>SPT Masa PPN menggunakan formulir <strong>1111</strong> yang terdiri dari:</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Lampiran</th>
+              <th>Isi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Induk 1111</td><td>Rekapitulasi PPN: total PK, total PM yang dapat dikreditkan, PPN kurang/lebih bayar</td></tr>
+            <tr><td>Lampiran A1</td><td>Daftar Ekspor BKP Berwujud/Tidak Berwujud/JKP</td></tr>
+            <tr><td>Lampiran A2</td><td>Daftar PPN Keluaran (penyerahan dalam negeri dengan Faktur Pajak)</td></tr>
+            <tr><td>Lampiran B1</td><td>Daftar PM yang Dapat Dikreditkan (dalam negeri)</td></tr>
+            <tr><td>Lampiran B2</td><td>Daftar PM yang Dapat Dikreditkan (impor BKP/pemanfaatan BKP TB & JKP dari LN)</td></tr>
+            <tr><td>Lampiran B3</td><td>Daftar PM yang Tidak Dapat Dikreditkan</td></tr>
+            <tr><td>Lampiran AB</td><td>Rekapitulasi Penyerahan dan Perolehan</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Batas Waktu Pelaporan</h3>
+      <p>SPT Masa PPN wajib dilaporkan <strong>paling lambat akhir bulan berikutnya</strong> setelah berakhirnya Masa Pajak. Contoh: SPT Masa PPN Juli 2026 → batas lapor 31 Agustus 2026.</p>
+      
+      <div class="info-box warning">
+        <strong>⚠️ Sanksi Keterlambatan:</strong>
+        <ul>
+          <li>Telat lapor: denda <strong>Rp500.000</strong> per SPT Masa PPN</li>
+          <li>Telat setor: bunga <strong>0,9% per bulan</strong> (tarif bunga KMK) dari PPN kurang bayar, dihitung dari jatuh tempo sampai tanggal pembayaran</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>SPT Pembetulan</h3>
+      <div class="collapsible">
+        <div class="collapsible-header">Ketentuan Pembetulan SPT Masa PPN</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <ul>
+              <li>WP berhak membetulkan SPT Masa PPN yang telah dilaporkan</li>
+              <li>Pembetulan dapat dilakukan sepanjang belum dilakukan pemeriksaan</li>
+              <li>Jika pembetulan menyebabkan PPN kurang bayar, dikenai sanksi bunga sesuai Pasal 8 ayat (2a) UU KUP</li>
+              <li>Pembetulan yang menyebabkan lebih bayar → tidak dikenai sanksi, namun dapat dilakukan pemeriksaan</li>
+              <li>Pembetulan SPT yang mengungkapkan ketidakbenaran (Pasal 8 ayat 4) dikenai denda 100% dari pajak kurang dibayar jika sedang dilakukan penyidikan</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Restitusi PPN (Pengembalian Lebih Bayar)</h3>
+      <div class="collapsible">
+        <div class="collapsible-header">Mekanisme Restitusi</div>
+        <div class="collapsible-body">
+          <div class="collapsible-content">
+            <p>Jika PM > PK, PKP memiliki dua opsi:</p>
+            <ol>
+              <li><strong>Kompensasi:</strong> Kelebihan PM dikompensasikan ke Masa Pajak berikutnya</li>
+              <li><strong>Restitusi:</strong> Mengajukan permohonan pengembalian di akhir tahun buku</li>
+            </ol>
+            <p><strong>PKP yang berhak restitusi setiap Masa Pajak (Pasal 9 ayat 4b):</strong></p>
+            <ul>
+              <li>PKP yang melakukan ekspor BKP Berwujud/Tidak Berwujud/JKP</li>
+              <li>PKP yang menyerahkan kepada Pemungut PPN</li>
+              <li>PKP yang menyerahkan BKP/JKP yang PPN-nya tidak dipungut</li>
+              <li>PKP dalam tahap belum berproduksi (masa pre-production)</li>
+            </ul>
+            <p><strong>Restitusi Dipercepat (tanpa pemeriksaan penuh):</strong></p>
+            <ul>
+              <li>PKP berisiko rendah (Pasal 17C/17D UU KUP)</li>
+              <li>PKP Persyaratan Tertentu: omzet ≤ Rp5 M, lebih bayar ≤ Rp5 M, restitusi WP orang pribadi ≤ Rp100 jt</li>
+              <li>Proses: 1 bulan (penelitian), bukan 12 bulan (pemeriksaan)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 12: Glossarium & Kuis -->
+  <div class="chapter" data-chapter="11">
+    <div class="chapter-header">
+      <div class="chapter-num">Bab 12</div>
+      <h1 class="chapter-title">Glossarium & Kuis Akhir</h1>
+      <p class="chapter-desc">Daftar istilah penting dan uji pemahaman Anda tentang PPN.</p>
+    </div>
+
+    <div class="section">
+      <h3>Glossarium PPN</h3>
+      <div class="glossary-grid">
+        <div class="glossary-card"><dt>BKP</dt><dd>Barang Kena Pajak: barang berwujud/tidak berwujud yang dikenai PPN</dd></div>
+        <div class="glossary-card"><dt>JKP</dt><dd>Jasa Kena Pajak: setiap kegiatan pelayanan yang dikenai PPN</dd></div>
+        <div class="glossary-card"><dt>PKP</dt><dd>Pengusaha Kena Pajak: pengusaha yang wajib memungut, menyetor, & melaporkan PPN</dd></div>
+        <div class="glossary-card"><dt>DPP</dt><dd>Dasar Pengenaan Pajak: nilai yang menjadi dasar penghitungan PPN</dd></div>
+        <div class="glossary-card"><dt>Pajak Keluaran (PK)</dt><dd>PPN yang dipungut saat penyerahan BKP/JKP oleh PKP</dd></div>
+        <div class="glossary-card"><dt>Pajak Masukan (PM)</dt><dd>PPN yang dibayar saat perolehan BKP/JKP oleh PKP</dd></div>
+        <div class="glossary-card"><dt>Faktur Pajak</dt><dd>Bukti pungutan PPN, wajib dibuat secara elektronik (e-Faktur)</dd></div>
+        <div class="glossary-card"><dt>NSFP</dt><dd>Nomor Seri Faktur Pajak: nomor yang diberikan DJP untuk penomoran Faktur</dd></div>
+        <div class="glossary-card"><dt>SPT Masa PPN</dt><dd>Surat Pemberitahuan Masa: laporan bulanan PPN (formulir 1111)</dd></div>
+        <div class="glossary-card"><dt>Restitusi</dt><dd>Pengembalian kelebihan bayar pajak (PM > PK)</dd></div>
+        <div class="glossary-card"><dt>FTZ</dt><dd>Free Trade Zone: kawasan perdagangan bebas (Batam, Bintan, Karimun)</dd></div>
+        <div class="glossary-card"><dt>PMSE</dt><dd>Perdagangan Melalui Sistem Elektronik: platform digital yang ditunjuk memungut PPN</dd></div>
+        <div class="glossary-card"><dt>Nilai Impor</dt><dd>CIF + Bea Masuk + Pungutan resmi lainnya</dd></div>
+        <div class="glossary-card"><dt>PPnBM</dt><dd>Pajak Penjualan atas Barang Mewah: pajak tambahan atas BKP yang tergolong mewah</dd></div>
+        <div class="glossary-card"><dt>Destination Principle</dt><dd>Prinsip PPN dikenakan di tempat tujuan konsumsi</dd></div>
+        <div class="glossary-card"><dt>Credit Method</dt><dd>Metode penghitungan PPN: PK dikurangi PM = PPN yang harus disetor</dd></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Kuis Pemahaman PPN</h3>
+      <div class="quiz-section">
+        <div class="quiz-title">📝 Uji Pemahaman Anda (10 Soal)</div>
+
+        <div class="quiz-question">
+          <p>1. Berapakah tarif PPN umum yang berlaku sejak 1 April 2022?</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q1" value="a"> 10%</label>
+            <label><input type="radio" name="q1" value="b"> 11%</label>
+            <label><input type="radio" name="q1" value="c"> 12%</label>
+            <label><input type="radio" name="q1" value="d"> 15%</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p>2. Tarif PPN untuk ekspor BKP adalah...</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q2" value="a"> 11%</label>
+            <label><input type="radio" name="q2" value="b"> 5%</label>
+            <label><input type="radio" name="q2" value="c"> 0%</label>
+            <label><input type="radio" name="q2" value="d"> Dibebaskan</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p>3. Batas peredaran bruto untuk wajib dikukuhkan sebagai PKP adalah...</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q3" value="a"> Rp3,6 miliar/tahun</label>
+            <label><input type="radio" name="q3" value="b"> Rp4,8 miliar/tahun</label>
+            <label><input type="radio" name="q3" value="c"> Rp5 miliar/tahun</label>
+            <label><input type="radio" name="q3" value="d"> Rp10 miliar/tahun</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p>4. Rumus PPN yang harus disetor PKP ke negara adalah...</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q4" value="a"> Tarif × DPP</label>
+            <label><input type="radio" name="q4" value="b"> Pajak Keluaran − Pajak Masukan</label>
+            <label><input type="radio" name="q4" value="c"> Pajak Masukan − Pajak Keluaran</label>
+            <label><input type="radio" name="q4" value="d"> Total Penjualan × Tarif</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p>5. Pada fasilitas PPN Dibebaskan, apakah Pajak Masukan dapat dikreditkan?</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q5" value="a"> Ya, sepenuhnya</label>
+            <label><input type="radio" name="q5" value="b"> Ya, sebagian</label>
+            <label><input type="radio" name="q5" value="c"> Tidak</label>
+            <label><input type="radio" name="q5" value="d"> Tergantung jenis barang</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p>6. Batas waktu pelaporan SPT Masa PPN adalah...</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q6" value="a"> Tanggal 20 bulan berikutnya</label>
+            <label><input type="radio" name="q6" value="b"> Akhir bulan berikutnya</label>
+            <label><input type="radio" name="q6" value="c"> Tanggal 15 bulan berikutnya</label>
+            <label><input type="radio" name="q6" value="d"> 3 bulan setelah Masa Pajak</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p>7. Denda keterlambatan pelaporan SPT Masa PPN adalah...</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q7" value="a"> Rp100.000</label>
+            <label><input type="radio" name="q7" value="b"> Rp250.000</label>
+            <label><input type="radio" name="q7" value="c"> Rp500.000</label>
+            <label><input type="radio" name="q7" value="d"> Rp1.000.000</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p>8. Nilai Impor dihitung dari...</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q8" value="a"> FOB + Asuransi</label>
+            <label><input type="radio" name="q8" value="b"> CIF saja</label>
+            <label><input type="radio" name="q8" value="c"> CIF + Bea Masuk + Pungutan lain yang sah</label>
+            <label><input type="radio" name="q8" value="d"> Harga beli + ongkos kirim</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p>9. Kode Faktur Pajak untuk penyerahan yang PPN-nya dibebaskan adalah...</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q9" value="a"> 04</label>
+            <label><input type="radio" name="q9" value="b"> 06</label>
+            <label><input type="radio" name="q9" value="c"> 07</label>
+            <label><input type="radio" name="q9" value="d"> 08</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p>10. Pajak Masukan dapat dikreditkan paling lama berapa bulan setelah Masa Pajak yang bersangkutan?</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q10" value="a"> 1 bulan</label>
+            <label><input type="radio" name="q10" value="b"> 3 bulan</label>
+            <label><input type="radio" name="q10" value="c"> 6 bulan</label>
+            <label><input type="radio" name="q10" value="d"> 12 bulan</label>
+          </div>
+        </div>
+
+        <button class="quiz-btn" onclick="checkQuiz()">Periksa Jawaban</button>
+        <div class="quiz-result" id="quizResult"></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button class="mobile-toggle" id="mobileToggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+
+<script>
+// Navigation
+const navItems = document.querySelectorAll('.nav-item');
+const chapters = document.querySelectorAll('.chapter');
+
+navItems.forEach(item => {
+  item.addEventListener('click', () => {
+    const idx = item.dataset.chapter;
+    navItems.forEach(n => n.classList.remove('active'));
+    chapters.forEach(c => c.classList.remove('active'));
+    item.classList.add('active');
+    chapters[idx].classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Close mobile sidebar
+    document.getElementById('sidebar').classList.remove('open');
+  });
+});
+
+// Collapsibles
+document.querySelectorAll('.collapsible-header').forEach(header => {
+  header.addEventListener('click', () => {
+    header.parentElement.classList.toggle('open');
+  });
+});
+
+// Progress Bar
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  document.getElementById('progressBar').style.width = progress + '%';
+  
+  // Back to top visibility
+  const btn = document.getElementById('backToTop');
+  if (scrollTop > 300) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+
+// Search
+document.getElementById('searchInput').addEventListener('input', function() {
+  const query = this.value.toLowerCase().trim();
+  if (!query) {
+    navItems.forEach(n => n.style.display = 'flex');
+    return;
+  }
+  navItems.forEach(nav => {
+    const text = nav.textContent.toLowerCase();
+    nav.style.display = text.includes(query) ? 'flex' : 'none';
+  });
+});
+
+// Quiz
+function checkQuiz() {
+  const answers = {
+    q1: 'b', q2: 'c', q3: 'b', q4: 'b', q5: 'c',
+    q6: 'b', q7: 'c', q8: 'c', q9: 'd', q10: 'b'
+  };
+  
+  let score = 0;
+  const total = Object.keys(answers).length;
+  
+  for (const [q, correct] of Object.entries(answers)) {
+    const selected = document.querySelector(`input[name="${q}"]:checked`);
+    if (selected && selected.value === correct) score++;
+  }
+  
+  const resultEl = document.getElementById('quizResult');
+  const pct = Math.round((score / total) * 100);
+  
+  resultEl.className = 'quiz-result show ' + (pct >= 70 ? 'good' : 'bad');
+  
+  if (pct === 100) {
+    resultEl.textContent = `🎉 Sempurna! ${score}/${total} (${pct}%) — Anda menguasai materi PPN!`;
+  } else if (pct >= 70) {
+    resultEl.textContent = `✅ Bagus! ${score}/${total} (${pct}%) — Pemahaman Anda sudah cukup baik.`;
+  } else if (pct >= 50) {
+    resultEl.textContent = `⚠️ Cukup: ${score}/${total} (${pct}%) — Perlu review beberapa bab lagi.`;
+  } else {
+    resultEl.textContent = `❌ Perlu belajar lagi: ${score}/${total} (${pct}%) — Baca ulang materi dari awal.`;
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<!-- skill:chrome -->
+<style>
+/* Credit line — bottom-right */
+.design-ui-credit {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  font: 11px/1 system-ui, sans-serif;
+  color: rgba(128,128,128,0.5);
+  pointer-events: none;
+  z-index: 2147483647;
+  transition: opacity 0.4s ease;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+/* Hide chrome on touch devices */
+@media (hover: none) {
+  .design-ui-credit { display: none; }
+}
+
+/* Print fixes */
+@media print {
+  * {
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+  }
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .design-ui-credit { display: none !important; }
+}
+
+</style>
+<script>
+(function () {
+    // Design-ui pages are single compositions, so the whole body is editable.
+    function markEditable() {
+        document.body.classList.add('artifact-editable');
+    }
+
+    // Credit badge with idle-fade. Hover devices only.
+    function initChromeUI() {
+        if (!matchMedia('(hover: hover)').matches) return;
+
+        var credit = document.createElement('div');
+        credit.className = 'design-ui-credit';
+        credit.setAttribute('aria-hidden', 'true');
+        credit.innerHTML = '\u{1F49C} by ClickUp Brain';
+        document.body.appendChild(credit);
+
+        var timer = null;
+        var fade = function (out) { credit.style.opacity = out ? '0' : ''; };
+        fade(true);
+        var show = function () {
+            fade(false);
+            clearTimeout(timer);
+            timer = setTimeout(function () { fade(true); }, 3000);
+        };
+        document.addEventListener('mousemove', show);
+        show();
+    }
+
+    function init() {
+        markEditable();
+        initChromeUI();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+
+</script>
+<!-- /skill:chrome -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Book 5: Pajak Bumi dan Bangunan (PBB)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+:root{--bg:oklch(0.99 0.004 30);--surface:oklch(0.97 0.009 30);--surface-alt:oklch(0.94 0.015 30);--border:oklch(0.88 0.02 30);--text:oklch(0.18 0.02 30);--text-muted:oklch(0.45 0.015 30);--accent:oklch(0.52 0.14 30);--accent-light:oklch(0.93 0.04 30);--accent-dark:oklch(0.38 0.11 30);--success:oklch(0.55 0.14 145);--error:oklch(0.55 0.17 25);--sidebar-w:280px;--header-h:60px}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:15px}
+.progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--accent),oklch(0.6 0.15 20));z-index:9999;transition:width .1s}
+.header{position:fixed;top:0;left:var(--sidebar-w);right:0;height:var(--header-h);background:oklch(0.99 0.004 30/.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 2rem;z-index:100;gap:1rem}
+.header-title{font-weight:700;font-size:1.05rem;color:var(--accent-dark)}.header-badge{background:var(--accent-light);color:var(--accent-dark);padding:.2rem .6rem;border-radius:99px;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.search-box{margin-left:auto;position:relative}.search-box input{padding:.45rem .9rem .45rem 2.2rem;border:1.5px solid var(--border);border-radius:9px;font-size:.83rem;font-family:inherit;width:220px;background:var(--surface);transition:all .2s}.search-box input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px oklch(0.52 0.14 30/.1);width:280px}.search-box::before{content:"🔍";position:absolute;left:.7rem;top:50%;transform:translateY(-50%);font-size:.8rem}
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;background:oklch(0.14 0.03 30);color:oklch(0.88 0.015 30);overflow-y:auto;z-index:200;padding:1.4rem 0;transition:transform .3s}
+.sidebar-brand{padding:0 1.4rem 1.3rem;border-bottom:1px solid oklch(0.26 0.03 30);margin-bottom:.8rem}.sidebar-brand h2{font-size:.95rem;font-weight:700;color:oklch(0.75 0.1 30)}.sidebar-brand p{font-size:.7rem;color:oklch(0.55 0.02 30)}
+.nav-section{padding:.4rem .9rem}.nav-section-title{font-size:.62rem;text-transform:uppercase;letter-spacing:1.2px;color:oklch(0.48 0.02 30);padding:.4rem .5rem;font-weight:600}
+.nav-item{display:flex;align-items:center;gap:.6rem;padding:.55rem .7rem;border-radius:7px;cursor:pointer;font-size:.78rem;transition:all .15s;color:oklch(0.72 0.015 30);text-decoration:none}.nav-item:hover{background:oklch(0.22 0.03 30);color:oklch(0.95 0.01 30)}.nav-item.active{background:oklch(0.52 0.14 30/.18);color:oklch(0.8 0.1 30);font-weight:600}
+.nav-item .num{width:20px;height:20px;border-radius:5px;background:oklch(0.26 0.03 30);display:flex;align-items:center;justify-content:center;font-size:.67rem;font-weight:700;flex-shrink:0}.nav-item.active .num{background:var(--accent);color:white}
+.main{margin-left:var(--sidebar-w);padding:calc(var(--header-h) + 2rem) 3rem 4rem;max-width:880px}
+.chapter{display:none;animation:fadeIn .35s ease}.chapter.active{display:block}@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.chapter-num{font-size:.72rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.4rem}.chapter-title{font-size:1.9rem;font-weight:800;color:var(--text);line-height:1.2;margin-bottom:.7rem}.chapter-desc{font-size:.95rem;color:var(--text-muted);line-height:1.6;margin-bottom:2rem}
+.section{margin-bottom:2rem}.section h3{font-size:1.15rem;font-weight:700;margin-bottom:.7rem;padding-bottom:.4rem;border-bottom:2px solid var(--accent-light)}.section p,.section li{margin-bottom:.8rem;font-size:.9rem}
+ul,ol{padding-left:1.4rem;margin:.6rem 0}li{margin-bottom:.35rem}
+.collapsible{border:1.5px solid var(--border);border-radius:11px;margin-bottom:.9rem;overflow:hidden;background:var(--surface)}.collapsible-header{padding:.9rem 1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-weight:600;font-size:.88rem;transition:background .2s}.collapsible-header:hover{background:var(--surface-alt)}.collapsible-header::after{content:"▶";font-size:.65rem;transition:transform .3s;color:var(--accent)}.collapsible.open .collapsible-header::after{transform:rotate(90deg)}.collapsible-body{max-height:0;overflow:hidden;transition:max-height .4s ease}.collapsible.open .collapsible-body{max-height:4000px}.collapsible-content{padding:0 1.1rem 1.1rem;font-size:.86rem;line-height:1.8}
+.info-box{padding:.9rem 1.1rem;border-radius:9px;margin:1rem 0;font-size:.86rem;line-height:1.7}.info-box.note{background:oklch(0.93 0.04 30/.5);border-left:4px solid var(--accent)}.info-box.warning{background:oklch(0.94 0.05 25/.4);border-left:4px solid var(--error)}
+.table-wrapper{overflow-x:auto;margin:1.1rem 0;border-radius:11px;border:1.5px solid var(--border)}table{width:100%;border-collapse:collapse;font-size:.82rem}thead{background:var(--accent);color:white}th{padding:.7rem .9rem;text-align:left;font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.4px}td{padding:.6rem .9rem;border-top:1px solid var(--border)}tbody tr:hover{background:var(--surface-alt)}
+.quiz-section{background:var(--surface);border:1.5px solid var(--border);border-radius:13px;padding:1.4rem;margin:2rem 0}.quiz-title{font-size:.95rem;font-weight:700;margin-bottom:1rem;color:var(--accent-dark)}.quiz-question{margin-bottom:1.3rem;padding-bottom:1.3rem;border-bottom:1px solid var(--border)}.quiz-question:last-of-type{border-bottom:none}.quiz-question p{font-weight:600;font-size:.88rem;margin-bottom:.5rem}.quiz-options label{display:flex;align-items:center;gap:.5rem;padding:.4rem .7rem;border-radius:7px;cursor:pointer;font-size:.83rem;transition:background .15s;margin-bottom:.2rem}.quiz-options label:hover{background:var(--surface-alt)}.quiz-options input[type="radio"]{accent-color:var(--accent)}
+.quiz-btn{background:var(--accent);color:white;border:none;padding:.6rem 1.3rem;border-radius:7px;font-family:inherit;font-weight:600;font-size:.83rem;cursor:pointer;transition:all .2s;margin-top:.8rem}.quiz-btn:hover{background:var(--accent-dark);transform:translateY(-1px)}.quiz-result{margin-top:.8rem;padding:.9rem;border-radius:7px;font-weight:600;font-size:.88rem;display:none}.quiz-result.show{display:block}.quiz-result.good{background:oklch(0.92 0.07 145/.5);color:oklch(0.33 0.11 145)}.quiz-result.bad{background:oklch(0.93 0.06 25/.4);color:oklch(0.35 0.14 25)}
+.glossary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.9rem;margin-top:.9rem}.glossary-card{background:var(--surface);border:1.5px solid var(--border);border-radius:9px;padding:.9rem 1rem;transition:all .2s}.glossary-card:hover{border-color:var(--accent);box-shadow:0 3px 12px oklch(0.52 0.14 30/.08)}.glossary-card dt{font-weight:700;font-size:.87rem;color:var(--accent-dark);margin-bottom:.2rem}.glossary-card dd{font-size:.8rem;color:var(--text-muted);line-height:1.5}
+.back-to-top{position:fixed;bottom:2rem;right:2rem;width:42px;height:42px;border-radius:50%;background:var(--accent);color:white;border:none;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px oklch(0.52 0.14 30/.25);opacity:0;transform:translateY(8px);transition:all .3s;z-index:50}.back-to-top.visible{opacity:1;transform:translateY(0)}.back-to-top:hover{background:var(--accent-dark)}
+.mobile-toggle{display:none;position:fixed;bottom:2rem;left:1rem;width:42px;height:42px;border-radius:50%;background:oklch(0.14 0.03 30);color:white;border:none;cursor:pointer;font-size:1.1rem;z-index:300;box-shadow:0 3px 12px rgba(0,0,0,.25)}
+@media(max-width:900px){:root{--sidebar-w:0px}.sidebar{transform:translateX(-280px);width:280px}.sidebar.open{transform:translateX(0)}.header{left:0;padding:0 1rem}.main{margin-left:0;padding:calc(var(--header-h)+1.3rem) 1.1rem 3rem}.mobile-toggle{display:flex;align-items:center;justify-content:center}.chapter-title{font-size:1.4rem}.search-box input{width:140px}.search-box input:focus{width:180px}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-brand"><h2>🏗️ E-Book PBB</h2><p>Pajak Bumi dan Bangunan (P5L)</p></div>
+<div class="nav-section">
+<div class="nav-section-title">Materi</div>
+<a class="nav-item active" data-chapter="0"><span class="num">1</span>Subjek & Objek Pajak</a>
+<a class="nav-item" data-chapter="1"><span class="num">2</span>Klasifikasi Sektor PBB</a>
+<a class="nav-item" data-chapter="2"><span class="num">3</span>Pendaftaran & Pelaporan</a>
+<a class="nav-item" data-chapter="3"><span class="num">4</span>Penilaian & NJOP</a>
+<a class="nav-item" data-chapter="4"><span class="num">5</span>Perhitungan PBB Terutang</a>
+<a class="nav-item" data-chapter="5"><span class="num">6</span>SPPT & SKP PBB</a>
+<a class="nav-item" data-chapter="6"><span class="num">7</span>STP PBB & Penagihan</a>
+<a class="nav-item" data-chapter="7"><span class="num">8</span>Upaya Hukum PBB</a>
+<a class="nav-item" data-chapter="8"><span class="num">9</span>Glossarium & Kuis</a>
+</div>
+</nav>
+<header class="header"><span class="header-title">Pajak Bumi dan Bangunan</span><span class="header-badge">UU 12/1985 jo. UU 12/1994</span><div class="search-box"><input type="text" id="searchInput" placeholder="Cari materi..."></div></header>
+<main class="main" id="mainContent">
+
+<!-- Ch1 -->
+<div class="chapter active" data-chapter="0">
+<div class="chapter-num">Bab 1</div><h1 class="chapter-title">Subjek & Objek Pajak PBB</h1><p class="chapter-desc">Dasar hukum, subjek pajak, dan pengertian objek PBB yang dikelola pemerintah pusat (PBB P5L).</p>
+<div class="section"><h3>Dasar Hukum</h3><p>PBB diatur dalam <strong>UU No. 12 Tahun 1985</strong> sebagaimana telah diubah dengan <strong>UU No. 12 Tahun 1994</strong>. Klasifikasi objek pajak diatur dalam PMK-186/PMK.03/2019 jo. PMK-234/PMK.03/2022.</p></div>
+<div class="section"><h3>Subjek Pajak PBB</h3><p>Subjek pajak PBB adalah orang atau badan yang secara nyata:</p><ol><li>Mempunyai suatu hak atas bumi</li><li>Memperoleh manfaat atas bumi</li><li>Memiliki, menguasai bangunan</li><li>Memperoleh manfaat atas bangunan</li></ol><div class="info-box note"><strong>💡 Penting:</strong> Tidak semua subjek pajak adalah wajib pajak. Subjek pajak menjadi wajib pajak hanya jika objek pajaknya memenuhi syarat dikenakan PBB. Contoh: perusahaan yang mengusahakan tanah untuk kuburan adalah subjek pajak tetapi bukan wajib pajak (kuburan tidak dikenai PBB).</div></div>
+<div class="section"><h3>Objek Pajak PBB</h3><p>Objek pajak PBB adalah <strong>bumi dan/atau bangunan</strong>.</p><ul><li><strong>Bumi:</strong> permukaan bumi dan tubuh bumi yang ada di bawahnya</li><li><strong>Bangunan:</strong> konstruksi teknik yang ditanam atau dilekatkan secara tetap pada tanah dan/atau perairan</li></ul></div>
+<div class="section"><h3>PBB P2 vs PBB P5L</h3><p>Sejak UU No. 28/2009 (UU PDRD) dan UU No. 1/2022 (UU HKPD):</p><div class="table-wrapper"><table><thead><tr><th>PBB P2 (Pemerintah Daerah)</th><th>PBB P5L (Pemerintah Pusat / DJP)</th></tr></thead><tbody><tr><td>Bumi/bangunan yang dimiliki, dikuasai, dimanfaatkan oleh orang pribadi/badan di luar kawasan usaha tertentu</td><td>Bumi/bangunan di kawasan: Perkebunan, Perhutanan, Pertambangan Migas, Pertambangan Panas Bumi, Pertambangan Minerba, dan Sektor Lainnya</td></tr></tbody></table></div></div>
+<div class="section"><h3>Objek yang Tidak Dikenakan PBB</h3>
+<div class="collapsible"><div class="collapsible-header">Daftar Objek Dikecualikan (Pasal 3 ayat 1)</div><div class="collapsible-body"><div class="collapsible-content"><ol><li>Objek untuk kepentingan umum di bidang ibadah, sosial, kesehatan, pendidikan, kebudayaan nasional (tidak untuk keuntungan)</li><li>Kuburan, peninggalan purbakala, atau sejenisnya</li><li>Hutan lindung, hutan suaka alam, hutan wisata, taman nasional, tanah penggembalaan desa, tanah negara belum dibebani hak</li><li>Perwakilan diplomatik/konsulat (asas timbal balik)</li><li>Badan/perwakilan organisasi internasional (ditetapkan Menkeu)</li></ol></div></div></div></div>
+</div>
+
+<!-- Ch2 -->
+<div class="chapter" data-chapter="1">
+<div class="chapter-num">Bab 2</div><h1 class="chapter-title">Klasifikasi Sektor PBB P5L</h1><p class="chapter-desc">Pengelompokan objek pajak berdasarkan 6 sektor kegiatan usaha.</p>
+<div class="section"><h3>6 Sektor Objek Pajak PBB P5L</h3>
+<div class="table-wrapper"><table><thead><tr><th>Sektor</th><th>Dasar Izin/Kontrak</th><th>Contoh Areal</th></tr></thead><tbody>
+<tr><td><strong>Perkebunan</strong></td><td>IUP-B, IUP, ITUBP, HGU</td><td>Areal produktif (sudah ditanami), belum produktif, tidak produktif, pengaman, emplasemen</td></tr>
+<tr><td><strong>Perhutanan</strong></td><td>IUPHHK-HA, IUPHHK-HTI, IUPHHK-RE, dll</td><td>Areal blok tebangan, belum ditanami, perlindungan & konservasi, emplasemen</td></tr>
+<tr><td><strong>Pertambangan Migas</strong></td><td>Kontrak Kerja Sama (KKS)</td><td>Permukaan bumi onshore, offshore, tubuh bumi (eksplorasi/eksploitasi)</td></tr>
+<tr><td><strong>Pertambangan Panas Bumi</strong></td><td>Izin/kuasa/penugasan panas bumi</td><td>Sama dengan migas: onshore, offshore, tubuh bumi</td></tr>
+<tr><td><strong>Pertambangan Minerba</strong></td><td>IUP, IUPK, IPR, Kontrak Karya, PKP2B</td><td>Belum dimanfaatkan, cadangan produksi, tidak produktif, pengaman, emplasemen</td></tr>
+<tr><td><strong>Sektor Lainnya</strong></td><td>SIUP Perikanan, Izin Perairan</td><td>Perikanan tangkap, pembudidayaan ikan, jaringan pipa/kabel, FSO/FPSO/FSRU (seluruhnya di perairan)</td></tr>
+</tbody></table></div></div>
+<div class="section"><h3>Kawasan yang Secara Fisik Tidak Terpisahkan</h3><p>Areal di <strong>luar</strong> izin/kontrak tetapi merupakan satu kesatuan untuk kegiatan usaha dan secara fisik tidak terpisahkan (bersinggungan atau terhubung melalui sungai, parit, jalan, jembatan, pipa) juga termasuk objek PBB sektor terkait.</p><div class="info-box note"><strong>💡 Contoh:</strong> Mess karyawan di luar areal IUP perkebunan tetapi terhubung melalui jalan/jembatan ke areal IUP → termasuk objek PBB sektor perkebunan.</div></div>
+</div>
+
+<!-- Ch3 -->
+<div class="chapter" data-chapter="2">
+<div class="chapter-num">Bab 3</div><h1 class="chapter-title">Pendaftaran, Pelaporan & Pendataan</h1><p class="chapter-desc">Proses administrasi PBB P5L dari pendaftaran hingga pendataan oleh DJP.</p>
+<div class="section"><h3>Pendaftaran Objek Pajak</h3><p>Wajib pajak wajib mendaftarkan objek pajak <strong>paling lama 1 bulan</strong> setelah saat terpenuhinya persyaratan subjektif (tanggal terbitnya izin/kontrak). KPP menerbitkan <strong>SKT PBB</strong> (Surat Keterangan Terdaftar) paling lama 10 hari kerja.</p><p>Jika WP tidak mendaftar setelah 30 hari, KPP mendaftarkan <strong>secara jabatan</strong>.</p></div>
+<div class="section"><h3>Pelaporan dengan SPOP</h3><p>Setelah terdaftar, WP wajib melaporkan objek pajak setiap tahun melalui <strong>e-SPOP</strong> (elektronik). DJP menyampaikan e-SPOP pada:</p>
+<div class="table-wrapper"><table><thead><tr><th>Sektor</th><th>Tanggal DJP Kirim e-SPOP</th></tr></thead><tbody>
+<tr><td>Perkebunan, Migas, Panas Bumi</td><td><strong>1 Februari</strong> tahun pajak</td></tr>
+<tr><td>Perhutanan, Minerba, Lainnya</td><td><strong>31 Maret</strong> tahun pajak</td></tr>
+<tr><td>Objek pajak baru (setelah tanggal di atas)</td><td>Tanggal terdaftar (SKT PBB)</td></tr>
+</tbody></table></div>
+<p>WP wajib menyampaikan e-SPOP <strong>paling lama 30 hari</strong> setelah diterima. Dapat ditunda +7 hari dengan surat pemberitahuan. Pembetulan: paling lama 15 hari setelah jangka waktu 30 hari berakhir.</p></div>
+<div class="section"><h3>Pendataan</h3><p>DJP melakukan pendataan untuk memperoleh/melengkapi data objek pajak:</p><ul><li><strong>Pendataan Kantor:</strong> mengolah data SPOP dan sistem informasi DJP (pengumpulan data + digitasi peta)</li><li><strong>Pendataan Lapangan:</strong> peninjauan lokasi fisik objek pajak (pengukuran satelit, penginderaan jauh, alat ukur manual)</li></ul></div>
+</div>
+
+<!-- Ch4 -->
+<div class="chapter" data-chapter="3">
+<div class="chapter-num">Bab 4</div><h1 class="chapter-title">Penilaian & Penetapan NJOP</h1><p class="chapter-desc">Cara DJP menentukan Nilai Jual Objek Pajak sebagai dasar pengenaan PBB.</p>
+<div class="section"><h3>Penetapan NJOP</h3><p>NJOP ditetapkan pada keadaan <strong>1 Januari tahun pajak</strong>. Dua cara penetapan:</p><ol><li><strong>Pendekatan Penilaian</strong> (oleh tim Penilai DJP)<ul><li>Perbandingan harga dengan objek lain sejenis</li><li>Nilai jual pengganti (berdasarkan hasil produksi)</li><li>Nilai perolehan baru (biaya perolehan dikurangi penyusutan)</li></ul></li><li><strong>Keputusan Direktur Jenderal Pajak</strong> (nilai tertentu per m² yang sudah ditetapkan, digunakan untuk areal tidak produktif, perlindungan/konservasi, offshore, tubuh bumi tanpa produksi)</li></ol></div>
+<div class="section"><h3>Penilaian Kantor vs Lapangan</h3>
+<div class="table-wrapper"><table><thead><tr><th>Penilaian Kantor</th><th>Penilaian Lapangan</th></tr></thead><tbody>
+<tr><td>Menganalisis data SPOP</td><td>Mengidentifikasi, mengumpulkan, menganalisis data di lokasi</td></tr>
+<tr><td>Dalam rangka penerbitan SPPT</td><td>Pengawasan, pemeriksaan, keberatan, pengurangan, penyidikan</td></tr>
+<tr><td>Dasar: data SPOP WP</td><td>Kriteria: ≥2 tahun tidak dinilai, potensi kenaikan signifikan, indikasi penambahan luas</td></tr>
+</tbody></table></div></div>
+</div>
+
+<!-- Ch5 -->
+<div class="chapter" data-chapter="4">
+<div class="chapter-num">Bab 5</div><h1 class="chapter-title">Perhitungan PBB Terutang</h1><p class="chapter-desc">Rumus dan contoh perhitungan PBB yang harus dibayar wajib pajak.</p>
+<div class="section"><h3>Rumus PBB Terutang</h3><div class="info-box note"><strong>Rumus Lengkap:</strong><br>NJOP = NJOP Bumi + NJOP Bangunan<br>NJKP = (NJOP - NJOPTKP) × %NJKP<br><strong>PBB Terutang = 0,5% × NJKP</strong></div>
+<div class="table-wrapper"><table><thead><tr><th>Komponen</th><th>Ketentuan</th></tr></thead><tbody>
+<tr><td>NJOPTKP</td><td><strong>Rp12.000.000</strong> (hanya dikurangkan 1× untuk 1 objek pajak per WP)</td></tr>
+<tr><td>%NJKP (NJOP ≥ Rp1 M)</td><td><strong>40%</strong> (perkebunan, perhutanan, pertambangan, sektor lainnya)</td></tr>
+<tr><td>%NJKP (NJOP < Rp1 M)</td><td><strong>20%</strong> (sektor lainnya saja)</td></tr>
+<tr><td>Tarif PBB</td><td><strong>0,5%</strong></td></tr>
+</tbody></table></div></div>
+<div class="section"><h3>Contoh Perhitungan</h3>
+<div class="collapsible open"><div class="collapsible-header">Kasus: PT Minigas (Sektor Migas)</div><div class="collapsible-body"><div class="collapsible-content">
+<p><strong>Data Onshore:</strong> Bumi 100.000 m² × Rp15.000.000/m² = Rp1.500 T; Bangunan 20.000 m² × Rp22.000.000/m² = Rp440 T</p>
+<p>NJOP = Rp1.940.000.000.000<br>NJOP - NJOPTKP = Rp1.939.988.000.000<br>NJKP (40%) = Rp775.995.200.000<br><strong>PBB Terutang Onshore = 0,5% × Rp775.995.200.000 = Rp3.879.976.000</strong></p>
+<p><strong>Data Tubuh Bumi (eksplorasi, belum produksi):</strong> 500.000 m² × Rp140/m² (Kep Dirjen) = Rp70.000.000<br>NJKP (40%) = Rp28.000.000<br><strong>PBB Terutang Tubuh Bumi = 0,5% × Rp28.000.000 = Rp140.000</strong></p>
+</div></div></div></div>
+<div class="section"><h3>Tahun Pajak & Saat Terutang</h3><p>Tahun pajak PBB = tahun takwim (1 Januari s.d. 31 Desember). Saat terutang ditentukan menurut <strong>keadaan objek pajak pada tanggal 1 Januari</strong>.</p><div class="info-box note"><strong>💡 Contoh:</strong> Bangunan baru dibangun Februari 2024 → baru terutang PBB bangunan mulai tahun pajak 2025 (per keadaan 1 Januari 2025).</div></div>
+</div>
+
+<!-- Ch6 -->
+<div class="chapter" data-chapter="5">
+<div class="chapter-num">Bab 6</div><h1 class="chapter-title">SPPT & SKP PBB</h1><p class="chapter-desc">Surat penetapan pajak yang diterbitkan DJP kepada wajib pajak PBB.</p>
+<div class="section"><h3>SPPT (Surat Pemberitahuan Pajak Terutang)</h3><ul><li>Diterbitkan berdasarkan data SPOP + hasil penilaian</li><li>Jatuh tempo pembayaran: <strong>6 bulan sejak tanggal diterima</strong> WP</li><li>Diterbitkan paling lama 5 tahun setelah berakhirnya tahun pajak</li><li>Untuk objek pajak baru: 30 hari setelah SPOP diterima KPP</li></ul></div>
+<div class="section"><h3>SKP PBB (Surat Ketetapan Pajak)</h3><p>Diterbitkan setelah <strong>pemeriksaan PBB atau pemeriksaan ulang</strong> dalam kondisi:</p><ol><li>WP tidak menyampaikan SPOP meski sudah ditegur tertulis</li><li>Berdasarkan data/bukti, PBB terutang lebih besar dari SPOP</li><li>Pemeriksaan ulang (data baru yang belum terungkap)</li></ol>
+<p><strong>Jumlah yang harus dibayar = Pokok/Selisih Pokok + Denda 25%</strong></p><p>Jatuh tempo: <strong>1 bulan sejak diterima</strong> WP.</p>
+<div class="collapsible"><div class="collapsible-header">Contoh SKP PBB</div><div class="collapsible-body"><div class="collapsible-content"><p>WP A tidak menyampaikan SPOP, ditegur, tetap tidak lapor. DJP periksa:</p><p>Pokok PBB = Rp5.000.000<br>Denda 25% = Rp1.250.000<br><strong>SKP PBB = Rp6.250.000</strong></p></div></div></div></div>
+</div>
+
+<!-- Ch7 -->
+<div class="chapter" data-chapter="6">
+<div class="chapter-num">Bab 7</div><h1 class="chapter-title">STP PBB & Penagihan</h1><p class="chapter-desc">Surat tagihan pajak untuk menagih PBB yang sudah jatuh tempo.</p>
+<div class="section"><h3>STP PBB</h3><p>Diterbitkan jika SPPT atau SKP PBB <strong>telah jatuh tempo dan tidak/kurang dibayar</strong>.</p><p><strong>Denda = 2% per bulan × pokok PBB</strong> (maksimal 24 bulan, bagian bulan dihitung penuh 1 bulan).</p><p>Jatuh tempo STP PBB: <strong>1 bulan sejak diterima</strong>. Jika tidak dibayar → dapat ditagih dengan <strong>surat paksa</strong>.</p></div>
+<div class="section"><h3>Dua Macam STP PBB</h3>
+<div class="table-wrapper"><table><thead><tr><th>Jenis</th><th>Isi</th><th>Kapan Diterbitkan</th></tr></thead><tbody>
+<tr><td>STP Pokok + Denda</td><td>Pokok PBB yang belum dibayar + denda 2%/bulan</td><td>Setelah jatuh tempo SPPT/SKP PBB</td></tr>
+<tr><td>STP Denda Saja</td><td>Hanya denda 2%/bulan (pokok sudah dibayar terlambat)</td><td>Setelah WP bayar pokok terlambat, atau setelah 24 bulan STP pokok+denda belum lunas</td></tr>
+</tbody></table></div></div>
+<div class="section"><h3>Contoh STP PBB</h3>
+<div class="collapsible"><div class="collapsible-header">Kasus STP Pokok + Denda</div><div class="collapsible-body"><div class="collapsible-content"><p>SPPT diterima 1 Maret 2022, PBB terutang Rp10.000.000. Jatuh tempo 31 Agustus 2022. WP belum bayar. STP diterbitkan 5 September 2022.</p><p>Denda = 2% × 1 bulan × Rp10.000.000 = Rp200.000<br><strong>STP PBB = Rp10.000.000 + Rp200.000 = Rp10.200.000</strong></p></div></div></div></div>
+</div>
+
+<!-- Ch8 -->
+<div class="chapter" data-chapter="7">
+<div class="chapter-num">Bab 8</div><h1 class="chapter-title">Upaya Hukum PBB</h1><p class="chapter-desc">Keberatan, pengurangan, banding, gugatan, dan peninjauan kembali.</p>
+<div class="section"><h3>Keberatan PBB</h3><p>Diajukan atas <strong>SPPT atau SKP PBB</strong> dalam jangka waktu <strong>3 bulan</strong> sejak diterima. Keputusan DJP diterbitkan paling lama 12 bulan. Keberatan PBB <strong>tidak menunda kewajiban membayar PBB</strong> (berbeda dengan pajak lainnya).</p></div>
+<div class="section"><h3>Pengurangan PBB</h3>
+<div class="table-wrapper"><table><thead><tr><th>Alasan</th><th>Maksimal Pengurangan</th><th>Jangka Waktu Ajukan</th></tr></thead><tbody>
+<tr><td>Kondisi tertentu (rugi/kesulitan likuiditas)</td><td>Maks <strong>75%</strong> dari PBB terutang</td><td>3 bulan (SPPT), 1 bulan (SKP/STP)</td></tr>
+<tr><td>Bencana alam / sebab luar biasa</td><td>Maks <strong>100%</strong> dari PBB terutang</td><td>6 bulan sejak bencana</td></tr>
+</tbody></table></div>
+<p>Keputusan Kanwil DJP atas nama Menkeu, paling lama 4 bulan.</p></div>
+<div class="section"><h3>Upaya Hukum Lanjutan</h3>
+<div class="table-wrapper"><table><thead><tr><th>Upaya</th><th>Objek</th><th>Diajukan Ke</th><th>Jangka Waktu</th></tr></thead><tbody>
+<tr><td><strong>Banding</strong></td><td>SK Keberatan PBB</td><td>Pengadilan Pajak</td><td>3 bulan sejak SK Keberatan diterima</td></tr>
+<tr><td><strong>Gugatan</strong></td><td>Pelaksanaan surat paksa, SPMP, pengumuman lelang, keputusan perpajakan lain</td><td>Pengadilan Pajak</td><td>14 hari (penagihan) / 30 hari (lainnya)</td></tr>
+<tr><td><strong>Peninjauan Kembali</strong></td><td>Putusan Banding/Gugatan</td><td>Mahkamah Agung</td><td>3 bulan sejak alasan PK diketahui</td></tr>
+</tbody></table></div></div>
+</div>
+
+<!-- Ch9 -->
+<div class="chapter" data-chapter="8">
+<div class="chapter-num">Bab 9</div><h1 class="chapter-title">Glossarium & Kuis Akhir</h1><p class="chapter-desc">Istilah penting dan uji pemahaman materi PBB P5L.</p>
+<div class="section"><h3>Glossarium</h3>
+<div class="glossary-grid">
+<div class="glossary-card"><dt>PBB P5L</dt><dd>PBB sektor Perkebunan, Perhutanan, Pertambangan (Migas, Pabum, Minerba), dan Lainnya</dd></div>
+<div class="glossary-card"><dt>NJOP</dt><dd>Nilai Jual Objek Pajak: dasar pengenaan PBB yang ditetapkan melalui penilaian</dd></div>
+<div class="glossary-card"><dt>NJOPTKP</dt><dd>Nilai Jual Objek Pajak Tidak Kena Pajak: Rp12.000.000 per objek pajak</dd></div>
+<div class="glossary-card"><dt>NJKP</dt><dd>Nilai Jual Kena Pajak: (NJOP - NJOPTKP) × persentase (20% atau 40%)</dd></div>
+<div class="glossary-card"><dt>SPOP</dt><dd>Surat Pemberitahuan Objek Pajak: formulir pelaporan data objek pajak oleh WP</dd></div>
+<div class="glossary-card"><dt>SPPT</dt><dd>Surat Pemberitahuan Pajak Terutang: surat tagihan PBB dari DJP ke WP</dd></div>
+<div class="glossary-card"><dt>SKP PBB</dt><dd>Surat Ketetapan Pajak PBB: diterbitkan setelah pemeriksaan (pokok + denda 25%)</dd></div>
+<div class="glossary-card"><dt>STP PBB</dt><dd>Surat Tagihan Pajak PBB: menagih SPPT/SKP yang jatuh tempo (denda 2%/bulan)</dd></div>
+<div class="glossary-card"><dt>SKT PBB</dt><dd>Surat Keterangan Terdaftar: bukti objek pajak terdaftar di sistem DJP</dd></div>
+<div class="glossary-card"><dt>NOP</dt><dd>Nomor Objek Pajak: identitas unik objek pajak PBB dalam administrasi DJP</dd></div>
+<div class="glossary-card"><dt>KKS</dt><dd>Kontrak Kerja Sama: kontrak bagi hasil pertambangan migas antara pemerintah dan kontraktor</dd></div>
+<div class="glossary-card"><dt>Tubuh Bumi</dt><dd>Bagian bumi di bawah permukaan, termasuk kandungan mineral/migas</dd></div>
+</div></div>
+<div class="section"><h3>Kuis Pemahaman PBB</h3>
+<div class="quiz-section"><div class="quiz-title">📝 10 Soal PBB P5L</div>
+<div class="quiz-question"><p>1. Tarif PBB adalah...</p><div class="quiz-options"><label><input type="radio" name="q1" value="a"> 0,1%</label><label><input type="radio" name="q1" value="b"> 0,5%</label><label><input type="radio" name="q1" value="c"> 1%</label><label><input type="radio" name="q1" value="d"> 2%</label></div></div>
+<div class="quiz-question"><p>2. NJOPTKP untuk PBB P5L adalah...</p><div class="quiz-options"><label><input type="radio" name="q2" value="a"> Rp8.000.000</label><label><input type="radio" name="q2" value="b"> Rp10.000.000</label><label><input type="radio" name="q2" value="c"> Rp12.000.000</label><label><input type="radio" name="q2" value="d"> Rp15.000.000</label></div></div>
+<div class="quiz-question"><p>3. Persentase NJKP untuk objek pajak PBB sektor perkebunan adalah...</p><div class="quiz-options"><label><input type="radio" name="q3" value="a"> 20%</label><label><input type="radio" name="q3" value="b"> 30%</label><label><input type="radio" name="q3" value="c"> 40%</label><label><input type="radio" name="q3" value="d"> 50%</label></div></div>
+<div class="quiz-question"><p>4. Saat yang menentukan PBB terutang adalah keadaan objek pajak pada tanggal...</p><div class="quiz-options"><label><input type="radio" name="q4" value="a"> 1 Januari</label><label><input type="radio" name="q4" value="b"> 31 Maret</label><label><input type="radio" name="q4" value="c"> 1 Juli</label><label><input type="radio" name="q4" value="d"> 31 Desember</label></div></div>
+<div class="quiz-question"><p>5. Jatuh tempo pembayaran SPPT adalah...</p><div class="quiz-options"><label><input type="radio" name="q5" value="a"> 1 bulan sejak diterima</label><label><input type="radio" name="q5" value="b"> 3 bulan sejak diterima</label><label><input type="radio" name="q5" value="c"> 6 bulan sejak diterima</label><label><input type="radio" name="q5" value="d"> 12 bulan sejak diterima</label></div></div>
+<div class="quiz-question"><p>6. Denda administratif dalam SKP PBB adalah...</p><div class="quiz-options"><label><input type="radio" name="q6" value="a"> 2% per bulan</label><label><input type="radio" name="q6" value="b"> 25% dari pokok</label><label><input type="radio" name="q6" value="c"> 50% dari pokok</label><label><input type="radio" name="q6" value="d"> 100% dari pokok</label></div></div>
+<div class="quiz-question"><p>7. Denda administratif dalam STP PBB adalah...</p><div class="quiz-options"><label><input type="radio" name="q7" value="a"> 2% per bulan (maks 24 bulan)</label><label><input type="radio" name="q7" value="b"> 25% dari pokok</label><label><input type="radio" name="q7" value="c"> 1% per bulan</label><label><input type="radio" name="q7" value="d"> 48% dari pokok</label></div></div>
+<div class="quiz-question"><p>8. Batas waktu pengajuan keberatan PBB sejak diterima SPPT/SKP adalah...</p><div class="quiz-options"><label><input type="radio" name="q8" value="a"> 1 bulan</label><label><input type="radio" name="q8" value="b"> 3 bulan</label><label><input type="radio" name="q8" value="c"> 6 bulan</label><label><input type="radio" name="q8" value="d"> 12 bulan</label></div></div>
+<div class="quiz-question"><p>9. Pengurangan PBB karena bencana alam dapat diberikan paling tinggi...</p><div class="quiz-options"><label><input type="radio" name="q9" value="a"> 50%</label><label><input type="radio" name="q9" value="b"> 75%</label><label><input type="radio" name="q9" value="c"> 100%</label><label><input type="radio" name="q9" value="d"> Tidak ada batasan</label></div></div>
+<div class="quiz-question"><p>10. WP wajib menyampaikan e-SPOP paling lama berapa hari setelah diterima?</p><div class="quiz-options"><label><input type="radio" name="q10" value="a"> 14 hari</label><label><input type="radio" name="q10" value="b"> 30 hari</label><label><input type="radio" name="q10" value="c"> 60 hari</label><label><input type="radio" name="q10" value="d"> 90 hari</label></div></div>
+<button class="quiz-btn" onclick="checkQuiz()">Periksa Jawaban</button>
+<div class="quiz-result" id="quizResult"></div>
+</div></div>
+</div>
+
+</main>
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button class="mobile-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+<script>
+const navItems=document.querySelectorAll('.nav-item'),chapters=document.querySelectorAll('.chapter');
+navItems.forEach(item=>{item.addEventListener('click',()=>{const idx=item.dataset.chapter;navItems.forEach(n=>n.classList.remove('active'));chapters.forEach(c=>c.classList.remove('active'));item.classList.add('active');chapters[idx].classList.add('active');window.scrollTo({top:0,behavior:'smooth'});document.getElementById('sidebar').classList.remove('open')})});
+document.querySelectorAll('.collapsible-header').forEach(h=>{h.addEventListener('click',()=>{h.parentElement.classList.toggle('open')})});
+window.addEventListener('scroll',()=>{const s=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight,p=d>0?(s/d)*100:0;document.getElementById('progressBar').style.width=p+'%';const b=document.getElementById('backToTop');s>300?b.classList.add('visible'):b.classList.remove('visible')});
+document.getElementById('searchInput').addEventListener('input',function(){const q=this.value.toLowerCase().trim();navItems.forEach(n=>{n.style.display=n.textContent.toLowerCase().includes(q)||!q?'flex':'none'})});
+function checkQuiz(){const ans={q1:'b',q2:'c',q3:'c',q4:'a',q5:'c',q6:'b',q7:'a',q8:'b',q9:'c',q10:'b'};let score=0;for(const[q,c]of Object.entries(ans)){const s=document.querySelector(`input[name="${q}"]:checked`);if(s&&s.value===c)score++}const r=document.getElementById('quizResult'),pct=Math.round(score/10*100);r.className='quiz-result show '+(pct>=70?'good':'bad');r.textContent=pct===100?`🎉 Sempurna! ${score}/10 — Anda menguasai PBB P5L!`:pct>=70?`✅ Bagus! ${score}/10 (${pct}%) — Pemahaman solid.`:pct>=50?`⚠️ Cukup: ${score}/10 (${pct}%) — Review lagi beberapa bab.`:`❌ Perlu belajar lagi: ${score}/10 (${pct}%)`}
+</script>
+</body>
+</html>
