@@ -1,0 +1,563 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<!-- skill:chrome -->
+<style>
+/* Credit line — bottom-right */
+.design-ui-credit {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  font: 11px/1 system-ui, sans-serif;
+  color: rgba(128,128,128,0.5);
+  pointer-events: none;
+  z-index: 2147483647;
+  transition: opacity 0.4s ease;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+/* Hide chrome on touch devices */
+@media (hover: none) {
+  .design-ui-credit { display: none; }
+}
+
+/* Print fixes */
+@media print {
+  * {
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+  }
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .design-ui-credit { display: none !important; }
+}
+
+</style>
+<script>
+(function () {
+    // Design-ui pages are single compositions, so the whole body is editable.
+    function markEditable() {
+        document.body.classList.add('artifact-editable');
+    }
+
+    // Credit badge with idle-fade. Hover devices only.
+    function initChromeUI() {
+        if (!matchMedia('(hover: hover)').matches) return;
+
+        var credit = document.createElement('div');
+        credit.className = 'design-ui-credit';
+        credit.setAttribute('aria-hidden', 'true');
+        credit.innerHTML = '\u{1F49C} by ClickUp Brain';
+        document.body.appendChild(credit);
+
+        var timer = null;
+        var fade = function (out) { credit.style.opacity = out ? '0' : ''; };
+        fade(true);
+        var show = function () {
+            fade(false);
+            clearTimeout(timer);
+            timer = setTimeout(function () { fade(true); }, 3000);
+        };
+        document.addEventListener('mousemove', show);
+        show();
+    }
+
+    function init() {
+        markEditable();
+        initChromeUI();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+
+</script>
+<!-- /skill:chrome -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pemotongan dan Pemungutan Pajak Penghasilan 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:oklch(97.8% 0.006 20);
+  --surface:oklch(99.1% 0.004 20);
+  --surface-soft:oklch(96.2% 0.014 20);
+  --text:oklch(22% 0.018 12);
+  --muted:oklch(50% 0.014 18);
+  --line:oklch(89% 0.01 18);
+  --brand:oklch(53% 0.22 18);
+  --brand-deep:oklch(42% 0.18 18);
+  --brand-soft:oklch(92% 0.035 18);
+  --gold:oklch(78% 0.14 85);
+  --shadow:0 18px 50px rgba(96,20,39,.08);
+  --radius:18px;
+  --radius-sm:12px;
+  --sidebar:320px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text)}
+.app{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;overflow:auto;padding:20px 18px 28px;border-right:1px solid var(--line);background:linear-gradient(180deg,oklch(98.5% 0.01 18),oklch(96.8% 0.012 18))}
+.brand-card{padding:18px 18px 16px;border:1px solid var(--line);border-radius:22px;background:radial-gradient(circle at top right, oklch(93% 0.05 18), transparent 35%), var(--surface);box-shadow:var(--shadow);margin-bottom:18px}
+.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-deep);font-weight:800;margin-bottom:8px}
+.brand-card h1{font-size:22px;line-height:1.15;margin:0 0 10px;font-weight:800;max-width:12ch}
+.brand-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
+.search{position:relative;margin-bottom:16px}
+.search input{width:100%;padding:13px 14px 13px 42px;border-radius:14px;border:1px solid var(--line);background:var(--surface);font:inherit;color:var(--text);outline:none}
+.search input:focus{border-color:var(--brand)}
+.search svg{position:absolute;left:14px;top:12px;width:17px;height:17px;stroke:var(--muted)}
+.nav-group{margin:18px 0 10px}
+.nav-title{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-deep);margin:0 0 8px 6px}
+.nav-list{display:grid;gap:6px}
+.nav-link{display:block;text-decoration:none;color:var(--muted);padding:10px 12px;border-radius:12px;font-size:13px;line-height:1.35;transition:.18s ease background,.18s ease color,.18s ease transform}
+.nav-link:hover,.nav-link.active{background:var(--brand-soft);color:var(--brand-deep);transform:translateX(2px)}
+.content{padding:34px clamp(18px,4vw,54px) 80px}
+.hero{padding:28px clamp(18px,3vw,28px) 30px;border:1px solid var(--line);border-radius:28px;background:
+radial-gradient(circle at 86% 18%, oklch(92% 0.05 18), transparent 18%),
+radial-gradient(circle at 10% 88%, oklch(95% 0.035 30), transparent 16%),
+var(--surface);box-shadow:var(--shadow);margin-bottom:24px}
+.hero .eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h2{margin:0;font-size:clamp(30px,4vw,48px);line-height:1.04;max-width:13ch}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:end;margin-top:18px}
+.hero p{font-size:15px;line-height:1.75;color:var(--muted);max-width:64ch;margin:0}
+.hero-meta{display:grid;gap:10px;justify-items:start}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:var(--surface-soft);font-size:13px;font-weight:700;color:var(--brand-deep);border:1px solid var(--line)}
+.sections{display:grid;gap:18px}
+.section{border:1px solid var(--line);border-radius:24px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+.section-head{padding:18px 20px;background:linear-gradient(180deg,oklch(98.2% 0.01 18),oklch(95.8% 0.015 18));border-bottom:1px solid var(--line)}
+.section-head h3{margin:0;font-size:22px;line-height:1.2}
+.section-head p{margin:8px 0 0;color:var(--muted);font-size:14px}
+.section-body{padding:22px 20px 26px}
+.prose{max-width:74ch}
+.prose h4{font-size:18px;line-height:1.3;margin:24px 0 10px;color:var(--brand-deep)}
+.prose p{margin:10px 0;font-size:15px;line-height:1.8}
+.prose ul,.prose ol{margin:10px 0 14px 20px;padding:0}
+.prose li{margin:7px 0;line-height:1.75}
+.note{margin:18px 0;padding:14px 16px;border-radius:16px;background:var(--brand-soft);font-size:14px;line-height:1.7}
+.note strong{color:var(--brand-deep)}
+.ref{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line)}
+.ref h5{margin:0 0 10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-deep)}
+.table-wrap{overflow:auto;margin:16px 0;border:1px solid var(--line);border-radius:16px}
+table{width:100%;border-collapse:collapse;background:var(--surface)}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);font-size:13px;text-align:left;vertical-align:top}
+th{background:oklch(95% 0.02 18);color:var(--brand-deep);font-weight:800}
+tr:last-child td{border-bottom:none}
+.chapter-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px}
+.chapter-link{padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:var(--surface-soft);text-decoration:none;color:var(--text)}
+.chapter-link strong{display:block;font-size:14px;margin-bottom:4px;color:var(--brand-deep)}
+.chapter-link span{font-size:12px;color:var(--muted)}
+.mobile-top{display:none;position:sticky;top:0;z-index:20;padding:12px 14px;background:rgba(250,247,246,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.mobile-top button{border:none;background:var(--surface);padding:10px 12px;border-radius:12px;font:inherit;font-weight:700;color:var(--brand-deep);box-shadow:var(--shadow)}
+.overlay{display:none}
+@media (max-width: 980px){
+  .app{grid-template-columns:1fr}
+  .sidebar{position:fixed;left:0;top:0;bottom:0;z-index:30;width:min(88vw,360px);transform:translateX(-102%);transition:transform .22s ease}
+  .sidebar.open{transform:translateX(0)}
+  .mobile-top{display:flex;justify-content:space-between;align-items:center}
+  .content{padding-top:22px}
+  .hero-grid{grid-template-columns:1fr}
+  .overlay.show{display:block;position:fixed;inset:0;background:rgba(23,16,19,.34);z-index:25}
+}
+</style>
+</head>
+<body>
+<div class="mobile-top">
+  <button onclick="toggleNav()">menu</button>
+  <div style="font-size:12px;font-weight:800;color:var(--brand-deep)">Potput PPh 2025</div>
+</div>
+<div class="overlay" id="overlay" onclick="toggleNav()"></div>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand-card">
+      <div class="kicker">bahan ajar interaktif</div>
+      <h1>Pemotongan dan Pemungutan Pajak Penghasilan</h1>
+      <p>Versi web interaktif dari seluruh isi buku: pengantar, PPh 21, 22, 23, 26, dan PPh 15.</p>
+    </div>
+    <div class="search">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5" stroke-linecap="round"></path></svg>
+      <input id="searchInput" type="text" placeholder="Cari bab atau topik" oninput="filterNav()" />
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-title">Ringkasan Buku</div>
+      <div class="nav-list">
+        <a class="nav-link" href="#overview">Ikhtisar</a>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-title">Bahan Ajar 1</div>
+      <div class="nav-list">
+        <a class="nav-link" href="#ba1">Pengertian Potput PPh</a>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-title">Bahan Ajar 2</div>
+      <div class="nav-list">
+        <a class="nav-link" href="#pph21">PPh Pasal 21</a>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-title">Bahan Ajar 3</div>
+      <div class="nav-list">
+        <a class="nav-link" href="#pph22">PPh Pasal 22</a>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-title">Bahan Ajar 4</div>
+      <div class="nav-list">
+        <a class="nav-link" href="#pph23">PPh Pasal 23</a>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-title">Bahan Ajar 5</div>
+      <div class="nav-list">
+        <a class="nav-link" href="#pph26">PPh Pasal 26</a>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-title">Bahan Ajar 7</div>
+      <div class="nav-list">
+        <a class="nav-link" href="#pph15">PPh Pasal 15</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <section class="hero" id="overview">
+      <div class="eyebrow">pusdiklat pajak 2025</div>
+      <h2>Panduan lengkap potput PPh, sekarang jauh lebih enak dibaca.</h2>
+      <div class="hero-grid">
+        <p>Buku ini merangkum mekanisme <strong>withholding tax</strong> di Indonesia, mulai dari konsep dasarnya sampai praktik pemotongan PPh Pasal 21, 22, 23, 26, dan PPh Pasal 15. Versi ini disusun ulang jadi web interaktif biar navigasinya cepat, materinya kebaca utuh, dan contoh-contohnya gampang dicari.</p>
+        <div class="hero-meta">
+          <div class="pill">6 kelompok materi utama</div>
+          <div class="pill">full isi buku, bukan ringkasan</div>
+          <div class="pill">siap dibuka di desktop dan HP</div>
+        </div>
+      </div>
+      <div class="chapter-links">
+        <a class="chapter-link" href="#ba1"><strong>Bahan Ajar 1</strong><span>Konsep dasar pemotongan dan pemungutan</span></a>
+        <a class="chapter-link" href="#pph21"><strong>Bahan Ajar 2</strong><span>PPh Pasal 21 dan contoh hitung</span></a>
+        <a class="chapter-link" href="#pph22"><strong>Bahan Ajar 3</strong><span>PPh Pasal 22</span></a>
+        <a class="chapter-link" href="#pph23"><strong>Bahan Ajar 4</strong><span>PPh Pasal 23</span></a>
+        <a class="chapter-link" href="#pph26"><strong>Bahan Ajar 5</strong><span>PPh Pasal 26</span></a>
+        <a class="chapter-link" href="#pph15"><strong>Bahan Ajar 7</strong><span>PPh Pasal 15</span></a>
+      </div>
+    </section>
+
+    <div class="sections">
+      <section class="section" id="ba1">
+        <div class="section-head">
+          <h3>Bahan Ajar 1: Pengertian Pemotongan dan Pemungutan Pajak Penghasilan</h3>
+          <p>Fondasi sistem withholding: subjek, objek, ruang lingkup, dan saat terutang.</p>
+        </div>
+        <div class="section-body prose">
+          <h4>A. Sistem Pemungutan Pajak di Indonesia</h4>
+          <p>Sistem pemungutan pajak di Indonesia secara umum terdiri dari tiga model. <strong>Self assessment system</strong> berarti Wajib Pajak menghitung, menyetor, dan melapor sendiri pajaknya. <strong>Official assessment system</strong> berarti pajak ditetapkan oleh fiskus. <strong>Withholding system</strong> berarti pajak dihitung, dipotong, dipungut, disetor, dan dilaporkan oleh pihak lain.</p>
+          <ul>
+            <li>Self assessment: contoh PPh Pasal 25/29.</li>
+            <li>Official assessment: contoh PBB dan Bea Meterai.</li>
+            <li>Withholding system: contoh PPh Pasal 21, 22, 23/26, 15, dan PPh Pasal 4 ayat (2).</li>
+          </ul>
+
+          <h4>B. Subjek Pajak dan Bukan Subjek Pajak</h4>
+          <p>Menurut Pasal 2 UU PPh, yang menjadi subjek pajak adalah orang pribadi, warisan yang belum terbagi, badan, dan bentuk usaha tetap. Yang dikecualikan sebagai bukan subjek pajak antara lain organisasi internasional dan pejabat perwakilan organisasi internasional yang memenuhi syarat tertentu.</p>
+          <div class="note"><strong>Syarat organisasi internasional bukan subjek pajak:</strong> Indonesia menjadi anggota organisasi tersebut dan organisasi itu tidak menjalankan usaha lain untuk memperoleh penghasilan dari Indonesia selain pemberian pinjaman kepada pemerintah dari dana iuran anggota.</div>
+
+          <h4>C. Objek Pajak dan Bukan Objek Pajak</h4>
+          <p>Objek pajak adalah setiap tambahan kemampuan ekonomis yang diterima atau diperoleh Wajib Pajak, baik dari dalam maupun luar Indonesia, yang dapat dipakai untuk konsumsi atau menambah kekayaan. Bukan objek pajak misalnya warisan, natura tertentu, atau dividen tertentu yang diterima Wajib Pajak badan sesuai ketentuan Pasal 4 ayat (3) UU PPh.</p>
+
+          <h4>D. Ruang Lingkup PPh Pemotongan dan Pemungutan</h4>
+          <p>PPh pemotongan dan pemungutan adalah pelaksanaan withholding system. Pihak ketiga punya kewajiban memotong atau memungut pajak dari penerima penghasilan, menyetorkannya ke kas negara, lalu melaporkannya ke KPP tempat dia terdaftar.</p>
+          <p>Jenis pajak yang dibahas dalam buku ini meliputi: PPh Pasal 21, PPh Pasal 22, PPh Pasal 23, PPh Pasal 26, PPh Pasal 4 ayat (2), dan PPh Pasal 15.</p>
+          <div class="note"><strong>Poin penting:</strong> secara umum pajak potput adalah <em>prepaid tax</em>, kecuali PPh final yang selesai di tahap pemotongan atau pemungutan tanpa pengkreditan lagi.</div>
+
+          <h4>E. Saat dan Tempat Terutang</h4>
+          <p>Pada dasarnya saat terutang PPh pemotongan dan pemungutan adalah saat penghasilan dibayarkan secara tunai atau saat dibebankan, mana yang lebih dulu. Tempat terutang pada prinsipnya mengikuti tempat pekerjaan, jasa, atau kegiatan usaha dilakukan dan umumnya menganut asas desentralisasi.</p>
+
+          <div class="ref">
+            <h5>Referensi utama</h5>
+            <p>UU PPh, UU HPP, dan materi Pusdiklat Pajak 2025.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="pph21">
+        <div class="section-head">
+          <h3>Bahan Ajar 2: PPh Pasal 21</h3>
+          <p>Objek, pemotong, tarif, dasar pengenaan, dan contoh penghitungan lengkap.</p>
+        </div>
+        <div class="section-body prose">
+          <h4>A. Objek PPh Pasal 21</h4>
+          <p>PPh Pasal 21 adalah pajak atas penghasilan berupa gaji, upah, honorarium, tunjangan, dan pembayaran lain sehubungan dengan pekerjaan, jabatan, jasa, dan kegiatan yang dilakukan orang pribadi subjek pajak dalam negeri. Fokus utamanya adalah <strong>active income</strong>.</p>
+          <ul>
+            <li>Penghasilan pegawai tetap, teratur maupun tidak teratur.</li>
+            <li>Uang pensiun berkala.</li>
+            <li>Pesangon, manfaat pensiun, THT/JHT yang diterima sekaligus.</li>
+            <li>Upah pegawai tidak tetap.</li>
+            <li>Imbalan bukan pegawai: honorarium, komisi, fee, dan sejenisnya.</li>
+            <li>Imbalan peserta kegiatan.</li>
+            <li>Natura dan kenikmatan tertentu yang termasuk objek.</li>
+          </ul>
+
+          <h4>B. Penghasilan yang Bukan Objek PPh Pasal 21</h4>
+          <p>Yang tidak dipotong PPh Pasal 21 antara lain klaim asuransi tertentu, natura tertentu yang dikecualikan, iuran pensiun/JHT yang dibayar pemberi kerja ke badan resmi, zakat atau sumbangan keagamaan wajib, hibah tertentu, beasiswa tertentu, bagian laba persekutuan tertentu, dan PPh yang ditanggung pemerintah.</p>
+
+          <h4>C. Pemotong PPh Pasal 21/26</h4>
+          <p>Pemotong PPh Pasal 21 pada dasarnya adalah pihak yang membayarkan penghasilan: pemberi kerja, instansi pemerintah, dana pensiun, badan, orang pribadi tertentu, dan penyelenggara kegiatan. Bila penerimanya subjek pajak luar negeri, mekanismenya bergeser ke PPh Pasal 26.</p>
+
+          <h4>D. Pemberi Kerja yang Tidak Wajib Memotong</h4>
+          <p>Yang dikecualikan antara lain kantor perwakilan negara asing, organisasi internasional tertentu, dan orang pribadi tertentu yang hanya mempekerjakan pekerja rumah tangga atau pekerja yang tidak terkait dengan kegiatan usaha atau pekerjaan bebasnya.</p>
+
+          <h4>E. Hak dan Kewajiban Pemotong</h4>
+          <p>Pemotong berhak mengajukan perpanjangan SPT Tahunan, melakukan kompensasi kelebihan setor, membetulkan SPT, mengajukan keberatan, dan banding. Kewajibannya: mendaftar ke KPP, menghitung, memotong, menyetor paling lambat tanggal 10 bulan berikutnya, melapor SPT Masa paling lambat tanggal 20, dan memberikan bukti potong.</p>
+
+          <h4>F. Hak dan Kewajiban Wajib Pajak yang Dipotong</h4>
+          <p>Wajib Pajak berhak meminta bukti potong, mengajukan keberatan, dan banding. Kewajibannya antara lain menyerahkan informasi status tanggungan dan tetap menyampaikan SPT Tahunan.</p>
+
+          <h4>G. Klasifikasi PPh Pasal 21</h4>
+          <p>Dasar pengenaan PPh Pasal 21 dibedakan untuk pegawai tetap, pensiunan, anggota dewan komisaris/pengawas, pegawai tidak tetap, bukan pegawai, peserta kegiatan, peserta program pensiun yang masih aktif, mantan pegawai, serta Wajib Pajak orang pribadi luar negeri.</p>
+
+          <h4>H. Tarif PPh Pasal 21</h4>
+          <p>Mulai 2024 digunakan dua pendekatan: <strong>tarif efektif bulanan/harian</strong> untuk masa berjalan dan <strong>tarif Pasal 17 UU PPh</strong> untuk penghitungan final tahunan. Tarif progresif Pasal 17 setelah UU HPP:</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Lapisan PKP</th><th>Tarif</th></tr></thead>
+              <tbody>
+                <tr><td>Sampai dengan Rp60.000.000</td><td>5%</td></tr>
+                <tr><td>Di atas Rp60.000.000 sampai Rp250.000.000</td><td>15%</td></tr>
+                <tr><td>Di atas Rp250.000.000 sampai Rp500.000.000</td><td>25%</td></tr>
+                <tr><td>Di atas Rp500.000.000 sampai Rp5.000.000.000</td><td>30%</td></tr>
+                <tr><td>Di atas Rp5.000.000.000</td><td>35%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="note"><strong>Tanpa NPWP:</strong> tarif pemotongan jadi 20% lebih tinggi dari tarif umum yang berlaku.</div>
+
+          <h4>I. Dasar Penghitungan Pegawai Tetap dan PTKP</h4>
+          <p>Penghasilan neto didapat dari penghasilan bruto dikurangi biaya jabatan, iuran pensiun/JHT tertentu, dan zakat/sumbangan wajib tertentu. PTKP per tahun:</p>
+          <ul>
+            <li>Rp54.000.000 untuk diri Wajib Pajak.</li>
+            <li>Tambahan Rp4.500.000 untuk status kawin.</li>
+            <li>Tambahan Rp4.500.000 per tanggungan, maksimal 3 orang.</li>
+          </ul>
+
+          <h4>J. Pejabat Negara, PNS, TNI, Polri, dan Pensiunannya</h4>
+          <p>Untuk kelompok ini, mekanisme penghitungan mengikuti prinsip yang sama, tapi sebagian penghasilan tertentu ditanggung pemerintah. Penghasilan tetap dan teratur setiap bulan jadi dasar pengenaan, lalu final tahunan dihitung pada masa pajak terakhir.</p>
+
+          <h4>K. Saat Terutang dan Tata Cara</h4>
+          <p>Saat terutang muncul ketika pembayaran, pembebanan, pengalihan natura, atau pemberian hak kenikmatan terjadi. Pemotongan dilakukan tiap Masa Pajak paling lambat akhir bulan saat pajak terutang.</p>
+
+          <h4>L. Contoh Penghitungan PPh Pasal 21</h4>
+          <p>Buku ini memuat contoh sangat lengkap: pegawai tetap setahun penuh, pegawai baru masuk, pegawai berhenti, pensiunan, pegawai tidak tetap, bukan pegawai, peserta kegiatan, mantan pegawai, WPLN, sampai contoh PPh 21 bersifat final.</p>
+          <div class="note"><strong>Contoh menonjol di buku:</strong> Tuan A, Tuan B, Tuan C, Tuan D, Tuan E, Tuan J, Tuan P, Tuan U, Tuan R, dan contoh khusus PNS serta pensiunan. Nilai, tarif efektif bulanan, dan perhitungan akhir tahun sudah dicantumkan rinci di materi sumber.</div>
+
+          <div class="ref">
+            <h5>Referensi utama</h5>
+            <p>UU PPh, PP 58 Tahun 2023, PMK 168 Tahun 2023, PP 80 Tahun 2010, dan aturan turunan lain yang dicantumkan di buku.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="pph22">
+        <div class="section-head">
+          <h3>Bahan Ajar 3: PPh Pasal 22</h3>
+          <p>Pungutan PPh atas impor, pembelian barang, hasil produksi, BBM, tambang, emas, dan barang sangat mewah.</p>
+        </div>
+        <div class="section-body prose">
+          <h4>A. Pengertian PPh Pasal 22</h4>
+          <p>PPh Pasal 22 adalah PPh dalam tahun berjalan yang dipungut sehubungan dengan pembayaran atas penyerahan barang, impor, atau kegiatan usaha lain. Ciri khasnya: istilah “PPh pungut” paling lekat dengan Pasal 22, pemungutnya ditunjuk khusus, dan objeknya dominan terkait transaksi barang, bukan jasa.</p>
+
+          <h4>B. Subjek, Objek, dan Pemungut</h4>
+          <p>Pemungut PPh Pasal 22 antara lain Bank Devisa, DJBC, instansi pemerintah, bendahara pengeluaran, KPA, BUMN tertentu, industri semen/kertas/baja/otomotif/farmasi, ATPM/APM/importir umum kendaraan, produsen/importir BBM dan pelumas, eksportir/industri hasil kehutanan-perkebunan-pertanian, pembeli komoditas tambang, dan pengusaha emas tertentu.</p>
+
+          <h4>C. Besarnya Pungutan</h4>
+          <p>Tarifnya berbeda-beda tergantung jenis transaksi. Beberapa yang penting:</p>
+          <ul>
+            <li>Impor barang tertentu: 10% atau 7,5% dari nilai impor.</li>
+            <li>Impor umum dengan API: 2,5% dari nilai impor.</li>
+            <li>Pembelian barang oleh bendahara/BUMN tertentu: 1,5% dari harga pembelian tidak termasuk PPN.</li>
+            <li>Penjualan hasil produksi tertentu: 0,1% sampai 0,45% dari DPP PPN.</li>
+            <li>Penjualan BBM, BBG, pelumas: umumnya 0,25% sampai 0,3% dari penjualan tidak termasuk PPN.</li>
+            <li>Pembelian hasil kehutanan/perkebunan/pertanian/peternakan/perikanan: 0,25%.</li>
+            <li>Pembelian batubara/mineral logam/mineral bukan logam: 1,5%.</li>
+          </ul>
+          <div class="note"><strong>Tanpa NPWP:</strong> tarif pungutan yang tidak final bisa menjadi 100% lebih tinggi.</div>
+
+          <h4>D. Pengecualian Pemungutan</h4>
+          <p>Pengecualian mencakup banyak kondisi: impor yang dibebaskan bea masuk/PPN tertentu, barang untuk kepentingan diplomatik, hibah bencana, buku ilmu pengetahuan, impor sementara, pembelian kecil oleh bendahara, pembayaran BOS, pembelian minyak dan gas tertentu, pembelian panas bumi/listrik panas bumi, pembelian kecil hasil hutan, dan sejumlah kondisi lain sesuai PMK 81 Tahun 2024.</p>
+
+          <h4>E. Saat Terutang</h4>
+          <p>Saat terutang mengikuti karakter transaksinya: bersamaan dengan pembayaran bea masuk untuk impor, saat penyelesaian dokumen ekspor, saat pembayaran untuk pembelian barang, saat penjualan untuk hasil produksi tertentu, saat delivery order untuk BBM/pelumas, dan saat pembelian untuk bahan baku tertentu.</p>
+
+          <h4>F. Barang Sangat Mewah</h4>
+          <p>Wajib Pajak badan yang menjual barang sangat mewah wajib memungut PPh Pasal 22. Objeknya meliputi pesawat pribadi, yacht, rumah atau apartemen sangat mahal, kendaraan roda empat tertentu, dan kendaraan roda dua/tiga tertentu. Tarifnya:</p>
+          <ul>
+            <li>1% dari harga jual untuk rumah dan apartemen tertentu.</li>
+            <li>5% dari harga jual untuk pesawat pribadi, yacht, kendaraan tertentu, dan objek mewah lain.</li>
+          </ul>
+
+          <h4>G. Contoh Kasus</h4>
+          <p>Materi juga memuat contoh hitung impor parfum, penjualan ke bendahara pemerintah, penjualan baja industri, penjualan pelumas, pembelian kayu bahan baku, dan penjualan rumah sangat mewah ke pembeli tanpa NPWP.</p>
+
+          <div class="ref">
+            <h5>Referensi utama</h5>
+            <p>PMK 34/PMK.010/2017 jo PMK 41/2022, PMK 48 Tahun 2023, PMK 92/PMK.03/2019, dan PMK 81 Tahun 2024.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="pph23">
+        <div class="section-head">
+          <h3>Bahan Ajar 4: PPh Pasal 23</h3>
+          <p>Pemotongan atas penghasilan dari modal, jasa, kegiatan, sewa, dan royalti untuk subjek pajak dalam negeri atau BUT.</p>
+        </div>
+        <div class="section-body prose">
+          <h4>A. Pengertian PPh Pasal 23</h4>
+          <p>PPh Pasal 23 mengatur pembayaran pajak dalam tahun berjalan dengan cara memotong penghasilan yang diterima Wajib Pajak dalam negeri atau BUT yang berasal dari modal, penyerahan jasa, atau penyelenggaraan kegiatan, selain yang sudah masuk ke PPh Pasal 21.</p>
+
+          <h4>B. Subjek yang Dikenakan Pemotongan</h4>
+          <p>Subjek yang dipotong adalah Wajib Pajak dalam negeri atau BUT yang menerima penghasilan dari modal, penyerahan jasa, atau penyelenggaraan kegiatan.</p>
+
+          <h4>C. Pemotong PPh Pasal 23</h4>
+          <p>Pemotong meliputi badan pemerintah, Wajib Pajak badan dalam negeri, penyelenggara kegiatan, BUT, perwakilan perusahaan luar negeri, serta orang pribadi tertentu yang ditunjuk seperti akuntan, arsitek, dokter, notaris, PPAT, pengacara, konsultan, dan pengusaha pembukuan tertentu.</p>
+
+          <h4>D. Objek dan Tarif</h4>
+          <p>Objek PPh Pasal 23 dibagi dua kelompok besar:</p>
+          <ul>
+            <li><strong>15% dari penghasilan bruto:</strong> dividen, bunga, premium, diskonto, imbalan jaminan pengembalian utang, royalti, hadiah, penghargaan tertentu.</li>
+            <li><strong>2% dari penghasilan bruto:</strong> sewa dan penghasilan lain sehubungan dengan penggunaan harta, jasa teknik, jasa manajemen, jasa konstruksi, jasa konsultan, dan jasa lain menurut PMK 141/PMK.03/2015.</li>
+          </ul>
+          <div class="note"><strong>Tanpa NPWP:</strong> tarif pemotongan jadi 100% lebih tinggi dari tarif normal.</div>
+
+          <h4>E. Royalti dan Jasa Lain</h4>
+          <p>Royalti didefinisikan luas, termasuk hak cipta, paten, desain, formula, peralatan komersial/ilmiah, informasi teknis, rekaman siaran, film, pita suara, dan pelepasan hak. Daftar jasa lain juga sangat panjang, mulai dari appraisal, aktuaris, hukum, arsitektur, design, drilling, event organizer, software/hardware, internet, logistik, maklon, katering, freight forwarding, laboratorium, sampai jasa yang dibebankan APBN/APBD.</p>
+
+          <h4>F. Dikecualikan dari PPh Pasal 23</h4>
+          <p>Yang dikecualikan antara lain penghasilan yang dibayar ke bank, sewa guna usaha dengan hak opsi, dividen tertentu yang bukan objek, bagian laba koperasi/firma/persekutuan tertentu, dan penghasilan tertentu ke badan usaha penyalur pinjaman/pembiayaan.</p>
+
+          <h4>G. Contoh Kasus</h4>
+          <p>Contoh di buku mencakup bunga ke bank, royalti ke penerima tanpa NPWP, jasa konsultansi, dan sewa kendaraan yang pembayarannya sudah termasuk PPN.</p>
+
+          <div class="ref">
+            <h5>Referensi utama</h5>
+            <p>UU PPh, PP 34 Tahun 2017, PP 34 Tahun 2016, PMK 141/PMK.03/2015, PER-11/PJ/2015, dan KEP-50/PJ./1994.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="pph26">
+        <div class="section-head">
+          <h3>Bahan Ajar 5: PPh Pasal 26</h3>
+          <p>Pemotongan atas penghasilan subjek pajak luar negeri, termasuk treaty, premi asuransi, penjualan saham, dan branch profit tax.</p>
+        </div>
+        <div class="section-body prose">
+          <h4>A. Tata Cara Pemotongan, Penyetoran, dan Pelaporan</h4>
+          <p>Langkah dasarnya: pastikan dulu lawan transaksi benar subjek pajak luar negeri. Setelah itu cek apakah dia berhak memakai tarif tax treaty. Tax treaty dapat digunakan jika ada DGT atau SKD sesuai PER-25/PJ/2018. Data SKD diinput melalui menu e-SKD di DJP Online, lalu pemotongan dilakukan dengan tarif treaty bila syarat terpenuhi. Kalau tidak, gunakan tarif umum 20%.</p>
+          <ul>
+            <li>Penyetoran dilakukan paling lambat tanggal 10 bulan berikutnya.</li>
+            <li>Pelaporan dilakukan paling lambat tanggal 20 bulan berikutnya.</li>
+            <li>Sejak 1 Agustus 2020, transaksi PPh 23/26 tertentu wajib melalui e-Bupot.</li>
+          </ul>
+
+          <h4>B. Tarif PPh Pasal 26</h4>
+          <p>Tarif umum PPh Pasal 26 adalah <strong>20% final dari jumlah bruto</strong>, misalnya untuk dividen, bunga, royalti, sewa, imbalan jasa, hadiah, pensiun, penghapusan utang, premi swap, dan lindung nilai lain.</p>
+          <p>Ada juga skema <strong>20% x perkiraan penghasilan neto</strong>, misalnya:</p>
+          <ul>
+            <li>Penjualan harta di Indonesia: perkiraan neto 25% dari harga jual, jadi tarif efektif 5%.</li>
+            <li>Premi asuransi ke luar negeri: tarif efektif tergantung jenis premi, karena perkiraan neto bisa 50%, 10%, atau 5% dari premi.</li>
+            <li>Penjualan saham WPLN non-emiten: perkiraan neto 25% dari harga jual, sehingga tarif efektif 5% final.</li>
+          </ul>
+          <div class="note"><strong>Pengecualian penting:</strong> WPLN orang pribadi yang memperoleh penghasilan tidak melebihi Rp10 juta untuk setiap jenis transaksi dikecualikan dari pemotongan PPh Pasal 26 menurut PMK 82/PMK.03/2009.</div>
+
+          <h4>C. Branch Profit Tax</h4>
+          <p>BUT di Indonesia juga bisa dikenai PPh Pasal 26 atas laba setelah pajak, kecuali laba tersebut ditanamkan kembali di Indonesia dan memenuhi syarat reinvestasi tertentu.</p>
+
+          <h4>D. Contoh Kasus</h4>
+          <p>Contoh di buku mencakup jasa manajemen ke Mr. Fernando, premi asuransi ke perusahaan luar negeri dengan treaty 10%, dan pembelian barang antik dari WPLN orang pribadi di bawah ambang Rp10 juta.</p>
+
+          <div class="ref">
+            <h5>Referensi utama</h5>
+            <p>PER-25/PJ/2018, PMK 82/PMK.03/2009, KMK 624/KMK.04/1994, KMK 434/KMK.04/1999, dan PMK 258/PMK.03/2008.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="pph15">
+        <div class="section-head">
+          <h3>Bahan Ajar 7: PPh Pasal 15</h3>
+          <p>Norma penghitungan khusus untuk charter penerbangan, pelayaran, KPD asing, dan jasa maklon internasional.</p>
+        </div>
+        <div class="section-body prose">
+          <h4>A. Charter Penerbangan Dalam Negeri</h4>
+          <p>Objeknya adalah semua imbalan atau nilai pengganti berupa uang dari pengangkutan orang dan/atau barang berdasarkan perjanjian charter. Norma penghitungan neto 6% dari peredaran bruto. PPh terutang = 30% × 6% = <strong>1,8% dari peredaran bruto</strong>. Sifatnya dapat dikreditkan sebagai pembayaran PPh Pasal 23.</p>
+
+          <h4>B. Pelayaran Dalam Negeri</h4>
+          <p>Objeknya seluruh penghasilan pengangkutan orang dan/atau barang, termasuk sewa kapal, baik domestik maupun rute internasional tertentu. Norma neto 4% dari peredaran bruto, sehingga tarif efektif PPh terutang <strong>1,2% dari peredaran bruto</strong> dan bersifat final.</p>
+
+          <h4>C. Pelayaran dan/atau Penerbangan Luar Negeri</h4>
+          <p>Objeknya pengangkutan yang dimuat dari satu pelabuhan ke pelabuhan lain di Indonesia dan/atau dari pelabuhan di Indonesia ke luar negeri. Penghasilan neto ditetapkan 6% dari peredaran bruto, dan PPh terutang <strong>2,64% dari peredaran bruto</strong>, bersifat final.</p>
+
+          <h4>D. Kantor Perwakilan Dagang Asing di Indonesia</h4>
+          <p>Untuk KPD asing dari negara non-P3B, penghasilan neto dianggap 1% dari nilai ekspor bruto dan PPh terutang sebesar <strong>0,44% dari nilai ekspor bruto</strong>, bersifat final. Pembayaran dilakukan dengan penyetoran sendiri paling lambat tanggal 15 bulan berikutnya.</p>
+
+          <h4>E. Jasa Maklon Internasional Mainan Anak-anak</h4>
+          <p>Untuk Wajib Pajak badan dalam negeri yang melakukan jasa maklon internasional produksi mainan anak-anak, penghasilan neto ditetapkan 7% dari total biaya pembuatan/perakitan selain bahan baku, sehingga PPh terutang menjadi <strong>2,1%</strong> dari biaya terkait tersebut. Disetor sendiri setiap bulan.</p>
+
+          <h4>F. Contoh Kasus</h4>
+          <p>Buku mencontohkan penghitungan PPh Pasal 15 untuk perusahaan pelayaran dalam negeri dan BUT perusahaan pelayaran luar negeri berdasarkan nilai pembayaran charter atau pengangkutan.</p>
+
+          <div class="ref">
+            <h5>Referensi utama</h5>
+            <p>KMK 475/KMK.04/1996, KMK 417/KMK.04/1996, SE-18/PJ.431/1992, dan surat terkait jasa maklon internasional.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+<script>
+function toggleNav(){
+  const sidebar=document.getElementById('sidebar');
+  const overlay=document.getElementById('overlay');
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('show');
+}
+function filterNav(){
+  const q=document.getElementById('searchInput').value.toLowerCase().trim();
+  document.querySelectorAll('.nav-link').forEach(link=>{
+    const txt=link.textContent.toLowerCase();
+    link.style.display = txt.includes(q) ? '' : 'none';
+  });
+}
+const links=[...document.querySelectorAll('.nav-link')];
+const sections=links.map(l=>document.querySelector(l.getAttribute('href'))).filter(Boolean);
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      links.forEach(l=>l.classList.remove('active'));
+      const active=document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+      if(active) active.classList.add('active');
+    }
+  })
+},{rootMargin:'-35% 0px -55% 0px',threshold:0});
+sections.forEach(s=>observer.observe(s));
+</script>
+</body>
+</html>
