@@ -3,266 +3,273 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arsip Ebook Interaktif — Perpajakan</title>
+<title>Perpustakaan Pajak Digital</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --forest:#2F4A3E;
-    --forest-2:#3A5A4B;
-    --cream:#FBF3E2;
-    --cream-2:#F4E9D3;
-    --honey:#E3A857;
-    --honey-soft:#EFC384;
-    --brick:#C1604A;
-    --sage:#8AA88C;
-    --ink:#2B2318;
-    --ink-soft:#5B5142;
-    --page-text:#EDE6D3;
-    --page-text-soft:#B9C6BA;
+    --blue-deep:#0B3B76;
+    --blue:#1663C7;
+    --blue-soft:#EAF2FD;
+    --yellow:#FDB813;
+    --yellow-soft:#FFF3D8;
+    --white:#FFFFFF;
+    --ink:#153058;
+    --text-soft:#5C6C86;
+    --border:#E3EBF7;
   }
 
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
 
   body{
-    background:var(--forest);
-    color:var(--page-text);
-    font-family:'IBM Plex Sans', sans-serif;
-    min-height:100vh;
-    position:relative;
-    overflow-x:hidden;
-  }
-
-  body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    opacity:0.045;
-    z-index:1;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  .glow{
-    position:fixed;
-    top:-25%;
-    left:50%;
-    transform:translateX(-50%);
-    width:1100px;
-    height:700px;
-    background:radial-gradient(ellipse at center, rgba(227,168,87,0.20) 0%, rgba(227,168,87,0) 68%);
-    pointer-events:none;
-    z-index:0;
-  }
-
-  .wrap{
-    position:relative;
-    z-index:2;
-    max-width:1000px;
-    margin:0 auto;
-    padding:80px 24px 64px;
-  }
-
-  header{
-    max-width:640px;
-    margin-bottom:64px;
-    animation:rise 0.7s ease both;
-  }
-
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12.5px;
-    letter-spacing:0.22em;
-    text-transform:uppercase;
-    color:var(--honey);
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:22px;
-  }
-  .eyebrow::before{ content:""; width:24px; height:1px; background:var(--honey); }
-
-  h1{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:clamp(32px, 5vw, 48px);
-    line-height:1.14;
-    letter-spacing:-0.01em;
-    color:var(--cream);
-    margin-bottom:8px;
-  }
-
-  h1 em{
-    font-style:italic;
-    color:var(--honey);
-    font-weight:500;
-    position:relative;
-  }
-
-  .squiggle{
-    display:block;
-    width:150px;
-    height:14px;
-    margin:14px 0 22px;
-  }
-  .squiggle path{
-    fill:none;
-    stroke:var(--honey);
-    stroke-width:3;
-    stroke-linecap:round;
-  }
-
-  .lede{
-    font-size:16.5px;
-    line-height:1.75;
-    color:var(--page-text-soft);
-    max-width:50ch;
-  }
-
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(270px, 1fr));
-    gap:22px;
-  }
-
-  .card{
-    background:var(--cream);
-    border-radius:22px;
-    padding:26px 24px 24px;
-    display:flex;
-    flex-direction:column;
-    gap:16px;
-    text-decoration:none;
+    background:var(--white);
     color:var(--ink);
-    box-shadow:0 1px 2px rgba(20,20,10,0.06), 0 10px 24px rgba(15,20,10,0.16);
-    transition:transform 0.4s cubic-bezier(.2,.8,.2,1), box-shadow 0.4s ease, background 0.4s ease;
-    opacity:0;
-    animation:rise 0.6s ease forwards;
+    font-family:'Nunito', sans-serif;
+    min-height:100vh;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:linear-gradient(160deg, var(--blue-deep) 0%, var(--blue) 100%);
+    border-radius:0 0 42px 42px;
+    padding:56px 24px 46px;
     position:relative;
     overflow:hidden;
   }
 
-  .card::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    border-radius:22px;
-    border:1.5px solid transparent;
-    transition:border-color 0.4s ease;
-    pointer-events:none;
-  }
-
-  .card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 4px 10px rgba(20,20,10,0.10), 0 20px 34px rgba(15,20,10,0.22);
-    background:var(--cream-2);
-  }
-  .card:hover::after{ border-color:var(--honey); }
-
-  .card:focus-visible{ outline:none; }
-  .card:focus-visible::after{ border-color:var(--brick); }
-
-  .card:nth-of-type(1){ animation-delay:0.08s; }
-  .card:nth-of-type(2){ animation-delay:0.16s; }
-  .card:nth-of-type(3){ animation-delay:0.24s; }
-  .card:nth-of-type(4){ animation-delay:0.32s; }
-  .card:nth-of-type(5){ animation-delay:0.40s; }
-
-  .card.featured{
-    background:var(--honey-soft);
-    border:1.5px solid var(--brick);
-  }
-  .card.featured:hover{ background:#EAB878; }
-  .card.featured .tag{ color:var(--forest); }
-  .card.featured .cta{ color:var(--ink); }
-  .card.featured p{ color:#4A3A24; }
-
-  .star{
-    position:absolute;
-    top:18px;
-    right:18px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:10.5px;
-    font-weight:600;
-    letter-spacing:0.04em;
-    color:var(--cream);
-    background:var(--brick);
-    padding:4px 10px;
-    border-radius:20px;
-  }
-
-  .badge{
-    width:84px;
-    height:84px;
-    border-radius:50%;
+  .hero-inner{
+    max-width:1040px;
+    margin:0 auto;
     display:flex;
     align-items:center;
-    justify-content:center;
-    transition:transform 0.5s cubic-bezier(.2,.8,.2,1);
-  }
-  .card:hover .badge{ transform:scale(1.07) rotate(-4deg); }
-  .badge svg{ width:100%; height:100%; }
-
-  .tag{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--brick);
-    font-weight:600;
+    gap:36px;
+    flex-wrap:wrap;
+    position:relative;
+    z-index:2;
   }
 
-  .card h2{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:20px;
-    line-height:1.28;
-    letter-spacing:-0.005em;
-    margin-top:-6px;
+  .hero-dot{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,0.08);
   }
+  .hero-dot.d1{ width:220px; height:220px; top:-90px; left:-70px; }
+  .hero-dot.d2{ width:140px; height:140px; bottom:-60px; left:30%; background:rgba(253,184,19,0.14); }
 
-  .card p{
-    font-size:14px;
-    line-height:1.62;
-    color:var(--ink-soft);
-    flex-grow:1;
-  }
+  .hero-text{ flex:1 1 340px; }
 
-  .cta{
+  .pill{
     display:inline-flex;
     align-items:center;
     gap:8px;
-    font-family:'IBM Plex Mono', monospace;
+    font-family:'Nunito', sans-serif;
+    font-weight:800;
     font-size:12.5px;
     letter-spacing:0.04em;
-    color:var(--forest);
-    font-weight:600;
-    margin-top:4px;
+    color:var(--blue-deep);
+    background:var(--yellow);
+    padding:7px 16px;
+    border-radius:100px;
+    margin-bottom:20px;
   }
-  .cta svg{ width:14px; height:14px; transition:transform 0.35s ease; }
-  .card:hover .cta svg{ transform:translateX(4px); }
+
+  h1{
+    font-family:'Fredoka', sans-serif;
+    font-weight:600;
+    font-size:clamp(28px, 4.4vw, 40px);
+    line-height:1.24;
+    color:var(--white);
+    margin-bottom:14px;
+  }
+  h1 span{ color:var(--yellow); }
+
+  .hero-lede{
+    font-size:15.5px;
+    line-height:1.7;
+    color:rgba(255,255,255,0.82);
+    max-width:46ch;
+    font-weight:600;
+  }
+
+  /* decorative rounded bookshelf illustration */
+  .shelf-illust{ flex:0 0 260px; max-width:100%; }
+  .shelf-illust svg{ width:100%; height:auto; display:block; }
+
+  /* ---------- MAIN ---------- */
+  .wrap{
+    max-width:1040px;
+    margin:0 auto;
+    padding:52px 24px 70px;
+  }
+
+  .section{ margin-bottom:56px; }
+
+  .section-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:6px;
+  }
+
+  .section-badge{
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    background:var(--blue-soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .section-badge svg{ width:20px; height:20px; stroke:var(--blue); }
+
+  .section-title{
+    font-family:'Fredoka', sans-serif;
+    font-weight:600;
+    font-size:22px;
+    color:var(--ink);
+  }
+
+  .section-sub{
+    font-size:14px;
+    color:var(--text-soft);
+    font-weight:600;
+    margin:6px 0 22px 50px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+    gap:16px;
+    margin-bottom:14px;
+  }
+
+  .card{
+    background:var(--white);
+    border:2px solid var(--border);
+    border-radius:22px;
+    padding:22px 20px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    text-decoration:none;
+    color:var(--ink);
+    transition:transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    opacity:0;
+    animation:rise 0.55s ease forwards;
+  }
+  .card:nth-of-type(1){ animation-delay:.06s; }
+  .card:nth-of-type(2){ animation-delay:.11s; }
+  .card:nth-of-type(3){ animation-delay:.16s; }
+  .card:nth-of-type(4){ animation-delay:.21s; }
+  .card:nth-of-type(5){ animation-delay:.26s; }
+  .card:nth-of-type(6){ animation-delay:.31s; }
+
+  .card:hover, .card:focus-visible{
+    transform:translateY(-5px);
+    border-color:var(--blue);
+    box-shadow:0 14px 26px rgba(22,99,199,0.14);
+    outline:none;
+  }
+
+  .card.gold:hover, .card.gold:focus-visible{
+    border-color:var(--yellow);
+    box-shadow:0 14px 26px rgba(253,184,19,0.22);
+  }
+
+  .icon-badge{
+    width:44px;
+    height:44px;
+    border-radius:14px;
+    background:var(--blue-soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .icon-badge svg{ width:22px; height:22px; stroke:var(--blue); }
+
+  .card.gold .icon-badge{ background:var(--yellow-soft); }
+  .card.gold .icon-badge svg{ stroke:#B67B00; }
+
+  .tag{
+    font-family:'Nunito', sans-serif;
+    font-weight:800;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--blue);
+  }
+  .card.gold .tag{ color:#B67B00; }
+
+  .card h3{
+    font-family:'Fredoka', sans-serif;
+    font-weight:600;
+    font-size:16.5px;
+    line-height:1.32;
+  }
+
+  .card p{
+    font-size:13px;
+    line-height:1.58;
+    color:var(--text-soft);
+    font-weight:600;
+    flex-grow:1;
+  }
+
+  .card-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    font-family:'Nunito', sans-serif;
+    font-weight:800;
+    font-size:12.5px;
+    color:var(--blue);
+    background:var(--blue-soft);
+    padding:8px 14px;
+    border-radius:100px;
+    width:fit-content;
+    transition:background 0.3s ease, gap 0.3s ease;
+  }
+  .card-cta svg{ width:13px; height:13px; transition:transform 0.3s ease; }
+  .card:hover .card-cta{ background:var(--blue); color:var(--white); }
+  .card:hover .card-cta svg{ transform:translateX(3px); }
+
+  .card.gold .card-cta{ background:var(--yellow-soft); color:#B67B00; }
+  .card.gold:hover .card-cta{ background:var(--yellow); color:var(--blue-deep); }
+
+  /* rounded shelf strip under each grid */
+  .shelf-strip{
+    height:14px;
+    border-radius:100px;
+    background:linear-gradient(90deg, var(--blue-soft), var(--yellow-soft));
+    margin:0 4px;
+  }
 
   footer{
-    margin-top:56px;
-    padding-top:26px;
-    border-top:1px solid rgba(237,230,211,0.14);
+    margin-top:20px;
+    padding-top:24px;
+    border-top:2px solid var(--border);
     display:flex;
     justify-content:space-between;
     align-items:center;
     flex-wrap:wrap;
-    gap:12px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11.5px;
-    color:var(--page-text-soft);
-    letter-spacing:0.04em;
+    gap:10px;
+    font-size:13px;
+    font-weight:700;
+    color:var(--text-soft);
   }
-  footer .dot{ color:var(--honey); }
+  footer .accent{ color:var(--blue); }
 
   @keyframes rise{
-    from{ opacity:0; transform:translateY(16px); }
+    from{ opacity:0; transform:translateY(14px); }
     to{ opacity:1; transform:translateY(0); }
+  }
+
+  @media (max-width:640px){
+    .shelf-illust{ display:none; }
+    .section-sub{ margin-left:0; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -272,151 +279,219 @@
 </head>
 <body>
 
-<div class="glow"></div>
-
-<div class="wrap">
-
-  <header>
-    <div class="eyebrow">Arsip Ebook Interaktif · 2026</div>
-    <h1>Lima topik pajak, dibahas <em>santai</em> tapi tetap lengkap.</h1>
-    <svg class="squiggle" viewBox="0 0 150 14"><path d="M2 8 C 20 -2, 38 18, 56 8 S 92 -2, 110 8 S 140 14, 148 6"/></svg>
-    <p class="lede">Klik salah satu untuk mulai baca — lima ebook membahas satu topik perpajakan secara spesifik, plus satu paket lengkap dengan simulasi soal untuk latihan.</p>
-  </header>
-
-  <div class="grid">
-
-    <a class="card" href="kup.html" target="_blank" rel="noopener">
-      <span class="badge">
-        <svg viewBox="0 0 140 140">
-          <circle cx="70" cy="70" r="68" fill="#DDE8DA"/>
-          <g transform="translate(31,38)">
-            <path d="M39 0 L4 8 V58 L39 50 Z" fill="#C1604A"/>
-            <path d="M39 0 L74 8 V58 L39 50 Z" fill="#EFC384"/>
-            <path d="M12 16 L32 12" stroke="#F4E9D3" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M12 26 L32 22" stroke="#F4E9D3" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M12 36 L28 33" stroke="#F4E9D3" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M46 12 L66 16" stroke="#FBF3E2" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M46 22 L66 26" stroke="#FBF3E2" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M46 33 L62 36" stroke="#FBF3E2" stroke-width="2.4" stroke-linecap="round"/>
-            <rect x="60" y="-14" width="4" height="26" rx="2" fill="#2F4A3E" transform="rotate(28 62 -1)"/>
-          </g>
+  <section class="hero">
+    <span class="hero-dot d1"></span>
+    <span class="hero-dot d2"></span>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <span class="pill">📚 Perpustakaan Pajak Digital</span>
+        <h1>Baca pajak dari <span>dua koleksi</span> sekaligus.</h1>
+        <p class="hero-lede">Kumpulan ebook interaktif dari koleksi IKPI dan Kemenkeu — tinggal pilih rak, ambil bukunya, langsung baca.</p>
+      </div>
+      <div class="shelf-illust">
+        <svg viewBox="0 0 260 190" fill="none">
+          <rect x="10" y="150" width="240" height="18" rx="9" fill="#FFFFFF" opacity="0.16"/>
+          <rect x="26" y="70" width="30" height="90" rx="12" fill="#FFFFFF"/>
+          <rect x="62" y="45" width="30" height="115" rx="12" fill="#FDB813"/>
+          <rect x="98" y="85" width="30" height="75" rx="12" fill="#FFFFFF" opacity="0.9"/>
+          <rect x="134" y="30" width="30" height="130" rx="12" fill="#FDB813" opacity="0.85"/>
+          <rect x="170" y="60" width="30" height="100" rx="12" fill="#FFFFFF"/>
+          <rect x="206" y="95" width="26" height="65" rx="12" fill="#FDB813"/>
+          <circle cx="41" cy="100" r="6" fill="#1663C7"/>
+          <circle cx="77" cy="75" r="6" fill="#0B3B76"/>
+          <circle cx="149" cy="60" r="6" fill="#0B3B76"/>
+          <circle cx="185" cy="90" r="6" fill="#1663C7"/>
         </svg>
-      </span>
-      <span class="tag">KUP</span>
-      <h2>Ketentuan Umum dan Tata Cara Perpajakan</h2>
-      <p>Fondasi sistem pajak Indonesia — hak, kewajiban, dan tata cara yang berlaku untuk hampir semua jenis pajak.</p>
-      <span class="cta">Buka Ebook <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
-    </a>
+      </div>
+    </div>
+  </section>
 
-    <a class="card" href="pph.html" target="_blank" rel="noopener">
-      <span class="badge">
-        <svg viewBox="0 0 140 140">
-          <circle cx="70" cy="70" r="68" fill="#F5E2C4"/>
-          <g transform="translate(34,40)">
-            <ellipse cx="35" cy="52" rx="26" ry="8" fill="#C1604A"/>
-            <ellipse cx="35" cy="43" rx="26" ry="8" fill="#EFC384"/>
-            <ellipse cx="35" cy="34" rx="26" ry="8" fill="#E3A857"/>
-            <ellipse cx="35" cy="25" rx="26" ry="8" fill="#EFC384"/>
-            <path d="M52 -12 C 62 -12, 68 -4, 66 6" fill="none" stroke="#2F4A3E" stroke-width="3.4" stroke-linecap="round"/>
-            <path d="M58 -14 L66 6 L46 2" fill="#2F4A3E"/>
-          </g>
-        </svg>
-      </span>
-      <span class="tag">PPh</span>
-      <h2>Pajak Penghasilan</h2>
-      <p>Aturan main pajak atas penghasilan pribadi maupun badan usaha — dari tarif, potongan, hingga pelaporannya.</p>
-      <span class="cta">Buka Ebook <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
-    </a>
+  <div class="wrap">
 
-    <a class="card" href="ppn.html" target="_blank" rel="noopener">
-      <span class="badge">
-        <svg viewBox="0 0 140 140">
-          <circle cx="70" cy="70" r="68" fill="#E3EDE1"/>
-          <g transform="translate(38,34)">
-            <path d="M8 18 L14 4 H40 L46 18 Z" fill="none" stroke="#3A5A4B" stroke-width="3" stroke-linejoin="round"/>
-            <path d="M6 18 H48 L44 62 H10 Z" fill="#8AA88C"/>
-            <circle cx="34" cy="42" r="13" fill="#FBF3E2"/>
-            <line x1="28" y1="48" x2="40" y2="36" stroke="#C1604A" stroke-width="2.6" stroke-linecap="round"/>
-            <circle cx="30" cy="38" r="2.4" fill="#C1604A"/>
-            <circle cx="38" cy="46" r="2.4" fill="#C1604A"/>
-          </g>
-        </svg>
-      </span>
-      <span class="tag">PPN</span>
-      <h2>Pajak Pertambahan Nilai</h2>
-      <p>Pajak yang menempel di hampir setiap transaksi jual-beli barang dan jasa — siapa yang memungut, siapa yang menanggung.</p>
-      <span class="cta">Buka Ebook <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
-    </a>
+    <div class="section">
+      <div class="section-head">
+        <span class="section-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 5.5c0 0 5-2.5 8 0c3-2.5 8 0 8 0v13c0 0-5-2.5-8 0c-3-2.5-8 0-8 0Z"/>
+          </svg>
+        </span>
+        <span class="section-title">Koleksi IKPI</span>
+      </div>
+      <p class="section-sub">Referensi pajak dari Ikatan Konsultan Pajak Indonesia.</p>
 
-    <a class="card" href="bea-meterai.html" target="_blank" rel="noopener">
-      <span class="badge">
-        <svg viewBox="0 0 140 140">
-          <circle cx="70" cy="70" r="68" fill="#F0DCCB"/>
-          <g transform="translate(36,32)">
-            <rect x="2" y="10" width="48" height="60" rx="4" fill="#FBF3E2" stroke="#E3A857" stroke-width="1.4"/>
-            <line x1="10" y1="24" x2="42" y2="24" stroke="#D9C9A8" stroke-width="2.2" stroke-linecap="round"/>
-            <line x1="10" y1="32" x2="42" y2="32" stroke="#D9C9A8" stroke-width="2.2" stroke-linecap="round"/>
-            <line x1="10" y1="40" x2="30" y2="40" stroke="#D9C9A8" stroke-width="2.2" stroke-linecap="round"/>
-            <circle cx="38" cy="54" r="17" fill="#C1604A"/>
-            <circle cx="38" cy="54" r="17" fill="none" stroke="#F4E9D3" stroke-width="2" stroke-dasharray="1.6 3.2"/>
-            <text x="38" y="59" font-family="'IBM Plex Mono', monospace" font-size="10" font-weight="700" fill="#FBF3E2" text-anchor="middle">RP</text>
-          </g>
-        </svg>
-      </span>
-      <span class="tag">Bea Meterai</span>
-      <h2>Bea Meterai</h2>
-      <p>Kenapa dokumen penting butuh "stempel" bernilai hukum, dan kapan penggunaannya wajib.</p>
-      <span class="cta">Buka Ebook <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
-    </a>
+      <div class="grid">
 
-    <a class="card" href="pbb.html" target="_blank" rel="noopener">
-      <span class="badge">
-        <svg viewBox="0 0 140 140">
-          <circle cx="70" cy="70" r="68" fill="#EAD9C4"/>
-          <g transform="translate(30,36)">
-            <circle cx="66" cy="8" r="8" fill="#E3A857"/>
-            <path d="M0 60 C 20 46, 60 46, 80 60 Z" fill="#8AA88C"/>
-            <rect x="18" y="30" width="36" height="30" fill="#F4E9D3"/>
-            <path d="M14 32 L36 14 L58 32 Z" fill="#C1604A"/>
-            <rect x="30" y="42" width="12" height="18" fill="#3A5A4B"/>
-          </g>
-        </svg>
-      </span>
-      <span class="tag">PBB</span>
-      <h2>Pajak Bumi dan Bangunan</h2>
-      <p>Pajak tahunan atas tanah dan bangunan yang dimiliki atau dikuasai — cara hitung dan waktu pembayarannya.</p>
-      <span class="cta">Buka Ebook <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
-    </a>
+        <a class="card" href="ikpi-book/kup.html" target="_blank" rel="noopener">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="3.5" width="14" height="17" rx="3"/>
+              <path d="M8.5 9h7M8.5 12.5h7M8.5 16h4.5"/>
+            </svg>
+          </span>
+          <span class="tag">KUP</span>
+          <h3>Ketentuan Umum &amp; Tata Cara Perpajakan</h3>
+          <p>Dasar-dasar sistem pajak di Indonesia, biar ngerti alurnya dari awal.</p>
+          <span class="card-cta">Baca ebook <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </a>
 
-    <a class="card featured" href="mega-ebook.html" target="_blank" rel="noopener">
-      <span class="star">★ Paket Lengkap</span>
-      <span class="badge">
-        <svg viewBox="0 0 140 140">
-          <circle cx="70" cy="70" r="68" fill="#F3E6C8"/>
-          <g transform="translate(30,34)">
-            <rect x="4" y="46" width="72" height="14" rx="3" fill="#3A5A4B"/>
-            <rect x="10" y="32" width="60" height="14" rx="3" fill="#C1604A"/>
-            <rect x="16" y="18" width="48" height="14" rx="3" fill="#E3A857"/>
-            <circle cx="40" cy="6" r="12" fill="#FBF3E2" stroke="#C1604A" stroke-width="2.4"/>
-            <path d="M40 -1 L42.4 3.6 L47.6 4.2 L43.8 7.6 L44.8 12.6 L40 10 L35.2 12.6 L36.2 7.6 L32.4 4.2 L37.6 3.6 Z" fill="#E3A857"/>
-            <path d="M34 16 L34 24 L40 28 L46 24 L46 16" fill="none" stroke="#C1604A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-          </g>
-        </svg>
-      </span>
-      <span class="tag">Mega Ebook</span>
-      <h2>Mega Ebook Pajak + Simulasi USKP</h2>
-      <p>Rangkuman lengkap KUP, PPh, PPN, Bea Meterai, dan PBB dalam satu paket, plus simulasi soal ala Ujian Sertifikasi Konsultan Pajak untuk uji pemahaman.</p>
-      <span class="cta">Buka Ebook <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
-    </a>
+        <a class="card" href="ikpi-book/pph.html" target="_blank" rel="noopener">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="8"/>
+              <path d="M9.5 9.3c0-1.1 1-1.8 2.4-1.8s2.4.7 2.4 1.6c0 2.4-4.8 1.2-4.8 3.6 0 1 1 1.7 2.4 1.7s2.5-.7 2.5-1.8"/>
+            </svg>
+          </span>
+          <span class="tag">PPh</span>
+          <h3>Pajak Penghasilan</h3>
+          <p>Aturan main pajak atas penghasilan pribadi maupun badan usaha.</p>
+          <span class="card-cta">Baca ebook <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </a>
+
+        <a class="card" href="ikpi-book/ppn.html" target="_blank" rel="noopener">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.5 12L12 4.5h6.5a1 1 0 0 1 1 1V12L12 19.5a1.5 1.5 0 0 1-2.1 0l-5.4-5.4a1.5 1.5 0 0 1 0-2.1Z"/>
+              <circle cx="15.2" cy="8.8" r="1.3"/>
+            </svg>
+          </span>
+          <span class="tag">PPN</span>
+          <h3>Pajak Pertambahan Nilai</h3>
+          <p>Pajak yang nempel di hampir semua transaksi jual-beli barang dan jasa.</p>
+          <span class="card-cta">Baca ebook <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </a>
+
+        <a class="card" href="ikpi-book/bea-meterai.html" target="_blank" rel="noopener">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="7.5" stroke-dasharray="1.8 2.8"/>
+              <path d="M9 12.5l2 2 4-4.2"/>
+            </svg>
+          </span>
+          <span class="tag">Bea Meterai</span>
+          <h3>Bea Meterai</h3>
+          <p>Kenapa dokumen penting butuh "stempel" yang sah secara hukum.</p>
+          <span class="card-cta">Baca ebook <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </a>
+
+        <a class="card" href="ikpi-book/pbb.html" target="_blank" rel="noopener">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 11.5 12 4l8 7.5"/>
+              <path d="M6 10.5V20h12v-9.5"/>
+              <path d="M10 20v-5h4v5"/>
+            </svg>
+          </span>
+          <span class="tag">PBB</span>
+          <h3>Pajak Bumi &amp; Bangunan</h3>
+          <p>Pajak tahunan buat kamu yang punya tanah atau bangunan.</p>
+          <span class="card-cta">Baca ebook <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </a>
+
+        <a class="card gold" href="ikpi-book/mega-ebook.html" target="_blank" rel="noopener">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3 L14.2 9.2 L20.8 9.8 L15.8 13.9 L17.3 20.4 L12 16.7 L6.7 20.4 L8.2 13.9 L3.2 9.8 L9.8 9.2 Z"/>
+            </svg>
+          </span>
+          <span class="tag">Paket Lengkap</span>
+          <h3>Mega Ebook + Simulasi USKP</h3>
+          <p>Rangkuman semua topik di atas, plus latihan soal ala ujian sertifikasi konsultan pajak.</p>
+          <span class="card-cta">Baca ebook <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </a>
+
+      </div>
+      <div class="shelf-strip"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <span class="section-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="10" width="16" height="10" rx="2.4"/>
+            <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+          </svg>
+        </span>
+        <span class="section-title">Koleksi Kemenkeu</span>
+      </div>
+      <p class="section-sub">Referensi resmi dari Kementerian Keuangan.</p>
+
+      <div class="grid">
+
+        <a class="card" href="kemenkeu-book/kup-menkeu.html" target="_blank" rel="noopener">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="3.5" width="14" height="17" rx="3"/>
+              <path d="M8.5 9h7M8.5 12.5h7M8.5 16h4.5"/>
+            </svg>
+          </span>
+          <span class="tag">KUP</span>
+          <h3>Ketentuan Umum &amp; Tata Cara Perpajakan</h3>
+          <p>Versi referensi Kemenkeu untuk ketentuan umum dan tata cara perpajakan.</p>
+          <span class="card-cta">Baca ebook <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </a>
+
+        <a class="card" href="kemenkeu-book/pph-menkeu.html" target="_blank" rel="noopener">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="8"/>
+              <path d="M9.5 9.3c0-1.1 1-1.8 2.4-1.8s2.4.7 2.4 1.6c0 2.4-4.8 1.2-4.8 3.6 0 1 1 1.7 2.4 1.7s2.5-.7 2.5-1.8"/>
+            </svg>
+          </span>
+          <span class="tag">PPh</span>
+          <h3>Pajak Penghasilan</h3>
+          <p>Versi referensi Kemenkeu untuk aturan pajak penghasilan.</p>
+          <span class="card-cta">Baca ebook <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </a>
+
+        <a class="card" href="kemenkeu-book/potput-menkeu.html" target="_blank" rel="noopener">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 4v16M12 4l-4 4M12 4l4 4M12 20l-4-4M12 20l4-4"/>
+            </svg>
+          </span>
+          <span class="tag">PPh Potput</span>
+          <h3>Pemotongan &amp; Pemungutan PPh</h3>
+          <p>Buat kamu yang wajib motong atau mungut pajak penghasilan orang lain.</p>
+          <span class="card-cta">Baca ebook <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </a>
+
+        <a class="card" href="kemenkeu-book/ppn-menkeu.html" target="_blank" rel="noopener">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.5 12L12 4.5h6.5a1 1 0 0 1 1 1V12L12 19.5a1.5 1.5 0 0 1-2.1 0l-5.4-5.4a1.5 1.5 0 0 1 0-2.1Z"/>
+              <circle cx="15.2" cy="8.8" r="1.3"/>
+            </svg>
+          </span>
+          <span class="tag">PPN</span>
+          <h3>Pajak Pertambahan Nilai</h3>
+          <p>Versi referensi Kemenkeu untuk aturan pajak pertambahan nilai.</p>
+          <span class="card-cta">Baca ebook <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </a>
+
+        <a class="card" href="kemenkeu-book/pbb-menkeu.html" target="_blank" rel="noopener">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.5 12L12 4.5h6.5a1 1 0 0 1 1 1V12L12 19.5a1.5 1.5 0 0 1-2.1 0l-5.4-5.4a1.5 1.5 0 0 1 0-2.1Z"/>
+              <circle cx="15.2" cy="8.8" r="1.3"/>
+            </svg>
+          </span>
+          <span class="tag">PBB</span>
+          <h3>Pajak Bumi dan Bangunan</h3>
+          <p>Versi referensi Kemenkeu untuk aturan pajak bumi dan bangunan.</p>
+          <span class="card-cta">Baca ebook <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </a>
+
+
+      </div>
+      <div class="shelf-strip"></div>
+    </div>
+
+    <footer>
+      <span>10 ebook <span class="accent">·</span> 2 koleksi</span>
+      <span>Klik kartu buat baca <span class="accent">→</span></span>
+    </footer>
 
   </div>
-
-  <footer>
-    <span>6 Ebook <span class="dot">·</span> Interaktif</span>
-    <span>Sentuh kartu untuk membuka <span class="dot">→</span></span>
-  </footer>
-
-</div>
 
 </body>
 </html>

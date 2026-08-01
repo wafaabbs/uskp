@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<!-- skill:chrome -->
+<style>
+/* Credit line — bottom-right */
+.design-ui-credit {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  font: 11px/1 system-ui, sans-serif;
+  color: rgba(128,128,128,0.5);
+  pointer-events: none;
+  z-index: 2147483647;
+  transition: opacity 0.4s ease;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+/* Hide chrome on touch devices */
+@media (hover: none) {
+  .design-ui-credit { display: none; }
+}
+
+/* Print fixes */
+@media print {
+  * {
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+  }
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .design-ui-credit { display: none !important; }
+}
+
+</style>
+<script>
+(function () {
+    // Design-ui pages are single compositions, so the whole body is editable.
+    function markEditable() {
+        document.body.classList.add('artifact-editable');
+    }
+
+    // Credit badge with idle-fade. Hover devices only.
+    function initChromeUI() {
+        if (!matchMedia('(hover: hover)').matches) return;
+
+        var credit = document.createElement('div');
+        credit.className = 'design-ui-credit';
+        credit.setAttribute('aria-hidden', 'true');
+        credit.innerHTML = '\u{1F49C} by ClickUp Brain';
+        document.body.appendChild(credit);
+
+        var timer = null;
+        var fade = function (out) { credit.style.opacity = out ? '0' : ''; };
+        fade(true);
+        var show = function () {
+            fade(false);
+            clearTimeout(timer);
+            timer = setTimeout(function () { fade(true); }, 3000);
+        };
+        document.addEventListener('mousemove', show);
+        show();
+    }
+
+    function init() {
+        markEditable();
+        initChromeUI();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+
+</script>
+<!-- /skill:chrome -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KUP 2025 - Ketentuan Umum dan Tata Cara Perpajakan</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#E67E22;--primary-dark:#D35400;--primary-light:#F39C12;--bg:#FFFAF5;--sidebar-bg:#FFF8F0;--text:#2C3E50;--text-light:#7F8C8D;--border:#F0E6D9;--accent:#E74C3C;--card-bg:#FFFFFF}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;display:flex;min-height:100vh}
+.sidebar{width:320px;background:var(--sidebar-bg);border-right:1px solid var(--border);height:100vh;position:fixed;overflow-y:auto;transition:transform .3s;z-index:100}
+.sidebar-header{padding:24px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;text-align:center}
+.sidebar-header h1{font-size:1.1rem;font-weight:700;margin-bottom:4px}
+.sidebar-header p{font-size:.75rem;opacity:.85}
+.nav-list{padding:12px 0}
+.nav-chapter{cursor:pointer;padding:12px 20px;font-weight:600;font-size:.85rem;color:var(--text);border-left:3px solid transparent;transition:all .2s;display:flex;align-items:center;gap:10px}
+.nav-chapter:hover{background:#FFF3E8;border-left-color:var(--primary)}
+.nav-chapter.active{background:#FFF3E8;border-left-color:var(--primary);color:var(--primary)}
+.nav-chapter .ch-num{background:var(--primary);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0}
+.nav-sections{max-height:0;overflow:hidden;transition:max-height .3s}
+.nav-sections.open{max-height:1000px}
+.nav-section{padding:8px 20px 8px 54px;font-size:.8rem;color:var(--text-light);cursor:pointer;transition:all .2s}
+.nav-section:hover{color:var(--primary);background:#FFF8F0}
+.nav-section.active{color:var(--primary);font-weight:600}
+.main{margin-left:320px;flex:1;padding:40px 60px;max-width:900px}
+.chapter-header{margin-bottom:32px;padding-bottom:24px;border-bottom:2px solid var(--border)}
+.chapter-header .badge{display:inline-block;background:var(--primary);color:#fff;padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:600;margin-bottom:12px}
+.chapter-header h2{font-size:1.8rem;color:var(--text);line-height:1.3}
+.chapter-header p{color:var(--text-light);margin-top:8px;font-size:.9rem}
+.content-section{margin-bottom:36px}
+.content-section h3{font-size:1.3rem;color:var(--primary-dark);margin-bottom:16px;padding-left:16px;border-left:4px solid var(--primary)}
+.content-section h4{font-size:1.05rem;color:var(--text);margin:20px 0 10px;font-weight:600}
+.content-section p{margin-bottom:12px;font-size:.92rem}
+.content-section ul,.content-section ol{margin:12px 0 12px 24px;font-size:.92rem}
+.content-section li{margin-bottom:6px}
+.info-box{background:linear-gradient(135deg,#FFF8E1,#FFF3E0);border-left:4px solid var(--primary);padding:16px 20px;border-radius:0 8px 8px 0;margin:16px 0;font-size:.88rem}
+.info-box strong{color:var(--primary-dark)}
+.example-box{background:#F8F9FA;border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin:16px 0;font-size:.88rem}
+.example-box::before{content:'Contoh';display:block;font-weight:700;color:var(--primary);margin-bottom:8px;font-size:.8rem;text-transform:uppercase;letter-spacing:.5px}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.85rem}
+th{background:var(--primary);color:#fff;padding:10px 14px;text-align:left;font-weight:600}
+td{padding:10px 14px;border-bottom:1px solid var(--border)}
+tr:hover td{background:#FFF8F0}
+.toggle-btn{display:none;position:fixed;top:16px;left:16px;z-index:200;background:var(--primary);color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;font-size:1.1rem}
+.search-box{padding:12px 20px}
+.search-box input{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:.85rem;outline:none;transition:border-color .2s}
+.search-box input:focus{border-color:var(--primary)}
+.footer-info{padding:20px;text-align:center;font-size:.75rem;color:var(--text-light);border-top:1px solid var(--border);margin-top:20px}
+@media(max-width:900px){
+.sidebar{transform:translateX(-100%)}
+.sidebar.open{transform:translateX(0)}
+.toggle-btn{display:block}
+.main{margin-left:0;padding:24px 20px}
+}
+.fade-in{animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<button class="toggle-btn" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+<aside class="sidebar">
+<div class="sidebar-header">
+<h1>KUP 2025</h1>
+<p>Ketentuan Umum dan Tata Cara Perpajakan</p>
+<p style="font-size:.65rem;margin-top:4px">Pusdiklat Pajak • Kemenkeu</p>
+</div>
+<div class="search-box"><input type="text" placeholder="Cari materi..." id="searchInput" oninput="filterNav()"></div>
+<nav class="nav-list" id="navList"></nav>
+<div class="footer-info">© 2025 Pusdiklat Pajak<br>Kemenkeu Corporate University</div>
+</aside>
+<main class="main" id="mainContent"></main>
+<script>
+const chapters=[
+{id:1,title:"Pendaftaran dan Pelaporan Usaha",sections:[
+{t:"Pendaftaran NPWP",c:`<p>Nomor Pokok Wajib Pajak (NPWP) merupakan nomor yang diberikan kepada Wajib Pajak sebagai sarana dalam administrasi perpajakan yang dipergunakan sebagai tanda pengenal diri atau identitas Wajib Pajak dalam melaksanakan hak dan kewajiban perpajakannya.</p><p>Setiap Wajib Pajak yang telah memenuhi persyaratan subjektif dan objektif sesuai dengan ketentuan peraturan perundang-undangan perpajakan wajib mendaftarkan diri pada kantor Direktorat Jenderal Pajak.</p><div class="info-box"><strong>Persyaratan Subjektif:</strong> Sesuai dengan ketentuan mengenai subjek pajak dalam UU PPh 1984.<br><strong>Persyaratan Objektif:</strong> Bagi subjek pajak yang menerima/memperoleh penghasilan atau diwajibkan melakukan pemotongan/pemungutan.</div>`},
+{t:"Penerbitan NPWP Secara Jabatan",c:`<p>Dalam hal Wajib Pajak orang pribadi tidak melaksanakan kewajiban mendaftarkan diri, Kepala KPP dapat menerbitkan NPWP secara jabatan berdasarkan hasil penelitian administrasi.</p><p>Kewajiban perpajakan bagi WP yang diterbitkan NPWP secara jabatan dimulai sejak saat WP memenuhi persyaratan subjektif dan objektif, <strong>paling lama 5 tahun sebelum diterbitkannya NPWP</strong>.</p>`},
+{t:"Penghapusan NPWP",c:`<p>Penghapusan NPWP dilakukan dalam hal:</p><ul><li>WP orang pribadi telah meninggal dunia dan tidak meninggalkan warisan</li><li>WP orang pribadi telah meninggalkan Indonesia untuk selama-lamanya</li><li>WP orang pribadi memiliki lebih dari 1 NPWP</li></ul><p>Penghapusan NPWP dilakukan berdasarkan permohonan Wajib Pajak atau secara jabatan melalui hasil pemeriksaan.</p>`},
+{t:"Pengukuhan PKP",c:`<p>Setiap Wajib Pajak sebagai Pengusaha yang dikenai pajak berdasarkan UU PPN wajib melaporkan usahanya untuk dikukuhkan menjadi Pengusaha Kena Pajak (PKP).</p><div class="info-box"><strong>Batas Pengusaha Kecil:</strong> Pengusaha yang peredaran brutonya tidak lebih dari Rp4,8 miliar dalam 1 tahun buku tidak wajib dikukuhkan sebagai PKP, tetapi dapat memilih untuk dikukuhkan.</div>`},
+{t:"Pencabutan PKP",c:`<p>Pencabutan Pengukuhan PKP dapat dilakukan berdasarkan permohonan Pencabutan Pengukuhan PKP atau secara jabatan. Pencabutan dilakukan berdasarkan hasil Pemeriksaan, dengan jangka waktu penyelesaian 6 bulan sejak permohonan diterima lengkap.</p>`}
+]},
+{id:2,title:"Pembukuan & Pencatatan",sections:[
+{t:"Pengertian Pembukuan dan Pencatatan",c:`<p><strong>Pembukuan</strong> adalah proses pencatatan yang dilakukan secara teratur untuk mengumpulkan data dan informasi keuangan yang meliputi harta, kewajiban, modal, penghasilan dan biaya, serta jumlah harga perolehan dan penyerahan barang atau jasa.</p><p><strong>Pencatatan</strong> adalah kegiatan mengumpulkan data secara teratur tentang peredaran atau penerimaan bruto dan/atau penghasilan bruto sebagai dasar untuk menghitung jumlah pajak yang terutang.</p>`},
+{t:"Kewajiban Pembukuan",c:`<p>WP orang pribadi yang melakukan kegiatan usaha/pekerjaan bebas dan WP badan di Indonesia diwajibkan menyelenggarakan pembukuan. Syarat pembukuan:</p><ul><li>Diselenggarakan dengan iktikad baik dan mencerminkan keadaan sebenarnya</li><li>Menggunakan huruf Latin, angka Arab, satuan mata uang Rupiah, dalam bahasa Indonesia</li><li>Prinsip taat asas dengan stelsel akrual atau stelsel kas</li><li>Memuat catatan mengenai harta, kewajiban, modal, penghasilan, biaya, penjualan dan pembelian</li></ul>`},
+{t:"Kewajiban Pencatatan",c:`<p>WP yang dikecualikan dari pembukuan tetap wajib melakukan pencatatan, yaitu:</p><ol><li>WP OP yang diperbolehkan menggunakan Norma Penghitungan Penghasilan Neto</li><li>WP OP yang tidak melakukan kegiatan usaha/pekerjaan bebas</li><li>WP OP yang memenuhi kriteria tertentu</li></ol>`},
+{t:"Kewajiban Penyimpanan Dokumen",c:`<p>Buku, catatan, dan dokumen wajib disimpan selama <strong>10 (sepuluh) tahun</strong> di Indonesia, di tempat kegiatan atau tempat tinggal WP orang pribadi, atau di tempat kedudukan WP badan.</p>`}
+]},
+{id:3,title:"Pembayaran Pajak",sections:[
+{t:"Batas Waktu Pembayaran",c:`<p>Batas waktu pembayaran dan penyetoran pajak untuk Masa Pajak ditentukan paling lama <strong>tanggal 15 bulan berikutnya</strong> setelah Masa Pajak berakhir untuk sebagian besar jenis pajak.</p><p>Kekurangan pembayaran pajak berdasarkan SPT Tahunan PPh harus dibayar lunas <strong>sebelum SPT Tahunan PPh disampaikan</strong>.</p>`},
+{t:"Tata Cara Pembayaran",c:`<p>Pembayaran pajak dilakukan ke Kas Negara melalui layanan yang disediakan oleh Collecting Agent. Pembayaran menggunakan:</p><ul><li>Surat Setoran Pajak</li><li>Meterai (untuk Bea Meterai)</li><li>Sarana administrasi lain (Bukti Penerimaan Negara, dll)</li></ul>`},
+{t:"Sanksi Keterlambatan Pembayaran",c:`<p>Pembayaran setelah jatuh tempo dikenai sanksi bunga sebesar <strong>tarif bunga per bulan yang ditetapkan Menteri Keuangan</strong>, dihitung dari tanggal jatuh tempo sampai dengan tanggal pembayaran, paling lama 24 bulan.</p>`},
+{t:"Angsuran/Penundaan Pembayaran",c:`<p>Direktur Jenderal Pajak dapat memberikan persetujuan untuk mengangsur atau menunda pembayaran pajak bagi WP yang mengalami kesulitan likuiditas atau keadaan force majeur.</p>`}
+]},
+{id:4,title:"Pelaporan Pajak (SPT)",sections:[
+{t:"Pengertian dan Fungsi SPT",c:`<p>Surat Pemberitahuan (SPT) adalah surat yang digunakan untuk melaporkan penghitungan dan/atau pembayaran pajak, objek pajak dan/atau bukan objek pajak, dan/atau harta dan kewajiban.</p><p>SPT terdiri dari <strong>SPT Masa</strong> (untuk suatu Masa Pajak) dan <strong>SPT Tahunan</strong> (untuk suatu Tahun Pajak atau Bagian Tahun Pajak).</p>`},
+{t:"Batas Waktu Penyampaian SPT",c:`<table><tr><th>Jenis SPT</th><th>Batas Waktu</th></tr><tr><td>SPT Masa</td><td>20 hari setelah akhir Masa Pajak</td></tr><tr><td>SPT Tahunan PPh OP</td><td>3 bulan setelah akhir Tahun Pajak</td></tr><tr><td>SPT Tahunan PPh Badan</td><td>4 bulan setelah akhir Tahun Pajak</td></tr></table>`},
+{t:"Sanksi Keterlambatan SPT",c:`<table><tr><th>Jenis SPT</th><th>Denda</th></tr><tr><td>SPT Masa selain PPN</td><td>Rp100.000</td></tr><tr><td>SPT Masa PPN</td><td>Rp500.000</td></tr><tr><td>SPT Tahunan PPh OP</td><td>Rp100.000</td></tr><tr><td>SPT Tahunan PPh Badan</td><td>Rp1.000.000</td></tr></table>`},
+{t:"Pembetulan SPT",c:`<p>WP dapat membetulkan SPT yang telah disampaikan dengan syarat DJP belum melakukan tindakan pemeriksaan. Pembetulan SPT yang menyatakan rugi/lebih bayar harus disampaikan paling lama <strong>2 tahun sebelum daluwarsa penetapan</strong>.</p>`}
+]},
+{id:5,title:"Pemeriksaan",sections:[
+{t:"Pengertian dan Tujuan",c:`<p>Pemeriksaan adalah serangkaian kegiatan menghimpun dan mengolah data, keterangan, dan/atau bukti yang dilaksanakan secara objektif dan profesional untuk:</p><ol><li>Menguji kepatuhan pemenuhan kewajiban perpajakan</li><li>Tujuan lain dalam rangka melaksanakan ketentuan perpajakan</li></ol>`},
+{t:"Tipe Pemeriksaan",c:`<ul><li><strong>Pemeriksaan Lengkap:</strong> Mencakup seluruh pos dalam SPT secara mendalam (5 bulan)</li><li><strong>Pemeriksaan Terfokus:</strong> Terfokus pada satu/beberapa pos secara mendalam (3 bulan)</li><li><strong>Pemeriksaan Spesifik:</strong> Atas satu/beberapa pos secara sederhana (1 bulan)</li></ul>`},
+{t:"Hak dan Kewajiban",c:`<p><strong>Kewajiban Pemeriksa:</strong> Memperlihatkan tanda pengenal dan SP2, menyampaikan SPHP, memberikan hak hadir dalam PAHP.</p><p><strong>Hak Wajib Pajak:</strong> Meminta penjelasan alasan/tujuan pemeriksaan, menghadiri pembahasan temuan sementara dan PAHP, mengajukan QA Pemeriksaan.</p>`},
+{t:"Penghitungan Secara Jabatan",c:`<p>Dalam hal WP tidak menyampaikan buku/catatan/dokumen yang diminta, dan Pemeriksa tidak dapat melakukan pengujian, penghasilan kena pajak dapat dihitung secara jabatan sesuai ketentuan peraturan perundang-undangan.</p>`}
+]},
+{id:6,title:"Penetapan & Ketetapan Pajak",sections:[
+{t:"Jenis Ketetapan Pajak",c:`<ul><li><strong>SKPKB:</strong> Menentukan jumlah kekurangan pembayaran pokok pajak + sanksi</li><li><strong>SKPKBT:</strong> Menentukan tambahan atas jumlah pajak yang telah ditetapkan</li><li><strong>SKPN:</strong> Jumlah pokok pajak sama dengan kredit pajak</li><li><strong>SKPLB:</strong> Jumlah kredit pajak lebih besar dari pajak terutang</li></ul><p>Surat ketetapan pajak diterbitkan dalam jangka waktu <strong>5 tahun</strong> setelah saat terutangnya pajak atau berakhirnya Masa/Tahun Pajak.</p>`},
+{t:"SKPKB",c:`<p>SKPKB diterbitkan jika terdapat pajak yang tidak/kurang dibayar, SPT tidak disampaikan setelah ditegur, PPN yang tidak seharusnya dikompensasikan, atau kewajiban pembukuan tidak dipenuhi.</p><div class="info-box"><strong>Sanksi Pasal 13 ayat 2:</strong> Bunga sebesar tarif bunga per bulan dari Menteri Keuangan, dihitung sejak saat terutangnya pajak s.d. diterbitkannya SKPKB, paling lama 24 bulan.</div>`},
+{t:"Surat Tagihan Pajak (STP)",c:`<p>STP diterbitkan apabila PPh dalam tahun berjalan tidak/kurang dibayar, terdapat kekurangan akibat salah tulis/salah hitung, WP dikenai sanksi denda/bunga, atau PKP tidak/terlambat membuat faktur pajak.</p>`},
+{t:"Pengembalian Pendahuluan (SKPPKP)",c:`<p>SKPPKP diterbitkan berdasarkan hasil penelitian untuk:</p><ul><li>WP Kriteria Tertentu (Pasal 17C): paling lama 3 bulan PPh, 1 bulan PPN</li><li>WP Persyaratan Tertentu (Pasal 17D): 15 hari kerja OP, 1 bulan Badan/PPN</li><li>PKP Berisiko Rendah (Pasal 9(4c) UU PPN): 1 bulan</li></ul>`}
+]},
+{id:7,title:"Penagihan Pajak",sections:[
+{t:"Dasar dan Tindakan Penagihan",c:`<p>Dasar penagihan: STP, SKPKB, SKPKBT, SK Pembetulan, SK Keberatan, Putusan Banding, Putusan PK yang menyebabkan pajak bertambah.</p><p>Tindakan penagihan: Surat Teguran → Surat Paksa → Penyitaan → Lelang → Pencegahan/Penyanderaan.</p>`},
+{t:"Jangka Waktu Penagihan",c:`<table><tr><th>Tindakan</th><th>Jangka Waktu</th></tr><tr><td>Surat Teguran</td><td>7 hari setelah jatuh tempo</td></tr><tr><td>Surat Paksa</td><td>21 hari setelah Surat Teguran</td></tr><tr><td>Penyitaan</td><td>2x24 jam setelah Surat Paksa</td></tr><tr><td>Pengumuman Lelang</td><td>14 hari setelah penyitaan</td></tr><tr><td>Pelaksanaan Lelang</td><td>14 hari setelah pengumuman</td></tr></table>`},
+{t:"Hak Mendahulu Negara",c:`<p>Negara mempunyai hak mendahulu untuk utang pajak atas barang-barang milik Penanggung Pajak. Pembayaran kepada kreditur lain diselesaikan setelah utang pajak dilunasi. Hak mendahulu hilang setelah 5 tahun sejak tanggal penerbitan dasar penagihan.</p>`},
+{t:"Daluwarsa Penagihan",c:`<p><strong>Tahun Pajak 2007 ke bawah:</strong> 10 tahun sejak saat terutangnya pajak.</p><p><strong>Tahun Pajak 2008 ke atas:</strong> 5 tahun sejak penerbitan STP/SKP/keputusan/putusan.</p><p>Daluwarsa tertangguh jika diterbitkan Surat Paksa, terdapat pengakuan utang pajak, atau dilakukan penyidikan.</p>`}
+]},
+{id:8,title:"Upaya Hukum di DJP",sections:[
+{t:"Pembetulan (Pasal 16)",c:`<p>DJP dapat membetulkan ketetapan/keputusan yang terdapat kesalahan tulis, kesalahan hitung, atau kekeliruan penerapan ketentuan. Jangka waktu penyelesaian: <strong>6 bulan</strong> sejak permohonan diterima.</p>`},
+{t:"Keberatan (Pasal 25)",c:`<p>Keberatan diajukan dalam <strong>3 bulan</strong> sejak tanggal SKP dikirim. DJP harus memberikan keputusan dalam <strong>12 bulan</strong> sejak surat keberatan diterima.</p><div class="info-box"><strong>Sanksi jika ditolak/dikabulkan sebagian:</strong> Denda 30% dari (jumlah pajak berdasarkan SK Keberatan - pajak yang telah dibayar sebelum keberatan).</div>`},
+{t:"Pengurangan/Pembatalan (Pasal 36)",c:`<p>DJP dapat:</p><ul><li>Mengurangkan/menghapuskan sanksi administrasi (karena kekhilafan/bukan kesalahan WP)</li><li>Mengurangkan/membatalkan SKP yang tidak benar</li><li>Mengurangkan/membatalkan STP yang tidak benar</li><li>Membatalkan hasil pemeriksaan tanpa SPHP atau PAHP</li></ul><p>Jangka waktu: 6 bulan. Permohonan dapat diajukan paling banyak 2 kali.</p>`},
+{t:"Imbalan Bunga",c:`<p>Imbalan bunga diberikan atas:</p><ul><li>Keterlambatan pengembalian kelebihan pembayaran pajak</li><li>Keterlambatan penerbitan SKPLB</li><li>Kelebihan pembayaran karena keberatan/banding/PK dikabulkan</li><li>SK Pembetulan/pengurangan/pembatalan yang mengabulkan</li></ul><p>Tarif: tarif bunga per bulan dari Menteri Keuangan, paling lama 24 bulan.</p>`}
+]},
+{id:9,title:"Upaya Hukum di Luar DJP",sections:[
+{t:"Banding",c:`<p>Diajukan ke Pengadilan Pajak dalam <strong>3 bulan</strong> sejak SK Keberatan diterima. Pengadilan Pajak merupakan pengadilan tingkat pertama dan terakhir.</p><div class="info-box"><strong>Sanksi jika ditolak/dikabulkan sebagian:</strong> Denda 60% dari (jumlah pajak berdasarkan Putusan Banding - pajak yang telah dibayar sebelum keberatan).</div>`},
+{t:"Gugatan",c:`<p>Diajukan terhadap pelaksanaan penagihan (14 hari) atau keputusan lainnya (30 hari). Gugatan tidak menunda pelaksanaan penagihan, tetapi dapat dimohonkan penundaan melalui putusan sela.</p>`},
+{t:"Peninjauan Kembali",c:`<p>Diajukan 1 kali ke Mahkamah Agung melalui Pengadilan Pajak, dalam jangka waktu <strong>3 bulan</strong> sejak alasan PK diketahui/putusan dikirim.</p><div class="info-box"><strong>Sanksi jika menambah pajak:</strong> Denda 60% dari (jumlah pajak berdasarkan Putusan PK - pajak yang telah dibayar sebelum keberatan).</div>`}
+]},
+{id:10,title:"Ketentuan Pidana",sections:[
+{t:"Pemeriksaan Bukti Permulaan",c:`<p>Dilakukan sebelum penyidikan berdasarkan IDLP (Informasi, Data, Laporan, Pengaduan). Pemeriksaan Bukti Permulaan memiliki kedudukan yang sama dengan penyelidikan dalam KUHAP.</p>`},
+{t:"Penyidikan",c:`<p>Penyidikan tindak pidana perpajakan hanya dilakukan oleh PPNS di lingkungan DJP. Penyidik berwenang melakukan penggeledahan, penyitaan, pemblokiran harta kekayaan tersangka, dan tindakan lain sesuai KUHAP.</p>`},
+{t:"Sanksi Pidana - Kealpaan (Pasal 38)",c:`<p>Tidak menyampaikan SPT atau menyampaikan SPT tidak benar karena kealpaan: denda 1-2x jumlah pajak terutang yang tidak/kurang dibayar, atau kurungan 3 bulan - 1 tahun.</p>`},
+{t:"Sanksi Pidana - Kesengajaan (Pasal 39)",c:`<p>Perbuatan sengaja (tidak daftar NPWP, tidak sampaikan SPT, SPT tidak benar, dll): penjara 6 bulan - 6 tahun dan denda 2-4x jumlah pajak terutang yang tidak/kurang dibayar.</p>`},
+{t:"Penghentian Penyidikan (Pasal 44B)",c:`<p>Jaksa Agung dapat menghentikan penyidikan atas permintaan Menteri Keuangan setelah WP/tersangka melunasi kerugian negara + sanksi denda (1x untuk Pasal 38, 3x untuk Pasal 39, 4x untuk Pasal 39A).</p>`},
+{t:"Daluwarsa Penuntutan",c:`<p>Tindak pidana perpajakan tidak dapat dituntut setelah <strong>10 tahun</strong> sejak saat terutangnya pajak atau berakhirnya Masa/Tahun Pajak.</p>`}
+]},
+{id:11,title:"Ketentuan Khusus",sections:[
+{t:"Wakil Wajib Pajak",c:`<p>WP Badan diwakili oleh pengurus. Wakil bertanggung jawab secara pribadi dan/atau secara renteng atas pembayaran pajak terutang. Pengurus termasuk orang yang nyata-nyata mempunyai wewenang menentukan kebijaksanaan perusahaan.</p>`},
+{t:"Kuasa Wajib Pajak",c:`<p>Kuasa WP dapat berupa konsultan pajak, pihak lain, atau keluarga. Kuasa harus memiliki kompetensi tertentu dalam aspek perpajakan (kecuali keluarga) dan wajib mematuhi ketentuan perpajakan.</p>`},
+{t:"Rahasia Jabatan",c:`<p>Setiap pejabat/petugas pajak dilarang mengungkapkan kerahasiaan WP. Pelanggaran karena kealpaan: kurungan 1 tahun + denda Rp25 juta. Pelanggaran sengaja: penjara 2 tahun + denda Rp50 juta.</p>`},
+{t:"Prosedur Persetujuan Bersama (MAP)",c:`<p>DJP berwenang melaksanakan prosedur persetujuan bersama (mutual agreement procedure) untuk mencegah/menyelesaikan permasalahan dalam penerapan P3B. Dapat diajukan bersamaan dengan keberatan, banding, atau pengurangan/pembatalan SKP.</p>`},
+{t:"Penunjukan Pihak Lain (Pasal 32A)",c:`<p>Menteri Keuangan dapat menunjuk pihak lain (termasuk platform digital) untuk melakukan pemotongan, pemungutan, penyetoran, dan/atau pelaporan pajak. Jika pihak lain adalah penyelenggara sistem elektronik, dapat dikenai sanksi pemutusan akses.</p>`}
+]}
+];
+function renderNav(){
+const nav=document.getElementById('navList');
+nav.innerHTML=chapters.map(ch=>`
+<div class="nav-item" data-chapter="${ch.id}">
+<div class="nav-chapter" onclick="toggleChapter(${ch.id})">
+<span class="ch-num">${ch.id}</span>${ch.title}
+</div>
+<div class="nav-sections" id="sec-${ch.id}">
+${ch.sections.map((s,i)=>`<div class="nav-section" onclick="showSection(${ch.id},${i})">${s.t}</div>`).join('')}
+</div>
+</div>`).join('');
+}
+function toggleChapter(id){
+const el=document.getElementById(`sec-${id}`);
+document.querySelectorAll('.nav-sections').forEach(s=>{if(s!==el)s.classList.remove('open')});
+el.classList.toggle('open');
+showSection(id,0);
+}
+function showSection(chId,secIdx){
+const ch=chapters.find(c=>c.id===chId);
+const sec=ch.sections[secIdx];
+document.querySelectorAll('.nav-chapter').forEach(n=>n.classList.remove('active'));
+document.querySelectorAll('.nav-section').forEach(n=>n.classList.remove('active'));
+document.querySelector(`[data-chapter="${chId}"] .nav-chapter`).classList.add('active');
+const secEls=document.querySelectorAll(`#sec-${chId} .nav-section`);
+if(secEls[secIdx])secEls[secIdx].classList.add('active');
+const main=document.getElementById('mainContent');
+main.innerHTML=`<div class="fade-in">
+<div class="chapter-header">
+<span class="badge">Bahan Ajar ${ch.id}</span>
+<h2>${ch.title}</h2>
+<p>${sec.t}</p>
+</div>
+<div class="content-section">${sec.c}</div>
+<div style="margin-top:32px;padding-top:20px;border-top:1px solid var(--border)">
+<p style="font-size:.8rem;color:var(--text-light)"><strong>Navigasi:</strong> Gunakan menu di samping untuk berpindah antar bab dan subbab.</p>
+${secIdx>0?`<button onclick="showSection(${chId},${secIdx-1})" style="margin-top:8px;padding:8px 16px;background:var(--primary);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:.8rem">← Sebelumnya</button>`:''}
+${secIdx<ch.sections.length-1?`<button onclick="showSection(${chId},${secIdx+1})" style="margin-top:8px;margin-left:8px;padding:8px 16px;background:var(--primary);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:.8rem">Selanjutnya →</button>`:''}
+</div></div>`;
+main.scrollTop=0;
+document.querySelector('.sidebar').classList.remove('open');
+}
+function filterNav(){
+const q=document.getElementById('searchInput').value.toLowerCase();
+document.querySelectorAll('.nav-item').forEach(item=>{
+const text=item.textContent.toLowerCase();
+item.style.display=text.includes(q)?'':'none';
+if(q&&text.includes(q)){
+const secEl=item.querySelector('.nav-sections');
+if(secEl)secEl.classList.add('open');
+}
+});
+}
+renderNav();
+showSection(1,0);
+document.getElementById('sec-1').classList.add('open');
+</script>
+</body>
+</html>

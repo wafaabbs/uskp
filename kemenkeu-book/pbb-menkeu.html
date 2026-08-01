@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<!-- skill:chrome -->
+<style>
+/* Credit line — bottom-right */
+.design-ui-credit {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  font: 11px/1 system-ui, sans-serif;
+  color: rgba(128,128,128,0.5);
+  pointer-events: none;
+  z-index: 2147483647;
+  transition: opacity 0.4s ease;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+/* Hide chrome on touch devices */
+@media (hover: none) {
+  .design-ui-credit { display: none; }
+}
+
+/* Print fixes */
+@media print {
+  * {
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+  }
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .design-ui-credit { display: none !important; }
+}
+
+</style>
+<script>
+(function () {
+    // Design-ui pages are single compositions, so the whole body is editable.
+    function markEditable() {
+        document.body.classList.add('artifact-editable');
+    }
+
+    // Credit badge with idle-fade. Hover devices only.
+    function initChromeUI() {
+        if (!matchMedia('(hover: hover)').matches) return;
+
+        var credit = document.createElement('div');
+        credit.className = 'design-ui-credit';
+        credit.setAttribute('aria-hidden', 'true');
+        credit.innerHTML = '\u{1F49C} by ClickUp Brain';
+        document.body.appendChild(credit);
+
+        var timer = null;
+        var fade = function (out) { credit.style.opacity = out ? '0' : ''; };
+        fade(true);
+        var show = function () {
+            fade(false);
+            clearTimeout(timer);
+            timer = setTimeout(function () { fade(true); }, 3000);
+        };
+        document.addEventListener('mousemove', show);
+        show();
+    }
+
+    function init() {
+        markEditable();
+        initChromeUI();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+
+</script>
+<!-- /skill:chrome -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PBB Sektor P5L & Bea Meterai 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--accent:oklch(42% 0.18 15);--accent-light:oklch(95% 0.03 15);--bg:oklch(98.5% 0.003 80);--surface:oklch(99.5% 0.002 80);--text:oklch(18% 0.01 80);--text-muted:oklch(55% 0.01 80);--border:oklch(90% 0.005 80);--sidebar-w:290px;--header-h:56px;--green:oklch(52% 0.14 145)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.75;font-size:15px}
+.header{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.25rem;z-index:100;gap:0.75rem}
+.header h1{font-size:0.95rem;font-weight:700;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.menu-btn{display:none;background:none;border:none;cursor:pointer;padding:6px}
+.menu-btn svg{width:22px;height:22px;stroke:var(--text);fill:none}
+.search-box{margin-left:auto;position:relative;width:240px}
+.search-box input{width:100%;padding:7px 10px 7px 32px;border:1px solid var(--border);border-radius:8px;font-size:0.8rem;font-family:inherit;outline:none;background:var(--bg);transition:border .2s}
+.search-box input:focus{border-color:var(--accent)}
+.search-box svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--text-muted);fill:none}
+.sidebar{position:fixed;top:var(--header-h);left:0;width:var(--sidebar-w);height:calc(100vh - var(--header-h));overflow-y:auto;background:var(--surface);border-right:1px solid var(--border);padding:0.75rem 0;z-index:90;transition:transform .3s ease}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.nav-group-title{padding:0.6rem 1.1rem 0.3rem;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent)}
+.nav-item{display:block;padding:0.35rem 1.1rem;font-size:0.78rem;color:var(--text-muted);cursor:pointer;text-decoration:none;transition:all .12s}
+.nav-item:hover{background:var(--accent-light);color:var(--text)}
+.nav-item.active{background:var(--accent-light);color:var(--accent);font-weight:600}
+.main{margin-left:var(--sidebar-w);margin-top:var(--header-h);padding:2.5rem 3rem 4rem;max-width:820px}
+.chapter{display:none}
+.chapter.active{display:block}
+.chapter h2{font-size:1.5rem;font-weight:800;margin-bottom:0.9rem;color:var(--accent)}
+.chapter h3{font-size:1.1rem;font-weight:700;margin:1.6rem 0 0.6rem;color:var(--text)}
+.chapter h4{font-size:0.95rem;font-weight:700;margin:1.2rem 0 0.5rem}
+.chapter p{margin-bottom:0.9rem}
+.chapter ul,.chapter ol{margin:0.5rem 0 1rem 1.4rem}
+.chapter li{margin-bottom:0.35rem}
+.info-box{background:var(--accent-light);padding:1rem 1.2rem;border-radius:8px;margin:1.1rem 0;font-size:0.88rem}
+.info-box strong{color:var(--accent)}
+.example-box{background:oklch(97% 0.02 145);padding:1rem 1.2rem;border-radius:8px;margin:1.1rem 0;font-size:0.88rem}
+.example-box .label{font-weight:700;color:var(--green);margin-bottom:0.3rem;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.03em}
+.nav-buttons{display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--border)}
+.nav-btn{padding:0.5rem 1rem;border:1px solid var(--border);border-radius:7px;font-size:0.82rem;font-family:inherit;cursor:pointer;background:var(--surface);transition:all .15s;color:var(--text)}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent)}
+.nav-btn.primary{background:var(--accent);color:oklch(98% 0.01 15);border-color:var(--accent)}
+.nav-btn.primary:hover{opacity:0.9}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:85}
+.overlay.show{display:block}
+@media(max-width:768px){
+.sidebar{transform:translateX(-100%)}
+.sidebar.open{transform:translateX(0)}
+.menu-btn{display:block}
+.main{margin-left:0;padding:1.5rem 1.1rem 3rem}
+.search-box{width:140px}
+.header h1{font-size:0.82rem}
+}
+</style>
+</head>
+<body>
+<header class="header">
+<button class="menu-btn" onclick="toggleSidebar()" aria-label="Menu"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+<h1>PBB Sektor P5L & Bea Meterai 2025</h1>
+<div class="search-box"><svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="m21 21-4.35-4.35"/></svg><input type="text" id="search" placeholder="Cari materi..." oninput="doSearch(this.value)"></div>
+</header>
+<div class="overlay" onclick="toggleSidebar()"></div>
+<nav class="sidebar" id="sidebar"></nav>
+<main class="main" id="main"></main>
+<script>
+const CH=[
+{g:"PBB: Pendataan & Penilaian",t:"1. Pendataan Kantor",c:`<h2>Pendataan Kantor</h2><p>Pendataan dilakukan dengan cara mengolah data Objek Pajak yang dilaporkan oleh Wajib Pajak melalui SPOP dan/atau mengolah data dan informasi yang terdapat dalam sistem informasi Direktorat Jenderal Pajak.</p><div class="info-box"><strong>Pengumpulan Data:</strong> Diperoleh dari SPOP yang disampaikan WP dan data dari instansi pemerintah, lembaga, asosiasi, dan pihak lain.</div><p><strong>Pemetaan</strong> dilakukan dengan transformasi antar sistem proyeksi dan/atau digitasi peta analog ke peta digital.</p>`},
+{g:"PBB: Pendataan & Penilaian",t:"2. Pendataan Lapangan",c:`<h2>Pendataan Lapangan</h2><p>Pendataan dilakukan dengan peninjauan pada lokasi fisik Objek Pajak atas data yang seharusnya dilaporkan dalam SPOP. Meliputi pengukuran berbasis satelit, penginderaan jauh, dan/atau alat ukur manual.</p><p>Apabila WP menolak, harus menandatangani surat pernyataan penolakan. Petugas pendata tetap melakukan pendataan berdasarkan data DJP dan hasilnya dilaporkan sebagai laporan hasil pendataan (dapat digunakan untuk analisis risiko/usulan pemeriksaan).</p>`},
+{g:"PBB: Pendataan & Penilaian",t:"3. Sektor dan Objek PBB",c:`<h2>Sektor dan Objek PBB</h2><p>PMK 186/PMK.03/2019 membagi objek PBB menjadi 6 sektor:</p><ol><li>Perkebunan</li><li>Perhutanan</li><li>Pertambangan Minyak dan Gas Bumi</li><li>Pertambangan Panas Bumi</li><li>Pertambangan Mineral atau Batubara</li><li>Lainnya (Perikanan tangkap, Pembudidayaan ikan, Jaringan pipa/kabel, Ruas jalan tol, Fasilitas penyimpanan: FSO, FPS, FPU, FSU, FPSO, FSRU)</li></ol><h3>Objek Bumi</h3><p>Permukaan bumi (tanah, perairan pedalaman, laut wilayah Indonesia) dan tubuh bumi yang ada di bawahnya.</p><h3>Objek Bangunan</h3><p>Konstruksi teknik yang ditanam/dilekatkan secara tetap pada tanah/perairan. Termasuk: jalan tol, kolam renang, galangan kapal, dermaga, kilang minyak, pipa minyak, dll.</p>`},
+{g:"PBB: Pendataan & Penilaian",t:"4. Objek PBB Dikecualikan",c:`<h2>Objek PBB Yang Dikecualikan</h2><p>Pasal 3 UU PBB, objek pajak yang tidak dikenakan PBB:</p><ol><li>Untuk kepentingan umum (ibadah, sosial, kesehatan, pendidikan, kebudayaan nasional) tanpa mencari keuntungan</li><li>Kuburan, peninggalan purbakala</li><li>Hutan lindung, suaka alam, taman nasional, tanah penggembalaan desa, tanah negara belum dibebani hak</li><li>Perwakilan diplomatik/konsulat (asas timbal balik)</li><li>Organisasi internasional yang ditentukan Menkeu</li></ol>`},
+{g:"PBB: Pendataan & Penilaian",t:"5. Subjek PBB",c:`<h2>Subjek PBB</h2><p>Orang atau badan yang secara nyata: mempunyai hak atas bumi, memperoleh manfaat atas bumi, memiliki/menguasai/memperoleh manfaat atas bangunan.</p><p>Subjek pajak yang dikenakan kewajiban membayar pajak menjadi <strong>Wajib Pajak</strong>. Jika belum jelas, DJP dapat menetapkan subjek pajak sebagai WP.</p><div class="example-box"><div class="label">Contoh</div>A memanfaatkan bumi/bangunan milik B bukan karena hak/perjanjian → A ditetapkan sebagai Wajib Pajak. Objek dalam sengketa → pihak yang memanfaatkan ditetapkan sebagai WP.</div>`},
+{g:"PBB: Pendataan & Penilaian",t:"6. NJOP, NJOPTKP & Tarif",c:`<h2>Nilai Jual Objek Pajak</h2><p>NJOP = harga rata-rata transaksi jual beli yang wajar. Metode: Perbandingan Data Pasar, Kalkulasi Biaya, atau Pendekatan Pendapatan. Ditetapkan tiap <strong>3 tahun</strong> (daerah tertentu tiap tahun).</p><h3>NJOPTKP</h3><p>Sebesar <strong>Rp12.000.000</strong> per WP, dikurangkan pada NJOP tertinggi.</p><h3>NJKP & Tarif</h3><p>NJKP: <strong>40%</strong> (perkebunan/kehutanan/pertambangan atau NJOP ≥ Rp1 miliar) atau <strong>20%</strong> (NJOP < Rp1 miliar).</p><div class="info-box"><strong>Tarif PBB = 0,5%</strong> (flat rate, Pasal 5 UU PBB).<br>Rumus: PBB = 0,5% × NJKP × (NJOP - NJOPTKP)</div>`},
+{g:"PBB: Pendataan & Penilaian",t:"7.1 PBB Sektor Perkebunan",c:`<h2>PBB Sektor Perkebunan</h2><p>Dikenakan atas bumi/bangunan di kawasan usaha perkebunan.</p><h3>Areal Bumi</h3><ol type="a"><li><strong>Produktif:</strong> telah ditanami (tanah + BIT)</li><li><strong>Belum Produktif:</strong> belum diolah/ditanami/pembibitan</li><li><strong>Tidak Produktif:</strong> tidak dapat diusahakan</li><li><strong>Pengaman:</strong> pendukung/pengaman</li><li><strong>Emplasemen:</strong> bangunan dan fasilitas</li></ol><h3>NJOP</h3><p>Areal Produktif tanah: Perbandingan Harga. Tanaman: <strong>Biaya Investasi Tanaman (BIT)</strong>. Bangunan: Nilai Perolehan Baru.</p><div class="example-box"><div class="label">Contoh PBB Terhutang</div>Bumi 16.510.000 m² = Rp712.901.800.000<br>Bangunan 16.500 m² = Rp23.899.920.000<br>DPP = Rp736.801.720.000 - NJOPTKP Rp12.000.000<br>NJKP 40% = Rp294.715.888.000<br><strong>PBB = 0,5% × Rp294.715.888.000 = Rp1.473.579.440</strong></div>`},
+{g:"PBB: Pendataan & Penilaian",t:"7.2 PBB Sektor Perhutanan",c:`<h2>PBB Sektor Perhutanan</h2><p>Bumi/bangunan di kawasan perhutanan. Areal tercantum dalam izin IUPHHK-HA, IUPHHBK-HA, IUPHHK-RE, IUPHHK-HTI, IUPHHBK-HT, dan penugasan Perum Perhutani.</p><h3>Hutan Alam (Areal Produktif)</h3><p>NJOP = Nilai Jual Pengganti = pendapatan bersih hasil hutan × Angka Kapitalisasi.</p><h3>Hutan Tanaman (Areal Produktif)</h3><p>NJOP bumi: Perbandingan Harga. NJOP tanaman: penghitungan BIT.</p><div class="example-box"><div class="label">Contoh Hutan Alam</div>PT Wono Alam Dulkemit (IUPHHK-RE Papua): 60.000 m³/tahun × Rp700.000/m³<br>Pendapatan kotor Rp42 miliar, biaya 75%, pendapatan bersih Rp10,5 miliar<br>Angka kapitalisasi 8,5 → Nilai Jual = <strong>Rp89.250.000.000</strong></div>`},
+{g:"PBB: Pendataan & Penilaian",t:"7.3 PBB Pertambangan Migas",c:`<h2>PBB Pertambangan Minyak & Gas Bumi</h2><p>Meliputi Permukaan Bumi Onshore, Offshore, dan Tubuh bumi dalam Wilayah Kerja Migas (Kontrak Kerja Sama).</p><h3>NJOP Tubuh Bumi (Ada Hasil)</h3><p>Nilai Jual Pengganti = pendapatan Migas (gross sales dari FQR triwulan IV) × Angka Kapitalisasi.</p><div class="example-box"><div class="label">Contoh</div>PT Dulkemit Oil & Gas: WK 3 juta ha, lifting 100.000 barrel/hari<br>Harga US$61/barrel × Rp15.500 = Pendapatan Rp34,5 triliun<br>Angka kapitalisasi 10,04 → NJOP Rp346,5 triliun<br>NJKP 40%, Tarif 0,5% → <strong>PBB = Rp692.399.976.000</strong></div>`},
+{g:"PBB: Pendataan & Penilaian",t:"7.4 PBB Panas Bumi",c:`<h2>PBB Pertambangan Panas Bumi</h2><p>Bumi/bangunan di kawasan pengusahaan Panas Bumi. Tubuh Bumi Eksploitasi: Nilai Jual Pengganti = pendapatan uap/listrik × Angka Kapitalisasi.</p><div class="example-box"><div class="label">Contoh</div>PT Dulkemit GeoEnergy: WK 900 ha, kapasitas 140 MW, harga uap Rp616/kwh<br>Pendapatan Rp755 miliar/tahun × 10,04 = NJOP Rp7,58 triliun<br><strong>PBB Terhutang = Rp14.999.976.000</strong></div>`},
+{g:"PBB: Pendataan & Penilaian",t:"7.5 PBB Minerba",c:`<h2>PBB Pertambangan Minerba</h2><p>Bumi/bangunan di kawasan pertambangan Mineral atau Batubara. SPPT terdiri dari: Permukaan Bumi Onshore, Offshore, dan Tubuh bumi.</p><h3>Tubuh Bumi Operasi Produksi</h3><p>NJOP = pendapatan bersih Minerba × Angka Kapitalisasi.<br>Pendapatan bersih = pendapatan kotor - biaya produksi (langsung).</p><p>Harga jual menggunakan Harga Patokan jika harga jual rata-rata lebih rendah.</p><div class="example-box"><div class="label">Contoh</div>PT Dulkemit Batubara: WIUP 1.180 ha, produksi 7.000 ton × Rp600.000<br>Pendapatan kotor Rp4,2 miliar - biaya Rp1,678 miliar = bersih Rp2,522 miliar<br>× 10,25 = <strong>Nilai bumi Rp25.850.500.000</strong></div>`},
+{g:"PBB: Pendataan & Penilaian",t:"7.6 PBB Sektor Lainnya",c:`<h2>PBB Sektor Lainnya</h2><p>Bumi/bangunan di wilayah perairan NKRI, selain PBB Perdesaan/Perkotaan. Subsektor:</p><ol><li><strong>Perikanan tangkap:</strong> NJOP = Nilai Jual Pengganti (pendapatan bersih × Angka Kapitalisasi)</li><li><strong>Pembudidayaan ikan:</strong> serupa dengan perikanan tangkap</li><li><strong>Jaringan Pipa/Kabel:</strong> NJOP ditetapkan Kepdirjen, luas = panjang × 2 × diameter</li><li><strong>Ruas jalan tol:</strong> jumlah tapak × luas pondasi</li><li><strong>Fasilitas penyimpanan (FSO/FPSO/dll):</strong> luas berdasarkan izin perhubungan</li></ol>`},
+// PART B
+{g:"PBB: Penetapan & STP",t:"1. Tahun Pajak & Saat Terutang",c:`<h2>Tahun Pajak & Saat Terutangnya PBB</h2><p>Tahun pajak = tahun takwim (1 Jan s.d. 31 Des). Besarnya pajak ditentukan berdasarkan keadaan objek pajak pada <strong>1 Januari</strong>.</p><p>Dasar penagihan: SPPT, SKP, dan STP. Menteri Keuangan dapat melimpahkan kewenangan penagihan kepada gubernur/bupati/walikota.</p>`},
+{g:"PBB: Penetapan & STP",t:"2. Prosedur Penerbitan SKP",c:`<h2>Prosedur Penerbitan SKP</h2><p>SKP diterbitkan jika:</p><ol><li>SPOP tidak disampaikan setelah ditegur → pokok + <strong>denda 25%</strong></li><li>Pemeriksaan menunjukkan pajak lebih besar dari SPOP → selisih + <strong>denda 25%</strong> dari selisih</li></ol><p>SKP harus dilunasi paling lambat <strong>1 bulan</strong> sejak diterima. Dapat diterbitkan dalam <strong>5 tahun</strong> setelah Tahun Pajak berakhir.</p>`},
+{g:"PBB: Penetapan & STP",t:"3. Pembayaran & Penagihan",c:`<h2>Pembayaran, Penerimaan & Penagihan</h2><p>SPPT harus dilunasi <strong>6 bulan</strong> sejak diterima. Keterlambatan dikenakan denda <strong>2% per bulan</strong> (maks 24 bulan). STP harus dilunasi <strong>1 bulan</strong>, dapat ditagih dengan Surat Paksa.</p><p>Hasil penerimaan PBB: min <strong>90%</strong> untuk pemerintah daerah (sebagian besar ke kabupaten/kota).</p>`},
+// PART C
+{g:"PBB: Keberatan & Upaya Hukum",t:"1. Keberatan",c:`<h2>Keberatan</h2><p>Diajukan terhadap SPPT/SKP, tertulis dalam bahasa Indonesia, selambat-lambatnya <strong>3 bulan</strong> sejak diterima. Tidak menunda kewajiban membayar.</p><p>DJP harus memberi keputusan dalam <strong>12 bulan</strong>. Jika lewat tanpa keputusan → keberatan dianggap diterima.</p><p>Keputusan: menerima seluruhnya, menerima sebagian, menolak, atau menambah jumlah pajak terhutang.</p>`},
+{g:"PBB: Keberatan & Upaya Hukum",t:"2. Pengurangan & Denda",c:`<h2>Pengurangan</h2><p><strong>Melalui permohonan:</strong> maks 75% (kondisi tertentu) atau maks 100% (bencana alam) untuk SPPT, SKP, STP.</p><p><strong>Secara jabatan:</strong> maks 100% untuk bencana alam sesuai ketentuan penanggulangan bencana.</p><h3>Pengurangan Denda Administrasi</h3><p>Atas permintaan WP, Dirjen Pajak dapat mengurangkan denda 25% (SKP) dan denda 2%/bulan (STP) karena hal-hal tertentu.</p><h3>Pengangsuran & Penundaan</h3><p>WP dapat mengajukan permohonan tertulis, tidak boleh memiliki tunggakan PBB tahun sebelumnya.</p>`},
+{g:"PBB: Keberatan & Upaya Hukum",t:"3. Pembetulan & Pembatalan",c:`<h2>Pembetulan & Pembatalan</h2><h3>Pembetulan</h3><p>Kesalahan tulis, kesalahan hitung, atau kekeliruan penerapan ketentuan (tarif, sanksi).</p><h3>Pengurangan/Penghapusan/Pembatalan</h3><p>Dirjen Pajak dapat: mengurangkan/menghapuskan sanksi administrasi, mengurangkan SPPT/SKP/STP yang tidak benar, atau membatalkan yang seharusnya tidak diterbitkan.</p>`},
+// PART D
+{g:"PBB: Restitusi & Ketentuan Lain",t:"1. Restitusi & Ketentuan Pidana",c:`<h2>Restitusi dan Ketentuan Lain</h2><h3>Pengembalian Kelebihan Pembayaran</h3><p>Permohonan tertulis, dilampiri fotokopi SPPT/STP/SKP dan bukti pembayaran. Imbalan bunga diberikan jika ada keterlambatan pengembalian.</p><h3>Ketentuan Bagi Pejabat</h3><p>Pejabat terkait objek pajak (Camat PPAT, Notaris PPAT) wajib menyampaikan laporan bulanan mutasi dan memberikan keterangan yang diperlukan.</p><h3>Ketentuan Pidana</h3><p><strong>Kealpaan:</strong> kurungan maks 6 bulan atau denda maks 2× pajak terhutang.<br><strong>Sengaja:</strong> penjara maks 2 tahun atau denda maks 5× pajak terhutang.<br><strong>Daluwarsa:</strong> 10 tahun sejak berakhirnya Tahun Pajak.</p>`},
+// PART E: BEA METERAI
+{g:"Bea Meterai",t:"1. Pengertian & Asas",c:`<h2>Pengertian Bea Meterai</h2><p><strong>Bea Meterai</strong> = pajak atas Dokumen. <strong>Dokumen</strong> = sesuatu yang ditulis (tulisan tangan, cetakan, atau elektronik) yang dapat dipakai sebagai alat bukti atau keterangan. <strong>Meterai</strong> = label/carik (tempel, elektronik, atau bentuk lain) yang mengandung unsur pengaman, dikeluarkan Pemerintah RI.</p><h3>Asas</h3><ol><li>Kesederhanaan</li><li>Efisiensi</li><li>Keadilan</li><li>Kepastian Hukum</li><li>Kemanfaatan</li></ol>`},
+{g:"Bea Meterai",t:"2. Objek Bea Meterai",c:`<h2>Objek Bea Meterai</h2><h3>A. Dokumen bersifat perdata:</h3><ol><li>Surat perjanjian, surat keterangan/pernyataan, beserta rangkapnya</li><li>Akta notaris beserta grosse, salinan, kutipannya</li><li>Akta PPAT beserta salinan dan kutipannya</li><li>Surat berharga (saham, obligasi, cek, bilyet giro, dll)</li><li>Dokumen transaksi surat berharga/kontrak berjangka</li><li>Dokumen lelang</li><li>Dokumen menyatakan jumlah uang <strong>> Rp5 juta</strong></li><li>Dokumen lain yang ditetapkan PP</li></ol><h3>B. Dokumen alat bukti di pengadilan</h3><p>Harus dilakukan Pemeteraian Kemudian jika belum dibayar Bea Meterainya.</p>`},
+{g:"Bea Meterai",t:"3. Objek Dikecualikan",c:`<h2>Objek Dikecualikan</h2><p>Bea Meterai tidak dikenakan atas:</p><ol type="a"><li>Dokumen lalu lintas orang/barang (konosemen, surat angkutan, dll)</li><li>Segala bentuk ijazah</li><li>Tanda terima pembayaran gaji/pensiun/tunjangan</li><li>Tanda bukti penerimaan uang negara</li><li>Kuitansi untuk semua jenis pajak</li><li>Tanda penerimaan uang untuk keperluan intern</li><li>Dokumen simpanan uang/surat berharga di bank/koperasi/kustodian</li><li>Surat gadai</li><li>Tanda pembagian keuntungan/bunga surat berharga</li><li>Dokumen Bank Indonesia untuk kebijakan moneter</li></ol>`},
+{g:"Bea Meterai",t:"4. Tarif, Saat Terutang & Kedaluwarsa",c:`<h2>Tarif</h2><div class="info-box"><strong>Tarif tetap Rp10.000</strong> per Dokumen. Dikenakan satu kali untuk setiap Dokumen.</div><h2>Saat Terutang</h2><ol type="a"><li><strong>Ditandatangani:</strong> surat perjanjian, akta notaris, akta PPAT</li><li><strong>Selesai dibuat:</strong> surat berharga, transaksi surat berharga</li><li><strong>Diserahkan:</strong> surat keterangan/pernyataan, Dokumen lelang, Dokumen jumlah uang</li><li><strong>Diajukan ke pengadilan:</strong> alat bukti</li><li><strong>Digunakan di Indonesia:</strong> Dokumen dari luar negeri</li></ol><h3>Kedaluwarsa</h3><p>BM terutang kedaluwarsa setelah <strong>5 tahun</strong> sejak saat terutang.</p>`},
+{g:"Bea Meterai",t:"5. Pihak Yang Terutang",c:`<h2>Pihak Yang Terutang</h2><ol type="a"><li>Pihak yang <strong>menerima</strong> Dokumen (sepihak)</li><li><strong>Masing-masing pihak</strong> (dua pihak atau lebih)</li><li>Pihak yang <strong>menerbitkan</strong> (surat berharga)</li><li>Pihak yang <strong>mengajukan</strong> (alat bukti di pengadilan)</li><li>Pihak yang <strong>menerima manfaat</strong> (Dokumen dari luar negeri)</li></ol><p>Para pihak boleh bersepakat mengenai pihak yang membayar.</p>`},
+{g:"Bea Meterai",t:"6. Pemungut & Sanksi",c:`<h2>Pemungut Bea Meterai</h2><p>Kewajiban: memungut, menyetorkan ke kas negara, dan melaporkan ke DJP.</p><p>Dokumen yang dipungut: cek/bilyet giro, transaksi surat berharga, surat keterangan/pernyataan, Dokumen jumlah uang > Rp5 juta.</p><h3>Sanksi</h3><p>Tidak memungut/menyetor: SKP sebesar BM yang kurang + sanksi <strong>100%</strong>.</p><p>Terlambat setor/lapor: STP dengan denda/bunga.</p><p>Penyetoran paling lambat tanggal <strong>15</strong> bulan berikutnya. SPT Masa BM paling lambat tanggal <strong>15</strong> bulan berikutnya.</p>`},
+{g:"Bea Meterai",t:"7. Pembayaran BM (Meterai)",c:`<h2>Pembayaran Bea Meterai</h2><h3>Meterai Tempel</h3><p>Direkatkan utuh, tanda tangan sebagian di atas kertas dan sebagian di atas Meterai Tempel + tanggal.</p><h3>Meterai Elektronik</h3><p>Kode unik 22 alfanumerik, dibubuhkan melalui Sistem Meterai Elektronik. Distributor menjual dengan harga = nilai nominal.</p><h3>Meterai Dalam Bentuk Lain</h3><p>Meterai Teraan (Mesin Digital), Meterai Komputerisasi, Meterai Percetakan (cek/bilyet giro), Meterai Teraan Digital (printer khusus).</p><h3>SSP</h3><p>Untuk Pemeteraian Kemudian > 50 Dokumen, atau saat Meterai Tempel/Elektronik tidak tersedia.</p>`},
+{g:"Bea Meterai",t:"8. Pemeteraian Kemudian",c:`<h2>Pemeteraian Kemudian</h2><p>Pemeteraian yang memerlukan pengesahan pejabat. Dilakukan untuk Dokumen perdata yang BM-nya tidak/kurang dibayar, atau Dokumen alat bukti di pengadilan.</p><h3>Besaran</h3><ul><li>Terutang sejak 1 Jan 2021: BM + sanksi <strong>100%</strong></li><li>Terutang sebelum 1 Jan 2021: BM + sanksi <strong>200%</strong></li><li>Alat bukti di pengadilan: BM terutang saja</li></ul><p>Disahkan oleh Pejabat Pos (Meterai Tempel) atau Pejabat DJP (Meterai Tempel, Elektronik, SSP).</p>`},
+{g:"Bea Meterai",t:"9. Fasilitas Pembebasan",c:`<h2>Fasilitas Pembebasan</h2><p>Diberikan (sementara/selamanya) untuk Dokumen:</p><ol type="a"><li>Pengalihan tanah/bangunan akibat <strong>bencana alam</strong></li><li>Pengalihan untuk kegiatan <strong>keagamaan/sosial</strong> non-komersial (wakaf, hibah, pembelian badan keagamaan/sosial)</li><li>Program pemerintah / kebijakan moneter/jasa keuangan (transaksi ≤ Rp5-10 juta di pasar modal)</li><li>Pelaksanaan <strong>perjanjian internasional</strong></li></ol>`},
+{g:"Bea Meterai",t:"10. Sanksi Pidana",c:`<h2>Sanksi Pidana Bea Meterai</h2><h3>Meniru/Memalsu Meterai (Pasal 24)</h3><p>Penjara maks <strong>7 tahun</strong> + denda maks <strong>Rp500 juta</strong>.</p><h3>Memakai/Menjual Meterai Palsu (Pasal 25)</h3><p>Penjara maks <strong>7 tahun</strong> + denda maks <strong>Rp500 juta</strong>.</p><h3>Menghilangkan Tanda Pemakaian (Pasal 26)</h3><p>Penjara maks <strong>3 tahun</strong> atau denda maks <strong>Rp200 juta</strong>.</p><h3>Larangan Pejabat (Pasal 21)</h3><p>Pejabat berwenang dilarang menerima, melekatkan, membuat salinan, atau memberikan keterangan pada Dokumen yang BM-nya tidak/kurang dibayar.</p><h3>Bridging Article</h3><p>Hal yang tidak diatur dalam UU BM, berlaku ketentuan UU KUP.</p>`}
+];
+const sidebar=document.getElementById('sidebar');const main=document.getElementById('main');let cg='';let nh='';
+CH.forEach((c,i)=>{if(c.g!==cg){cg=c.g;nh+=`<div class="nav-group-title">${c.g}</div>`}nh+=`<a class="nav-item" data-i="${i}" onclick="go(${i})">${c.t}</a>`;main.innerHTML+=`<section class="chapter" id="ch-${i}">${c.c}<div class="nav-buttons">${i>0?`<button class="nav-btn" onclick="go(${i-1})">← Sebelumnya</button>`:'<span></span>'}${i<CH.length-1?`<button class="nav-btn primary" onclick="go(${i+1})">Selanjutnya →</button>`:''}</div></section>`});
+sidebar.innerHTML=nh;
+function go(i){document.querySelectorAll('.chapter').forEach(c=>c.classList.remove('active'));document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.getElementById('ch-'+i).classList.add('active');sidebar.querySelectorAll('.nav-item')[i].classList.add('active');sidebar.querySelectorAll('.nav-item')[i].scrollIntoView({block:'nearest'});window.scrollTo(0,0);if(window.innerWidth<769){sidebar.classList.remove('open');document.querySelector('.overlay').classList.remove('show')}}
+go(0);
+function toggleSidebar(){sidebar.classList.toggle('open');document.querySelector('.overlay').classList.toggle('show')}
+function doSearch(q){q=q.toLowerCase().trim();const items=sidebar.querySelectorAll('.nav-item');const titles=sidebar.querySelectorAll('.nav-group-title');if(!q){items.forEach(e=>e.style.display='');titles.forEach(e=>e.style.display='');return}titles.forEach(e=>e.style.display='none');items.forEach((e,i)=>{const m=CH[i].t.toLowerCase().includes(q)||CH[i].c.toLowerCase().includes(q);e.style.display=m?'':'none'})}
+</script>
+</body>
+</html>
